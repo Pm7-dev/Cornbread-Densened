@@ -14,7 +14,7 @@ public class InventoryClear implements Listener {
         for(int i=0; i<35; i++) { if(e.getInventory().getItem(i) == null) {return;} }
         for(int in=0; in<10; in++) { e.getInventory().getItem((int) Math.floor(Math.random() * (36))).setType(Material.AIR); }
         Player p = (Player) e.getInventory().getHolder();
-        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Something happened. Figure it out"));
+        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Your inventory was looking a little full... FTFY"));
         e.getItem().getItemStack().setType(Material.AIR);
     }
 }

@@ -12,10 +12,13 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 
+import java.util.Random;
+
 public class SkeletonTotems implements Listener {
+    Random random = new Random();
     public void onMobSpawn(EntitySpawnEvent e) {
         if(e.getEntityType() == EntityType.SKELETON) {
-            if((int) Math.floor(Math.random() * (5)) == 1) {
+            if((int) Math.floor(random.nextFloat() * (5)) == 1) {
                 World world = e.getEntity().getWorld();
                 Location location = e.getEntity().getLocation();
                 Entity silverfish = world.spawnEntity(location, EntityType.SILVERFISH);
@@ -43,7 +46,6 @@ public class SkeletonTotems implements Listener {
             if(damaged.getType() == EntityType.SILVERFISH && !damaged.getPassengers().isEmpty() && damaged.getPassengers().get(0).getType() == EntityType.STRAY) {
                 Player p = (Player) e.getDamager();
                 p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You can only damage the top of the totem."));
-                return;
             }
         }
     }

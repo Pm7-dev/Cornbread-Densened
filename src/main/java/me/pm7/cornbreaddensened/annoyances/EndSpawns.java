@@ -9,7 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.util.Vector;
 
+import java.util.Random;
+
 public class EndSpawns implements Listener {
+    Random random = new Random();
     @EventHandler
     public void onEndSpawn(EntitySpawnEvent e) {
         Entity entity = e.getEntity();
@@ -18,17 +21,17 @@ public class EndSpawns implements Listener {
             Location loc = entity.getLocation();
 
             // Spawn a normal, basic ravager
-            if((int) Math.floor(Math.random() * (30)) == 1) {
+            if((int) Math.floor(random.nextFloat() * (23)) == 1) {
                 world.spawnEntity(loc, EntityType.RAVAGER);
             }
             // Spawn a not so normal, not so basic ravager
-            if((int) Math.floor(Math.random() * (30)) == 1) {
+            if((int) Math.floor(random.nextFloat() * (23)) == 1) {
                 Entity bee = world.spawnEntity(loc.clone().add(new Vector(0, 7, 0)), EntityType.BEE);
                 Entity ravager = world.spawnEntity(loc.clone().add(new Vector(0, 7, 0)), EntityType.RAVAGER);
                 bee.addPassenger(ravager);
             }
             // Spawn a Bardian (Or Guee)
-            if((int) Math.floor(Math.random() * (30)) == 1) {
+            if((int) Math.floor(random.nextFloat() * (23)) == 1) {
                 Entity bee = world.spawnEntity(loc.clone().add(new Vector(0, 7, 0)), EntityType.BEE);
                 Entity guardian = world.spawnEntity(loc.clone().add(new Vector(0, 7, 0)), EntityType.GUARDIAN);
                 bee.addPassenger(guardian);

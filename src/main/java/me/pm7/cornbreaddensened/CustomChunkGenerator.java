@@ -22,10 +22,11 @@ public class CustomChunkGenerator extends ChunkGenerator {
     // TODO: Try loading all the NBT files up here and only placing them down there
 
     public CustomChunkGenerator() {
+        Random random = new Random();
         // Setup all the noisemaps with random seeds
-        stoneLayer.SetSeed((int)Math.floor(Math.random() * (99999)));
-        chromeSpikes.SetSeed((int)Math.floor(Math.random() * (99999)));
-        chromeGround.SetSeed((int)Math.floor(Math.random() * (99999)));
+        stoneLayer.SetSeed((int)Math.floor(random.nextFloat() * (99999)));
+        chromeSpikes.SetSeed((int)Math.floor(random.nextFloat() * (99999)));
+        chromeGround.SetSeed((int)Math.floor(random.nextFloat() * (99999)));
 
         stoneLayer.SetFrequency(0.001f);
         chromeSpikes.SetFrequency(0.05f);
@@ -41,27 +42,27 @@ public class CustomChunkGenerator extends ChunkGenerator {
 
     @Override
     public void generateNoise(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, ChunkData chunkData) {
-        //TODO: USE THE INPUT RANDOM INSTEAD OF CREATING 30 OF THEM
-
+        Random chunkColor = new Random((long) ((int) (chunkX / 3) + 27) * ((int) (chunkZ / 3) + 3) * 4875 + 3);
+        int color = (int) (chunkColor.nextFloat()*16);
 
         // First order of business, Delete around 1 in every ten chunks for funsies
-        if((int)Math.floor(Math.random() * (10)) == 1) {
+        if((int)Math.floor(random.nextFloat() * (10)) == 1) {
             for(int y = chunkData.getMinHeight(); y < chunkData.getMaxHeight(); y++) {
                 for (int x = 0; x < 16; x++) {
                     //set z 0 and 15
                     float chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 70); // 20 + 70
                     float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 70); // 20 + 70
-                    if (y < chromeGround || y < stone) { chunkData.setBlock(x, y, 0, getSurfaceMat(chunkX, chunkZ)); }
+                    if (y < chromeGround || y < stone) { chunkData.setBlock(x, y, 0, getSurfaceMat(color, random)); }
                     chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 70);
                     stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 70);
-                    if (y < chromeGround || y < stone) { chunkData.setBlock(x, y, 15, getSurfaceMat(chunkX, chunkZ)); }
+                    if (y < chromeGround || y < stone) { chunkData.setBlock(x, y, 15, getSurfaceMat(color, random)); }
                 }
                 for (int z = 0; z < 16; z++) {
                     //set x 0 and 15
                     float chromeGround = (((this.chromeGround.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 70);
-                    if (y < chromeGround) { chunkData.setBlock(0, y, z, getSurfaceMat(chunkX, chunkZ)); }
+                    if (y < chromeGround) { chunkData.setBlock(0, y, z, getSurfaceMat(color, random)); }
                     chromeGround = (((this.chromeGround.GetNoise(15 + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 70);
-                    if (y < chromeGround) { chunkData.setBlock(15, y, z, getSurfaceMat(chunkX, chunkZ)); }
+                    if (y < chromeGround) { chunkData.setBlock(15, y, z, getSurfaceMat(color, random)); }
                 }
             }
         }
@@ -73,72 +74,70 @@ public class CustomChunkGenerator extends ChunkGenerator {
 
                         //Generate """stone""" layer (it will in fact not be stone)
                         float stone = (((stoneLayer.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
-                        if (y <= stone) { chunkData.setBlock(x, y, z, getStoneMat(y, (int) stone)); }
+                        if (y <= stone) { chunkData.setBlock(x, y, z, getStoneMat(y, (int) stone, random)); }
 
                         // Generate spikes of surface blocks to look cool
                         float spikes = (((this.chromeSpikes.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 35) + 50);
-                        if (y > stone && y <= spikes) { chunkData.setBlock(x, y, z, getSurfaceMat(chunkX, chunkZ)); }
+                        if (y > stone && y <= spikes) { chunkData.setBlock(x, y, z, getSurfaceMat(color, random)); }
 
                         // Generate plateau-like surfaces from that wonky noisemap
                         float chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
                         if (y > stone && y < chromeGround) {
-                            chunkData.setBlock(x, y, z, getSurfaceMat(chunkX, chunkZ));
+                            chunkData.setBlock(x, y, z, getSurfaceMat(color, random));
 
                             // Generate "structures"
                             if(x==8 && z==8 && y > chromeGround-2 && y>spikes) {
                                 // These structures only generate in the general middle of a chunk because
 
                                 // Add a cool house to white chunks every once in a while (special tool that will help us later)
-                                Random colorRand = new Random((long) ((int) (chunkX/3) + 27) * ((int) (chunkZ/3) + 3) * 4875 + 453);
-                                int color = (int) (colorRand.nextFloat()*16);
-                                if (color == 0 && Math.floor(Math.random() * (17)) == 1) {
+                                if (color == 0 && Math.floor(random.nextFloat() * (17)) == 1) {
                                     x += (chunkX * 16) - 3;
                                     y -= 2;
                                     z += (chunkZ * 16) + 3;
                                     // 3/5ths of the time, generate a normal house, otherwise, generate one with a portal frame
-                                    switch ((int) Math.floor(Math.random() * (5))) {
+                                    switch ((int) Math.floor(random.nextFloat() * (5))) {
                                         case 0:
                                         case 1:
                                         case 2:
-                                            loadStructure("house.nbt", x, y, z); break;
+                                            loadStructure("house.nbt", x, y, z, random); break;
                                         case 3:
                                         case 4:
-                                            loadStructure("house_with_portal.nbt", x, y, z); break;
+                                            loadStructure("house_with_portal.nbt", x, y, z, random); break;
                                     }
                                 }
                                 // Add some kelp towers so you don't starve
-                                else if(Math.floor(Math.random() * (30)) == 1) {
+                                else if(Math.floor(random.nextFloat() * (30)) == 1) {
                                     int finalX = x + (chunkX * 16) - 3;
                                     int finalY = y + 2;
                                     int finalZ = z + (chunkZ * 16) - 3;
-                                    switch ((int) Math.floor(Math.random() * (3))) {
-                                        case 0: loadStructure("kelp_tower_1.nbt", finalX, finalY, finalZ); break;
-                                        case 1: loadStructure("kelp_tower_2.nbt", finalX, finalY, finalZ); break;
-                                        case 2: loadStructure("kelp_tower_3.nbt", finalX, finalY, finalZ); break;
+                                    switch ((int) Math.floor(random.nextFloat() * (3))) {
+                                        case 0: loadStructure("kelp_tower_1.nbt", finalX, finalY, finalZ, random); break;
+                                        case 1: loadStructure("kelp_tower_2.nbt", finalX, finalY, finalZ, random); break;
+                                        case 2: loadStructure("kelp_tower_3.nbt", finalX, finalY, finalZ, random); break;
                                     }
                                 }
                                 // Might as well put in some couches too
-                                else if(Math.floor(Math.random() * (23)) == 1) {
+                                else if(Math.floor(random.nextFloat() * (23)) == 1) {
                                     int finalX = x + (chunkX * 16); // -3
                                     int finalZ = z + (chunkZ * 16) - 3;
-                                    switch ((int) Math.floor(Math.random() * (7))) {
-                                        case 0: loadStructure("couch_1.nbt", finalX, y, finalZ); break;
-                                        case 1: loadStructure("couch_2.nbt", finalX, y, finalZ); break;
-                                        case 2: loadStructure("couch_3.nbt", finalX, y, finalZ); break;
-                                        case 3: loadStructure("couch_4.nbt", finalX, y, finalZ); break;
-                                        case 4: loadStructure("couch_5.nbt", finalX, y, finalZ); break;
-                                        case 5: loadStructure("couch_6.nbt", finalX, y, finalZ); break;
-                                        case 6: loadStructure("couch_7.nbt", finalX, y, finalZ); break;
+                                    switch ((int) Math.floor(random.nextFloat() * (7))) {
+                                        case 0: loadStructure("couch_1.nbt", finalX, y, finalZ, random); break;
+                                        case 1: loadStructure("couch_2.nbt", finalX, y, finalZ, random); break;
+                                        case 2: loadStructure("couch_3.nbt", finalX, y, finalZ, random); break;
+                                        case 3: loadStructure("couch_4.nbt", finalX, y, finalZ, random); break;
+                                        case 4: loadStructure("couch_5.nbt", finalX, y, finalZ, random); break;
+                                        case 5: loadStructure("couch_6.nbt", finalX, y, finalZ, random); break;
+                                        case 6: loadStructure("couch_7.nbt", finalX, y, finalZ, random); break;
                                     }
                                 }
                             }
                             // Oh yeah we should probably have SOME wood
-                            else if (y > chromeGround-2 && y>spikes && Math.floor(Math.random() * (3800)) == 1) {
+                            else if (y > chromeGround-2 && y>spikes && Math.floor(random.nextFloat() * (3800)) == 1) {
                                 // Around every like 4000th surface block will have a tree on top of it
 
                                 // Randomize type of log we are using
                                 String type = "oak";
-                                switch ((int) Math.floor(Math.random() * (8))) {
+                                switch ((int) Math.floor(random.nextFloat() * (8))) {
                                     case 0: type = "acacia"; break;
                                     case 1: type = "birch"; break;
                                     case 2: type = "cherry"; break;
@@ -149,10 +148,10 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                     case 7: type = "spruce"; break;
                                 }
                                 // Pick variant of tree
-                                int variant = ((int) Math.floor(Math.random() * (5))) + 1;
+                                int variant = ((int) Math.floor(random.nextFloat() * (5))) + 1;
 
                                 // Spawn in the tree
-                                loadStructure("trees/"+type+"_"+variant+".nbt", x + (chunkX * 16)-2, y+1, z + (chunkZ * 16)-2);
+                                loadStructure("trees/"+type+"_"+variant+".nbt", x + (chunkX * 16)-2, y+1, z + (chunkZ * 16)-2, random);
                             }
 
                             //Waterlevl
@@ -166,9 +165,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
         }
     }
 
-    void loadStructure(String filename, int x, int y, int z) {
-        //TODO: MAKE AN INPUT RANDOM INSTEAD OF MAKING A NEW ONE
-
+    void loadStructure(String filename, int x, int y, int z, Random random) {
         // Wait 20 ticks to make sure the chunk loaded
         if(!plugin.isEnabled()) {
             System.out.println("AA, a crash!");
@@ -182,20 +179,18 @@ public class CustomChunkGenerator extends ChunkGenerator {
             catch (IOException e) { throw new RuntimeException(e); }
 
             // Choose a rotation to put the structure at
-            switch ((int)Math.floor(Math.random() * (4))) {
-                case 0: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.NONE, Mirror.NONE, 0, 1, new Random()); break;
-                case 1: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_90, Mirror.NONE, 0, 1, new Random()); break;
-                case 2: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.COUNTERCLOCKWISE_90, Mirror.NONE, 0, 1, new Random()); break;
-                case 3: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_180, Mirror.NONE, 0, 1, new Random()); break;
+            switch ((int)Math.floor(random.nextFloat() * (4))) {
+                case 0: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.NONE, Mirror.NONE, 0, 1, random); break;
+                case 1: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_90, Mirror.NONE, 0, 1, random); break;
+                case 2: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.COUNTERCLOCKWISE_90, Mirror.NONE, 0, 1, random); break;
+                case 3: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_180, Mirror.NONE, 0, 1, random); break;
             }
         }, 20L);
     }
 
     // For generating the stone layer; making inventory management a nightmare
-    Material getStoneMat(int y, int height) {
-        // TODO: USE INPUT RANDOM INSTEAD OF MAKING A NEW ONE
-
-        int r = (int)Math.floor(Math.random() * (23));
+    Material getStoneMat(int y, int height, Random random) {
+        int r = (int)Math.floor(random.nextFloat() * (41));
         Material mat = Material.STONE;
         switch (r) {
             case 0: mat = Material.ANDESITE; break;
@@ -219,20 +214,34 @@ public class CustomChunkGenerator extends ChunkGenerator {
             case 18: mat = Material.JUNGLE_SLAB; break;
             case 19: mat = Material.MAGENTA_GLAZED_TERRACOTTA; break;
             case 20: mat = Material.REDSTONE_ORE;
+            case 21: mat = Material.SHORT_GRASS; break;
+            case 22: mat = Material.AMETHYST_BLOCK; break;
+            case 23: mat = Material.BAMBOO_TRAPDOOR; break;
+            case 24: mat = Material.ANDESITE_WALL; break;
+            case 25: mat = Material.COBBLESTONE_WALL; break;
+            case 26: mat = Material.DIORITE_WALL; break;
+            case 27: mat = Material.GRANITE_WALL; break;
+            case 28: mat = Material.DEEPSLATE_BRICKS; break;
+            case 29: mat = Material.PURPUR_PILLAR; break;
+            case 30: mat = Material.QUARTZ_SLAB; break;
+            case 31: mat = Material.CHISELED_TUFF; break;
+            case 32: mat = Material.BRICKS; break;
+            case 33: mat = Material.BRICK_STAIRS; break;
+            case 34: mat = Material.CHISELED_SANDSTONE; break;
+            case 35: mat = Material.CHISELED_RED_SANDSTONE; break;
+            case 36: mat = Material.BELL; break;
+            case 37: mat = Material.BAMBOO_PRESSURE_PLATE; break;
+            case 38: mat = Material.BLACKSTONE_SLAB; break;
         }
         // gotta put some precious metals in. No coal though, that's what the fences are for
-        if(height-y > 13 && (int)Math.floor(Math.random() * (175)) == 1) { mat = Material.IRON_ORE; }
-        if(height-y > 13 && (int)Math.floor(Math.random() * (300)) == 1) { mat = Material.DIAMOND_ORE; }
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (175)) == 1) { mat = Material.IRON_ORE; }
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (300)) == 1) { mat = Material.DIAMOND_ORE; }
         return mat;
     }
 
-    Material getSurfaceMat(int chunkX, int chunkZ) {
-        // TODO: USE INPUT RANDOM INSTEAD OF MAKING A NEW ONE
-
+    Material getSurfaceMat(int color ,Random random) {
         // Group chunks into chunk chunks of 3 chunks per chunk chunk. Color them according to the magical seed random
-        Random colorRand = new Random((long) ((int) (chunkX/3) + 27) * ((int) (chunkZ/3) + 3) * 4875 + 453);
-        int color = (int) (colorRand.nextFloat()*16);
-        int block = (int)Math.floor(Math.random() * (7));
+        int block = (int)Math.floor(random.nextFloat() * (7));
         Material mat = Material.STONE;
 
         // Pain.

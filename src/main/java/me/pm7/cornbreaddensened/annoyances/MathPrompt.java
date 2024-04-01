@@ -10,17 +10,19 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static java.lang.Integer.parseInt;
 
 public class MathPrompt implements Listener {
+    Random random = new Random();
     List<String> students = new ArrayList<>();
     List<String> problems = new ArrayList<>();
 
     @EventHandler
     public void onPlayerMovement(PlayerMoveEvent e) {
         if(!students.contains(e.getPlayer().getName())) {
-            if ((int) Math.floor(Math.random() * (25000)) == 1) {
+            if ((int) Math.floor(random.nextFloat() * (25000)) == 1) {
                 students.add(e.getPlayer().getName());
                 int t1 = (int)Math.floor((Math.random() * (9)) + 1);
                 int t2 = (int)Math.floor((Math.random() * (9)) + 1);

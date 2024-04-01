@@ -11,10 +11,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
+
+import java.util.Random;
 
 public class PickUpEndFrame implements Listener {
     CornbreadDensened plugin = CornbreadDensened.getPlugin();
+   int i=0;
 
     @EventHandler
     public void onPlayerRightClick(PlayerInteractEvent e) {
@@ -26,7 +30,11 @@ public class PickUpEndFrame implements Listener {
         block.setType(Material.AIR);
         Location loc = block.getLocation().add(new Vector(0.5, 0.5, 0.5));
         ItemStack frame = new ItemStack(Material.END_PORTAL_FRAME, 1);
+        ItemMeta meta = frame.getItemMeta();
+        meta.setDisplayName(String.valueOf(i));
+        frame.setItemMeta(meta);
         loc.getWorld().dropItemNaturally(loc, frame);
+        i++;
 
         Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
             int count = 0;
