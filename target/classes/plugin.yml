@@ -1,0 +1,5 @@
+name: CornbreadDensened
+version: '1.0-SNAPSHOT'
+main: me.pm7.cornbreaddensened.CornbreadDensened
+api-version: '1.20'
+load: STARTUP

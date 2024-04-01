@@ -1,0 +1,5 @@
+name: CornbreadDensened
+version: '${project.version}'
+main: me.pm7.cornbreaddensened.CornbreadDensened
+api-version: '1.20'
+load: STARTUP

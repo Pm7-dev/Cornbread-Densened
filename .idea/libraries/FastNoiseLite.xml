@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="FastNoiseLite">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/FastNoiseLite.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/FastNoiseLite.jar!/" />
+    </SOURCES>
+  </library>
+</component>
