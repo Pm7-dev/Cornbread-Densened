@@ -47,7 +47,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
 
         // First order of business, Delete around 1 in every ten chunks for funsies
         if((int)Math.floor(random.nextFloat() * (10)) == 1) {
-            for(int y = chunkData.getMinHeight(); y < chunkData.getMaxHeight(); y++) {
+            for(int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
                 for (int x = 0; x < 16; x++) {
                     //set z 0 and 15
                     float chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 70); // 20 + 70
@@ -66,9 +66,9 @@ public class CustomChunkGenerator extends ChunkGenerator {
                 }
             }
         }
-        // Ok time to actually generate the nromal layers now
+        // Ok time to actually generate the normal layers now
         else {
-            for (int y = chunkData.getMinHeight(); y < chunkData.getMaxHeight(); y++) {
+            for (int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
                 for (int x = 0; x < 16; x++) {
                     for (int z = 0; z < 16; z++) {
 
@@ -180,62 +180,78 @@ public class CustomChunkGenerator extends ChunkGenerator {
 
             // Choose a rotation to put the structure at
             switch ((int)Math.floor(random.nextFloat() * (4))) {
-                case 0: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.NONE, Mirror.NONE, 0, 1, random); break;
-                case 1: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_90, Mirror.NONE, 0, 1, random); break;
-                case 2: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.COUNTERCLOCKWISE_90, Mirror.NONE, 0, 1, random); break;
-                case 3: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_180, Mirror.NONE, 0, 1, random); break;
+                case 0: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.NONE, Mirror.NONE, 0, 1, new Random()); break;
+                case 1: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_90, Mirror.NONE, 0, 1, new Random()); break;
+                case 2: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.COUNTERCLOCKWISE_90, Mirror.NONE, 0, 1, new Random()); break;
+                case 3: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_180, Mirror.NONE, 0, 1, new Random()); break;
             }
         }, 20L);
     }
 
     // For generating the stone layer; making inventory management a nightmare
     Material getStoneMat(int y, int height, Random random) {
-        int r = (int)Math.floor(random.nextFloat() * (41));
+        int r = (int)Math.floor(random.nextFloat() * (59));
         Material mat = Material.STONE;
         switch (r) {
-            case 0: mat = Material.ANDESITE; break;
-            case 1: mat = Material.DIORITE; break;
-            case 2: mat = Material.GRANITE; break;
-            case 3: mat = Material.STONE_STAIRS; break;
-            case 4: mat = Material.STONE_SLAB; break;
-            case 5: mat = Material.DIORITE_STAIRS; break;
-            case 6: mat = Material.DIORITE_SLAB; break;
-            case 7: mat = Material.GRANITE_STAIRS; break;
-            case 8: mat = Material.GRANITE_SLAB; break;
-            case 9: mat = Material.DIRT; break;
-            case 10: mat = Material.COARSE_DIRT; break;
-            case 11: mat = Material.COBWEB; break;
-            case 12: mat = Material.OAK_FENCE_GATE; break;
-            case 13: mat = Material.CHERRY_BUTTON; break;
-            case 14: mat = Material.OBSIDIAN; break;
-            case 15: mat = Material.BLACK_CONCRETE; break;
-            case 16: mat = Material.DARK_OAK_FENCE; break;
-            case 17: mat = Material.ACACIA_STAIRS; break;
-            case 18: mat = Material.JUNGLE_SLAB; break;
-            case 19: mat = Material.MAGENTA_GLAZED_TERRACOTTA; break;
-            case 20: mat = Material.REDSTONE_ORE;
-            case 21: mat = Material.SHORT_GRASS; break;
-            case 22: mat = Material.AMETHYST_BLOCK; break;
-            case 23: mat = Material.BAMBOO_TRAPDOOR; break;
-            case 24: mat = Material.ANDESITE_WALL; break;
-            case 25: mat = Material.COBBLESTONE_WALL; break;
-            case 26: mat = Material.DIORITE_WALL; break;
-            case 27: mat = Material.GRANITE_WALL; break;
-            case 28: mat = Material.DEEPSLATE_BRICKS; break;
-            case 29: mat = Material.PURPUR_PILLAR; break;
-            case 30: mat = Material.QUARTZ_SLAB; break;
-            case 31: mat = Material.CHISELED_TUFF; break;
-            case 32: mat = Material.BRICKS; break;
-            case 33: mat = Material.BRICK_STAIRS; break;
-            case 34: mat = Material.CHISELED_SANDSTONE; break;
-            case 35: mat = Material.CHISELED_RED_SANDSTONE; break;
-            case 36: mat = Material.BELL; break;
-            case 37: mat = Material.BAMBOO_PRESSURE_PLATE; break;
-            case 38: mat = Material.BLACKSTONE_SLAB; break;
+            case 0: mat = Material.SMOOTH_STONE; break;
+            case 1: mat = Material.STONE_BRICKS; break;
+            case 2: mat = Material.CRACKED_STONE_BRICKS; break;
+            case 3: mat = Material.MOSSY_COBBLESTONE; break;
+            case 4: mat = Material.CHISELED_STONE_BRICKS; break;
+            case 5: mat = Material.GRANITE; break;
+            case 6: mat = Material.POLISHED_GRANITE; break;
+            case 7: mat = Material.DIORITE; break;
+            case 8: mat = Material.POLISHED_DIORITE; break;
+            case 9: mat = Material.ANDESITE; break;
+            case 10: mat = Material.POLISHED_ANDESITE; break;
+            case 11: mat = Material.CHISELED_DEEPSLATE; break;
+            case 12: mat = Material.POLISHED_DEEPSLATE; break;
+            case 13: mat = Material.DEEPSLATE_BRICKS; break;
+            case 14: mat = Material.CRACKED_DEEPSLATE_BRICKS; break;
+            case 15: mat = Material.DEEPSLATE_TILES; break;
+            case 16: mat = Material.CRACKED_DEEPSLATE_TILES; break;
+            case 17: mat = Material.TUFF; break;
+            case 18: mat = Material.BRICKS; break;
+            case 19: mat = Material.MUD; break;
+            case 20: mat = Material.GRAVEL; break;
+            case 21: mat = Material.SANDSTONE; break;
+            case 22: mat = Material.INFESTED_COBBLESTONE; break;
+            case 23: mat = Material.CHISELED_SANDSTONE; break;
+            case 24: mat = Material.RED_SANDSTONE; break;
+            case 25: mat = Material.INFESTED_CRACKED_STONE_BRICKS; break;
+            case 26: mat = Material.WAXED_COPPER_BLOCK; break;
+            case 27: mat = Material.CHISELED_RED_SANDSTONE; break;
+            case 28: mat = Material.PRISMARINE; break;
+            case 29: mat = Material.DARK_PRISMARINE; break;
+            case 30: mat = Material.PRISMARINE_BRICKS; break;
+            case 31: mat = Material.WAXED_WEATHERED_CHISELED_COPPER; break;
+            case 32: mat = Material.NETHER_BRICKS; break;
+            case 33: mat = Material.CRACKED_NETHER_BRICKS; break;
+            case 34: mat = Material.NETHER_WART_BLOCK; break;
+            case 35: mat = Material.POLISHED_BASALT; break;
+            case 36: mat = Material.POLISHED_BLACKSTONE; break;
+            case 37: mat = Material.INFESTED_MOSSY_STONE_BRICKS; break;
+            case 38: mat = Material.CRACKED_POLISHED_BLACKSTONE_BRICKS; break;
+            case 39: mat = Material.END_STONE; break;
+            case 40: mat = Material.PURPUR_PILLAR; break;
+            case 41: mat = Material.PURPUR_BLOCK; break;
+            case 42: mat = Material.MUSHROOM_STEM; break;
+            case 43: mat = Material.INFESTED_STONE_BRICKS; break;
+            case 44: mat = Material.SOUL_SOIL; break;
+            case 45: mat = Material.CHISELED_QUARTZ_BLOCK; break;
+            case 46: mat = Material.BUBBLE_CORAL_BLOCK; break;
+            case 47: mat = Material.INFESTED_STONE; break;
+            case 48: mat = Material.ROOTED_DIRT; break;
+            case 49: mat = Material.DIRT; break;
+            case 50: mat = Material.CALCITE; break;
+            case 51: mat = Material.DRIPSTONE_BLOCK; break;
+            case 52: mat = Material.OBSIDIAN; break;
+            case 53: mat = Material.WAXED_WEATHERED_CUT_COPPER_STAIRS; break;
+            case 54: mat = Material.SPONGE; break;
         }
-        // gotta put some precious metals in. No coal though, that's what the fences are for
-        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (175)) == 1) { mat = Material.IRON_ORE; }
-        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (300)) == 1) { mat = Material.DIAMOND_ORE; }
+        // gotta put some precious metals in. No coal though, that's what the fences were for
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (150)) == 1) { mat = Material.IRON_ORE; }
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (275)) == 1) { mat = Material.DIAMOND_ORE; }
         return mat;
     }
 
@@ -254,7 +270,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.WHITE_WOOL; break;
                     case 4: mat = Material.WHITE_STAINED_GLASS; break;
                     case 5: mat = Material.WHITE_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.WHITE_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.CHISELED_QUARTZ_BLOCK; break;
                 }
                 break;
             }
@@ -266,7 +282,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.LIGHT_GRAY_WOOL; break;
                     case 4: mat = Material.LIGHT_GRAY_STAINED_GLASS; break;
                     case 5: mat = Material.LIGHT_GRAY_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.LIGHT_GRAY_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.ANDESITE; break;
                 }
                 break;
             }
@@ -278,7 +294,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.GRAY_WOOL; break;
                     case 4: mat = Material.GRAY_STAINED_GLASS; break;
                     case 5: mat = Material.GRAY_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.GRAY_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.DEEPSLATE_TILES; break;
                 }
                 break;
             }
@@ -290,7 +306,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.BLACK_WOOL; break;
                     case 4: mat = Material.BLACK_STAINED_GLASS; break;
                     case 5: mat = Material.BLACK_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.BLACK_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.POLISHED_BLACKSTONE_BRICKS; break;
                 }
                 break;
             }
@@ -302,7 +318,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.BROWN_WOOL; break;
                     case 4: mat = Material.BROWN_STAINED_GLASS; break;
                     case 5: mat = Material.BROWN_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.BROWN_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.SOUL_SOIL; break;
                 }
                 break;
             }
@@ -314,7 +330,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.RED_WOOL; break;
                     case 4: mat = Material.RED_STAINED_GLASS; break;
                     case 5: mat = Material.RED_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.RED_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.RED_NETHER_BRICKS; break;
                 }
                 break;
             }
@@ -326,7 +342,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.ORANGE_WOOL; break;
                     case 4: mat = Material.ORANGE_STAINED_GLASS; break;
                     case 5: mat = Material.ORANGE_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.ORANGE_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.SMOOTH_RED_SANDSTONE; break;
                 }
                 break;
             }
@@ -338,7 +354,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.YELLOW_WOOL; break;
                     case 4: mat = Material.YELLOW_STAINED_GLASS; break;
                     case 5: mat = Material.YELLOW_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.YELLOW_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.SPONGE; break;
                 }
                 break;
             }
@@ -350,7 +366,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.LIME_WOOL; break;
                     case 4: mat = Material.LIME_STAINED_GLASS; break;
                     case 5: mat = Material.LIME_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.LIME_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.EMERALD_BLOCK; break;
                 }
                 break;
             }
@@ -362,7 +378,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.GREEN_WOOL; break;
                     case 4: mat = Material.GREEN_STAINED_GLASS; break;
                     case 5: mat = Material.GREEN_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.GREEN_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.MOSS_BLOCK; break;
                 }
                 break;
             }
@@ -374,7 +390,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.CYAN_WOOL; break;
                     case 4: mat = Material.CYAN_STAINED_GLASS; break;
                     case 5: mat = Material.CYAN_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.CYAN_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.OXIDIZED_COPPER; break;
                 }
                 break;
             }
@@ -386,7 +402,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.LIGHT_BLUE_WOOL; break;
                     case 4: mat = Material.LIGHT_BLUE_STAINED_GLASS; break;
                     case 5: mat = Material.LIGHT_BLUE_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.LIGHT_BLUE_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.BLUE_ICE; break;
                 }
                 break;
             }
@@ -398,7 +414,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.BLUE_WOOL; break;
                     case 4: mat = Material.BLUE_STAINED_GLASS; break;
                     case 5: mat = Material.BLUE_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.BLUE_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.LAPIS_BLOCK; break;
                 }
                 break;
             }
@@ -410,7 +426,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.PURPLE_WOOL; break;
                     case 4: mat = Material.PURPLE_STAINED_GLASS; break;
                     case 5: mat = Material.PURPLE_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.PURPLE_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.AMETHYST_BLOCK; break;
                 }
                 break;
             }
@@ -422,7 +438,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.MAGENTA_WOOL; break;
                     case 4: mat = Material.MAGENTA_STAINED_GLASS; break;
                     case 5: mat = Material.MAGENTA_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.MAGENTA_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.PURPUR_BLOCK; break;
                 }
                 break;
             }
@@ -434,7 +450,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                     case 3: mat = Material.PINK_WOOL; break;
                     case 4: mat = Material.PINK_STAINED_GLASS; break;
                     case 5: mat = Material.PINK_GLAZED_TERRACOTTA; break;
-                    case 6: mat = Material.PINK_STAINED_GLASS_PANE; break;
+                    case 6: mat = Material.CHERRY_SLAB; break;
                 }
                 break;
             }
