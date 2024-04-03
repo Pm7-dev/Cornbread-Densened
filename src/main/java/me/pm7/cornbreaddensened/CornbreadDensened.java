@@ -26,6 +26,9 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PickUpEndFrame(), this);
         getServer().getPluginManager().registerEvents(new RandomNetherSpeed(), this);
         getServer().getPluginManager().registerEvents(new SkeletonTotems(), this);
+        getServer().getPluginManager().registerEvents(new NoEndBed(), this);
+        getServer().getPluginManager().registerEvents(new EndermiteSilverfishBuff(), this);
+        getServer().getPluginManager().registerEvents(new NetherSpawns(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             int tick = 0;

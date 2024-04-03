@@ -90,7 +90,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                 // These structures only generate in the general middle of a chunk because
 
                                 // Add a cool house to white chunks every once in a while (special tool that will help us later)
-                                if (color == 0 && Math.floor(random.nextFloat() * (17)) == 1) {
+                                if (color == 0 && Math.floor(random.nextFloat() * (15)) == 1) {
                                     x += (chunkX * 16) - 3;
                                     y -= 2;
                                     z += (chunkZ * 16) + 3;

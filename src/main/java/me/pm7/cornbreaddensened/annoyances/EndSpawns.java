@@ -2,6 +2,7 @@ package me.pm7.cornbreaddensened.annoyances;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Bee;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -19,23 +20,32 @@ public class EndSpawns implements Listener {
         World world = entity.getWorld();
         if(world.getName().equals("world_the_end") && entity.getType() == EntityType.ENDERMAN) {
             Location loc = entity.getLocation();
-
             // Spawn a normal, basic ravager
-            if((int) Math.floor(random.nextFloat() * (23)) == 1) {
-                world.spawnEntity(loc, EntityType.RAVAGER);
-            }
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc, EntityType.RAVAGER); }
             // Spawn a not so normal, not so basic ravager
-            if((int) Math.floor(random.nextFloat() * (23)) == 1) {
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) {
                 Entity bee = world.spawnEntity(loc.clone().add(new Vector(0, 7, 0)), EntityType.BEE);
                 Entity ravager = world.spawnEntity(loc.clone().add(new Vector(0, 7, 0)), EntityType.RAVAGER);
                 bee.addPassenger(ravager);
             }
-            // Spawn a Bardian (Or Guee)
-            if((int) Math.floor(random.nextFloat() * (23)) == 1) {
-                Entity bee = world.spawnEntity(loc.clone().add(new Vector(0, 7, 0)), EntityType.BEE);
-                Entity guardian = world.spawnEntity(loc.clone().add(new Vector(0, 7, 0)), EntityType.GUARDIAN);
-                bee.addPassenger(guardian);
-            }
+            // Spawn a Guardian
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc, EntityType.ELDER_GUARDIAN); }
+            // Spawn a Vex
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc.clone().add(new Vector(0, 7, 0)), EntityType.VEX); }
+            // Spawn a Cave Spider
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc, EntityType.CAVE_SPIDER); }
+            // Spawn a Witch
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc, EntityType.WITCH); }
+            // Spawn a Wither Skeleton
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc, EntityType.WITHER_SKELETON); }
+            // Spawn stray
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc, EntityType.STRAY); }
+            // Spawn Silverfish
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc, EntityType.SILVERFISH); world.spawnEntity(loc, EntityType.SILVERFISH); }
+            // Spawn Phantom
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc, EntityType.PHANTOM); }
+            // Spawn Vindicator
+            if((int) Math.floor(random.nextFloat() * (21)) == 1) { world.spawnEntity(loc, EntityType.VINDICATOR); }
         }
     }
 }

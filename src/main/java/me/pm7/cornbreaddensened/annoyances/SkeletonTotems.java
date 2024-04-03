@@ -23,7 +23,7 @@ public class SkeletonTotems implements Listener {
     @EventHandler
     public void onMobSpawn(EntitySpawnEvent e) {
         if(e.getEntityType() == EntityType.SKELETON) {
-            if((int) Math.floor(random.nextFloat() * (5)) == 1) {
+            if((int) Math.floor(random.nextFloat() * (4)) == 1) {
                 World world = e.getEntity().getWorld();
                 Location location = e.getEntity().getLocation();
                 Entity silverfish = world.spawnEntity(location, EntityType.SILVERFISH);
