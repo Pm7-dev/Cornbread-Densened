@@ -6,16 +6,21 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Random;
 
 public class SkeletonTotems implements Listener {
     Random random = new Random();
+
+    @EventHandler
     public void onMobSpawn(EntitySpawnEvent e) {
         if(e.getEntityType() == EntityType.SKELETON) {
             if((int) Math.floor(random.nextFloat() * (5)) == 1) {
@@ -31,10 +36,17 @@ public class SkeletonTotems implements Listener {
                 passenger2.addPassenger(passenger3);
                 passenger1.addPassenger(passenger2);
                 silverfish.addPassenger(passenger1);
+
+                PotionEffect effect = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, PotionEffect.INFINITE_DURATION, 1);
+                ((LivingEntity) passenger1).addPotionEffect(effect);
+                ((LivingEntity) passenger2).addPotionEffect(effect);
+                ((LivingEntity) passenger3).addPotionEffect(effect);
+                ((LivingEntity) passenger4).addPotionEffect(effect);
             }
         }
     }
 
+    @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent e) {
         Entity damaged = e.getEntity();
         if (e.getDamager() instanceof Player) {

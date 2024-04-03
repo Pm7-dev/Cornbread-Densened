@@ -19,7 +19,7 @@ public class Leaves implements Listener {
     public void onBlockBreak(BlockBreakEvent e) {
         if(leaves.contains(e.getBlock().getType())) {
             e.setDropItems(false);
-            if((int) Math.floor(Math.random() * (5)) == 1) {
+            if((int) Math.floor(Math.random() * (7)) == 1) {
                 World world = e.getBlock().getWorld();
                 Entity bat = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BAT);
                 Entity passenger = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 5, 0)), EntityType.WITCH);
@@ -33,7 +33,7 @@ public class Leaves implements Listener {
         e.setCancelled(true);
         e.getBlock().setType(Material.AIR);
 
-        if((int) Math.floor(Math.random() * (5)) == 1) {
+        if((int) Math.floor(Math.random() * (7)) == 1) {
             World world = e.getBlock().getWorld();
             Entity bat = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BAT);
             Entity passenger = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 5, 0)), EntityType.WITCH);

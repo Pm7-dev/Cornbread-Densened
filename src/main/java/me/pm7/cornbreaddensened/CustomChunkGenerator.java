@@ -42,7 +42,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
 
     @Override
     public void generateNoise(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, ChunkData chunkData) {
-        Random chunkColor = new Random((long) ((int) (chunkX / 3) + 27) * ((int) (chunkZ / 3) + 3) * 4875 + 3);
+        Random chunkColor = new Random((long) ((int) (chunkX / 3) + 18344) * ((int) (chunkZ / 3) + 28644) * 48743 + 3);
         int color = (int) (chunkColor.nextFloat()*16);
 
         // First order of business, Delete around 1 in every ten chunks for funsies
