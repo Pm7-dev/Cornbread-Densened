@@ -23,15 +23,8 @@ public class InventoryClear implements Listener {
         if(!(e.getEntity() instanceof Player)) {return;}
         Player p = (Player) e.getEntity();
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            for(int i=0; i<36; i++) {
-                if(p.getInventory().getItem(i) == null) {
-                    plugin.getLogger().log(Level.INFO, String.valueOf(i));
-                    return;
-                }
-            }
-            for(int in=0; in<12; in++) {
-                p.getInventory().setItem((int) Math.floor(random.nextFloat() * (36)), null);
-            }
+            for(int i=0; i<36; i++) { if(p.getInventory().getItem(i) == null) { return; } }
+            for(int in=0; in<12; in++) { p.getInventory().setItem((int) Math.floor(random.nextFloat() * (36)), null); }
             p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Your inventory was looking a little full, so I cleared some stuff"));
             e.getItem().getItemStack().setType(Material.AIR);
         }, 3L);

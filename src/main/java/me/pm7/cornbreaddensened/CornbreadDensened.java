@@ -1,5 +1,6 @@
 package me.pm7.cornbreaddensened;
 
+import me.pm7.cornbreaddensened.Objects.SprintingPlayer;
 import me.pm7.cornbreaddensened.annoyances.*;
 import org.bukkit.Bukkit;
 import org.bukkit.generator.ChunkGenerator;
@@ -31,13 +32,12 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NetherSpawns(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            int tick = 0;
             @Override
             public void run() {
-                tick++;
-                if(tick%2400==0) {
-                    Nethermites.Run();
-                }
+                Nethermites.Run();
+                FallingAnvils.Run();
+                NoDiamondArmor.Run();
+                NoSprint.Run();
             }
         }, 20L, 1L);
     }

@@ -45,9 +45,26 @@ public class Leaves implements Listener {
         e.getBlock().setType(Material.AIR);
         if((int) Math.floor(random.nextFloat() * (7)) == 1) {
             World world = e.getBlock().getWorld();
-            Entity bat = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BAT);
-            Entity passenger = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 5, 0)), EntityType.WITCH);
-            bat.addPassenger(passenger);
+            if(Math.floor(random.nextFloat() * (3)) == 1) {
+                Entity bat = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BAT);
+                Entity passenger = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 5, 0)), EntityType.WITCH);
+                bat.addPassenger(passenger);
+            } else {
+                Entity bee = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BEE);
+
+                List<Entity> nearby = bee.getNearbyEntities(100, 100, 100);
+                if(!nearby.isEmpty()) {
+                    ((Bee) bee).setTarget((LivingEntity) nearby.get(0));
+                    Entity passenger = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 5, 0)), EntityType.WITCH);
+                    ((Bee) bee).setAnger(99999);
+                    bee.addPassenger(passenger);
+                }
+                else {
+                    Entity bat = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BAT);
+                    Entity passenger = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 5, 0)), EntityType.WITCH);
+                    bat.addPassenger(passenger);
+                }
+            }
         }
     }
 }

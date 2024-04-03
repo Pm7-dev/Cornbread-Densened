@@ -53,11 +53,13 @@ public class SkeletonTotems implements Listener {
             if(damaged.getType() == EntityType.STRAY && !damaged.getPassengers().isEmpty()) {
                 Player p = (Player) e.getDamager();
                 p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You can only damage the top of the totem."));
+                e.setCancelled(true);
                 return;
             }
             if(damaged.getType() == EntityType.SILVERFISH && !damaged.getPassengers().isEmpty() && damaged.getPassengers().get(0).getType() == EntityType.STRAY) {
                 Player p = (Player) e.getDamager();
                 p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You can only damage the top of the totem."));
+                e.setCancelled(true);
             }
         }
     }

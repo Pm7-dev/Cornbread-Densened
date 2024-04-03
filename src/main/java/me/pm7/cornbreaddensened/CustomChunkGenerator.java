@@ -106,7 +106,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                     }
                                 }
                                 // Add some kelp towers so you don't starve
-                                else if(Math.floor(random.nextFloat() * (30)) == 1) {
+                                else if(Math.floor(random.nextFloat() * (38)) == 1) {
                                     int finalX = x + (chunkX * 16) - 3;
                                     int finalY = y + 2;
                                     int finalZ = z + (chunkZ * 16) - 3;

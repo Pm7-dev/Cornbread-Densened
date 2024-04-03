@@ -20,7 +20,7 @@ public class NoEndBed implements Listener {
         if(e.getBlock().getWorld().getName().equals("world_the_end")) {
             if(bedsList.contains(e.getBlockPlaced().getType())) {
                 e.setCancelled(true);
-                e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Imagine I let you use beds for the dragon in a world full of wool"));
+                e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Imagine I let you use bed explosions in a world full of wool"));
                 e.getPlayer().setHealth(0.0f);
             }
         }

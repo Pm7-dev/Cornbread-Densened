@@ -2,8 +2,11 @@ me\pm7\cornbreaddensened\FastNoiseLite$TransformType3D.class
 me\pm7\cornbreaddensened\FastNoiseLite$Vector2.class
 me\pm7\cornbreaddensened\annoyances\EndSpawns.class
 me\pm7\cornbreaddensened\FastNoiseLite.class
+me\pm7\cornbreaddensened\annoyances\NoSprint.class
+me\pm7\cornbreaddensened\Objects\SprintingPlayer.class
 me\pm7\cornbreaddensened\FastNoiseLite$RotationType3D.class
 me\pm7\cornbreaddensened\annoyances\EndermiteSilverfishBuff.class
+me\pm7\cornbreaddensened\annoyances\NoDiamondArmor.class
 me\pm7\cornbreaddensened\annoyances\ExplodeOnCraft.class
 me\pm7\cornbreaddensened\annoyances\NoEndBed.class
 me\pm7\cornbreaddensened\CornbreadDensened.class
@@ -28,4 +31,5 @@ me\pm7\cornbreaddensened\annoyances\PickUpEndFrame.class
 me\pm7\cornbreaddensened\annoyances\NoCrouch.class
 me\pm7\cornbreaddensened\FastNoiseLite$CellularReturnType.class
 me\pm7\cornbreaddensened\annoyances\InventoryClear.class
+me\pm7\cornbreaddensened\annoyances\FallingAnvils.class
 me\pm7\cornbreaddensened\annoyances\Nethermites.class

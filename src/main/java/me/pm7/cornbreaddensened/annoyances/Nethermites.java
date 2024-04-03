@@ -8,7 +8,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 public class Nethermites {
+    static int tick = 0;
     public static void Run() {
+        if(tick < 2400) { tick+=1; return; }
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(p.getWorld().getName().equals("world_nether")) {
                 Location loc = p.getLocation();
@@ -17,5 +19,6 @@ public class Nethermites {
                 world.spawnEntity(loc, EntityType.ENDERMITE);
             }
         }
+        tick = 0;
     }
 }
