@@ -30,15 +30,19 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoEndBed(), this);
         getServer().getPluginManager().registerEvents(new EndermiteSilverfishBuff(), this);
         getServer().getPluginManager().registerEvents(new NetherSpawns(), this);
+        getServer().getPluginManager().registerEvents(new CraftChest(), this);
+        getServer().getPluginManager().registerEvents(new NoLavaBucket(), this);
+        getServer().getPluginManager().registerEvents(new BigCreeperExplosion(), this);
+        getServer().getPluginManager().registerEvents(new BuffMobs(), this);
+        getServer().getPluginManager().registerEvents(new NoOffHand(), this);
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            @Override
-            public void run() {
-                Nethermites.Run();
-                FallingAnvils.Run();
-                NoDiamondArmor.Run();
-                NoSprint.Run();
-            }
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            Nethermites.Run();
+            FallingAnvils.Run();
+            NoDiamondArmor.Run();
+            NoSprint.Run();
+            PufferDrop.Run();
+            SpawnThingsAroundPlayers.Run();
         }, 20L, 1L);
     }
 

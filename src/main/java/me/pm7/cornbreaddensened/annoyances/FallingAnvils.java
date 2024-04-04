@@ -16,8 +16,7 @@ public class FallingAnvils {
         for(Player p : Bukkit.getOnlinePlayers()) {
             World world = p.getWorld();
             if(!world.getName().equals("world")) { continue; }
-            Location loc = p.getLocation().clone();
-            loc.setY(200);
+            Location loc = p.getLocation().clone().add(0, 20, 1);
             Location loc1 = loc.clone().add(new Vector(-1, 0, -1));
             Location loc2 = loc.clone().add(new Vector(0, 0, -1));
             Location loc3 = loc.clone().add(new Vector(1, 0, -1));
@@ -37,7 +36,7 @@ public class FallingAnvils {
             spawnAnvil(world, loc8);
         }
         tick = 0;
-        needed = (int) Math.floor((Math.random() * (14400 - 3600)) + 3600);
+        needed = (int) Math.floor((Math.random() * (6500 - 5000)) + 5000);
     }
 
     static void spawnAnvil(World world, Location loc) {
