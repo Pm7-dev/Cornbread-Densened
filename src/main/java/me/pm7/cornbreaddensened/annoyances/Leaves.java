@@ -53,7 +53,7 @@ public class Leaves implements Listener {
                 Entity bee = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BEE);
 
                 List<Entity> nearby = bee.getNearbyEntities(100, 100, 100);
-                if(!nearby.isEmpty()) {
+                if(!nearby.isEmpty() && nearby.get(0) instanceof LivingEntity) {
                     ((Bee) bee).setTarget((LivingEntity) nearby.get(0));
                     Entity passenger = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 5, 0)), EntityType.WITCH);
                     ((Bee) bee).setAnger(99999);

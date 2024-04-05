@@ -9,7 +9,7 @@ public class BigCreeperExplosion implements Listener {
     @EventHandler
     public void makeCreeperBoomBoom(EntityExplodeEvent e) {
         if(e.getEntity().getType() == EntityType.CREEPER) {
-            e.getLocation().getWorld().createExplosion(e.getLocation(), 16, true);
+            e.getLocation().getWorld().createExplosion(e.getLocation(), 13, true);
         }
     }
 }

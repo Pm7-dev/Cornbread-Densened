@@ -1,5 +1,8 @@
 package me.pm7.cornbreaddensened.annoyances;
 
+import me.pm7.cornbreaddensened.CornbreadDensened;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class FallingAnvils {
+    static CornbreadDensened plugin = CornbreadDensened.getPlugin();
     static int tick = 0;
     static int needed = 1200;
     public static void Run() {
@@ -16,7 +20,7 @@ public class FallingAnvils {
         for(Player p : Bukkit.getOnlinePlayers()) {
             World world = p.getWorld();
             if(!world.getName().equals("world")) { continue; }
-            Location loc = p.getLocation().clone().add(0, 20, 1);
+            Location loc = p.getLocation().clone().add(0, 16, 1);
             Location loc1 = loc.clone().add(new Vector(-1, 0, -1));
             Location loc2 = loc.clone().add(new Vector(0, 0, -1));
             Location loc3 = loc.clone().add(new Vector(1, 0, -1));
@@ -34,6 +38,7 @@ public class FallingAnvils {
             spawnAnvil(world, loc6);
             spawnAnvil(world, loc7);
             spawnAnvil(world, loc8);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Look out!")), 6L);
         }
         tick = 0;
         needed = (int) Math.floor((Math.random() * (6500 - 5000)) + 5000);

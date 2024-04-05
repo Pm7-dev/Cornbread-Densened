@@ -42,7 +42,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
 
     @Override
     public void generateNoise(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, ChunkData chunkData) {
-        Random chunkColor = new Random((long) ((int) (chunkX / 3) + 18344) * ((int) (chunkZ / 3) + 28644) * 48743 + 3);
+        Random chunkColor = new Random((long) ((int) (chunkX / 3) + 18344) * ((int) (chunkZ / 3) + 28644) * 48743 + worldInfo.getSeed());
         int color = (int) (chunkColor.nextFloat()*16);
 
         // First order of business, Delete around 1 in every ten chunks for funsies
@@ -50,18 +50,18 @@ public class CustomChunkGenerator extends ChunkGenerator {
             for(int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
                 for (int x = 0; x < 16; x++) {
                     //set z 0 and 15
-                    float chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 70); // 20 + 70
-                    float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 70); // 20 + 70
+                    float chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 60); // 20 + 70
+                    float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 25); // 20 + 70
                     if (y < chromeGround || y < stone) { chunkData.setBlock(x, y, 0, getSurfaceMat(color, random)); }
-                    chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 70);
-                    stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 70);
+                    chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 60);
+                    stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 25);
                     if (y < chromeGround || y < stone) { chunkData.setBlock(x, y, 15, getSurfaceMat(color, random)); }
                 }
                 for (int z = 0; z < 16; z++) {
                     //set x 0 and 15
-                    float chromeGround = (((this.chromeGround.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 70);
+                    float chromeGround = (((this.chromeGround.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
                     if (y < chromeGround) { chunkData.setBlock(0, y, z, getSurfaceMat(color, random)); }
-                    chromeGround = (((this.chromeGround.GetNoise(15 + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 70);
+                    chromeGround = (((this.chromeGround.GetNoise(15 + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 60);
                     if (y < chromeGround) { chunkData.setBlock(15, y, z, getSurfaceMat(color, random)); }
                 }
             }

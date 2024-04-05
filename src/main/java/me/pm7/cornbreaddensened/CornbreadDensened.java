@@ -34,7 +34,6 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoLavaBucket(), this);
         getServer().getPluginManager().registerEvents(new BigCreeperExplosion(), this);
         getServer().getPluginManager().registerEvents(new BuffMobs(), this);
-        getServer().getPluginManager().registerEvents(new NoOffHand(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             Nethermites.Run();
@@ -43,6 +42,7 @@ public final class CornbreadDensened extends JavaPlugin {
             NoSprint.Run();
             PufferDrop.Run();
             SpawnThingsAroundPlayers.Run();
+            NoOffHand.Run();
         }, 20L, 1L);
     }
 
