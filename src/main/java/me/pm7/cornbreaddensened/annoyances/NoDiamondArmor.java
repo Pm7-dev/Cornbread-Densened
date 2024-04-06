@@ -24,7 +24,7 @@ public class NoDiamondArmor {
             if (inv.getLeggings() != null && inv.getLeggings().getType() == Material.DIAMOND_LEGGINGS) { diamondcheck = true; }
             if (inv.getBoots() != null && inv.getBoots().getType() == Material.DIAMOND_BOOTS) { diamondcheck = true; }
 
-            PotionEffect effect = new PotionEffect(PotionEffectType.WITHER, 40, 1);
+            PotionEffect effect = new PotionEffect(PotionEffectType.WITHER, 40, 0);
             if(diamondcheck) {
                 p.addPotionEffect(effect);
                 p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("That diamond armor is too heavy!"));

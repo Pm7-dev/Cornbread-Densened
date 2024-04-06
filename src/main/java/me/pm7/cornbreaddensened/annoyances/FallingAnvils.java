@@ -18,7 +18,7 @@ public class FallingAnvils {
             if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
             World world = p.getWorld();
             if(!world.getName().equals("world")) { continue; }
-            Location loc = p.getLocation().clone().add(0, 22, 1);
+            Location loc = p.getLocation().clone().add(0, 26, 1);
             Location loc1 = loc.clone().add(new Vector(-1, 0, -1));
             Location loc2 = loc.clone().add(new Vector(0, 0, -1));
             Location loc3 = loc.clone().add(new Vector(1, 0, -1));
@@ -36,7 +36,7 @@ public class FallingAnvils {
             spawnAnvil(world, loc6);
             spawnAnvil(world, loc7);
             spawnAnvil(world, loc8);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Look out!")), 10L);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Look out!")), 5L);
         }
         tick = 0;
         needed = (int) Math.floor((Math.random() * (6500 - 5000)) + 5000);

@@ -3,3 +3,7 @@ version: '0.0.1'
 main: me.pm7.cornbreaddensened.CornbreadDensened
 api-version: '1.20'
 load: STARTUP
+commands:
+  start:
+    usage: /<command>
+    description: "does the thign"

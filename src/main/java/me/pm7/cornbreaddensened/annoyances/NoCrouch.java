@@ -11,9 +11,7 @@ public class NoCrouch implements Listener {
     public void onPlayerCrouch(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if(p.getGameMode() != GameMode.SURVIVAL) { return; }
-        if(p.getGameMode() == GameMode.CREATIVE) {return;}
         if(p.isSneaking()) {
-            e.setCancelled(true);
             p.setFireTicks(200);
         }
     }

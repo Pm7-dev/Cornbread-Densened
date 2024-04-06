@@ -12,8 +12,7 @@ public class Hoglins implements Listener {
 
     @EventHandler
     public void onEntitySpawn(EntitySpawnEvent e) {
-        if(e.getEntity().getType() != EntityType.HOGLIN || e.getEntity().getType() != EntityType.ZOGLIN) { return; }
-        e.setCancelled(true);
+        if(e.getEntity().getType() != EntityType.HOGLIN && e.getEntity().getType() != EntityType.ZOGLIN) { return; }
         if(random.nextBoolean()) { e.getEntity().getWorld().spawnEntity(e.getLocation(), EntityType.RAVAGER); }
         else { e.getEntity().getWorld().spawnEntity(e.getLocation(), EntityType.WITCH); }
     }

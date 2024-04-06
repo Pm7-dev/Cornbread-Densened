@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 public class Nethermites {
     static int tick = 0;
     public static void Run() {
-        if(tick < 2400) { tick+=1; return; }
+        if(tick < 2400) { tick++; return; }
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
             if(p.getWorld().getName().equals("world_nether")) {

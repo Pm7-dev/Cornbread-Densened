@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -25,10 +27,24 @@ public class InventoryClear implements Listener {
         Player p = (Player) e.getEntity();
         if(p.getGameMode() != GameMode.SURVIVAL) { return; }
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            for(int i=0; i<36; i++) { if(p.getInventory().getItem(i) == null) { return; } }
+            int count = 0;
+            for(int i=0; i<36; i++) { if(p.getInventory().getItem(i) != null) { count++; } }
+            if(count < 29) { return; }
             for(int in=0; in<12; in++) { p.getInventory().setItem((int) Math.floor(random.nextFloat() * (36)), null); }
             p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Your inventory was looking a little full, so I cleared some stuff"));
-            e.getItem().getItemStack().setType(Material.AIR);
+        }, 3L);
+    }
+
+    @EventHandler
+    public void onInventory(InventoryClickEvent e) {
+        Player p = (Player) e.getInventory().getHolder();
+        if(p.getGameMode() != GameMode.SURVIVAL) { return; }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            int count = 0;
+            for(int i=0; i<36; i++) { if(p.getInventory().getItem(i) != null) { count++; } }
+            if(count < 29) { return; }
+            for(int in=0; in<12; in++) { p.getInventory().setItem((int) Math.floor(random.nextFloat() * (36)), null); }
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Your inventory was looking a little full, so I cleared some stuff"));
         }, 3L);
     }
 }

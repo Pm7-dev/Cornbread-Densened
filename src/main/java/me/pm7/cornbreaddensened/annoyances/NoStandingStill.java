@@ -27,10 +27,11 @@ public class NoStandingStill implements Listener {
             if(idle == null) { continue; }
             idle.ticks++;
 
-            if(idle.ticks >= 200) {
+            if(idle.ticks >= 380) {
                 if(Math.floor(random.nextFloat() * 30) == 0) {
                     idle.dead = true;
                     idle.player.setHealth(0.0d);
+                    idle.ticks = 0;
                 }
             }
         }
@@ -56,6 +57,8 @@ public class NoStandingStill implements Listener {
         if(p == null) { return; }
         if(p.dead) {
             e.setDeathMessage(p.player.getDisplayName() + " died of... being boring for too long, idk");
+            p.dead = false;
+            p.ticks = 0;
         }
     }
 

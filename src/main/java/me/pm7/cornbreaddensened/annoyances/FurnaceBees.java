@@ -13,26 +13,29 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class FurnaceBees implements Listener {
     Random random = new Random();
+    List<Material> furnaces = Arrays.asList(Material.FURNACE, Material.SMOKER, Material.BLAST_FURNACE);
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent e) {
         if(e.getClickedBlock() == null) { return; }
-        if(e.getClickedBlock().getType() != Material.FURNACE) { return; }
-        if((int)Math.floor(random.nextFloat() * 20) != 1) {
-            Player p = e.getPlayer();
-            if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
-            p.closeInventory();
-            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Oh no! There was a beehive in the furnace!"));
-            Location loc = e.getClickedBlock().getLocation().clone().add(0.5, 0.5, 0.5);
+        if(!furnaces.contains(e.getClickedBlock().getType())) { return; }
+        if((int)Math.floor(random.nextFloat() * 20) != 1) { return; }
 
-            SpawnBee(loc, p);
-            SpawnBee(loc, p);
-            SpawnBee(loc, p);
-        }
+        Player p = e.getPlayer();
+        if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
+        e.setCancelled(true);
+        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Oh no! There was a beehive in the furnace!"));
+        Location loc = e.getClickedBlock().getLocation().clone().add(0.5, 0.5, 0.5);
+
+        SpawnBee(loc, p);
+        SpawnBee(loc, p);
+        SpawnBee(loc, p);
     }
 
     void SpawnBee(Location loc, Player p) {

@@ -23,19 +23,25 @@ public class BedFire implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e) {
+        if(e.getRespawnLocation() == e.getRespawnLocation().getWorld().getSpawnLocation()) {return;}
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
-        if((int)Math.floor(random.nextFloat() * 20) != 1) { return; }
+        if((int)Math.floor(random.nextFloat() * 10) != 1) { return; }
         Location loc = e.getRespawnLocation();
         World world = loc.getWorld();
+        boolean done = false;
         for(int x = loc.getBlockX()-2; x <loc.getBlockX()+2; x++) {
             for(int y = loc.getBlockY()-2; y <loc.getBlockY()+2; y++) {
                 for(int z = loc.getBlockZ()-2; z <loc.getBlockZ()+2; z++) {
                     if(bedsList.contains(world.getBlockAt(x, y, z).getType())) {
+                        if(!done) {
+                            e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You uhh... used your bed so hard that it uhh.. caught on fire."));
+                            done = true;
+                        }
                         world.getBlockAt(x, y, z).setType(Material.FIRE);
                     }
                 }
             }
         }
-        e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You uhh... used your bed so hard that it uhh.. caught on fire."));
+        e.getPlayer().setRespawnLocation(null);
     }
 }
