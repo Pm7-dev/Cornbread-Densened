@@ -1,5 +1,6 @@
 package me.pm7.cornbreaddensened.annoyances;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.*;
@@ -19,6 +20,7 @@ public class Leaves implements Listener {
             Material.OAK_LEAVES, Material.DARK_OAK_LEAVES, Material.SPRUCE_LEAVES, Material.MANGROVE_LEAVES, Material.JUNGLE_LEAVES);
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
+        if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(leaves.contains(e.getBlock().getType())) {
             e.setDropItems(false);
             if((int) Math.floor(random.nextFloat() * (7)) == 1) {
@@ -53,7 +55,7 @@ public class Leaves implements Listener {
                 Entity bee = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BEE);
 
                 List<Entity> nearby = bee.getNearbyEntities(100, 100, 100);
-                if(!nearby.isEmpty() && nearby.get(0) instanceof LivingEntity) {
+                if(!nearby.isEmpty() && nearby.get(0) instanceof Player) {
                     ((Bee) bee).setTarget((LivingEntity) nearby.get(0));
                     Entity passenger = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 5, 0)), EntityType.WITCH);
                     ((Bee) bee).setAnger(99999);

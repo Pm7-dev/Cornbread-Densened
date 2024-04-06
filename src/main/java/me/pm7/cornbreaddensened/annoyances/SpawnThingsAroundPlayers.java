@@ -1,6 +1,7 @@
 package me.pm7.cornbreaddensened.annoyances;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
 import org.bukkit.potion.PotionEffect;
@@ -18,6 +19,7 @@ public class SpawnThingsAroundPlayers {
         //spawn a random of one of the cool mobs with resistance 5 for 10 seconds so it can fall normally
         System.out.println("running");
         for(Player p : Bukkit.getOnlinePlayers()) {
+            if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
             if(Math.floor(Math.random()*3)!=1) { continue; }
             System.out.println("spawning something!");
             Location loc = p.getLocation().clone();

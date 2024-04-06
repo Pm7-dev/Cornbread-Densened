@@ -1,5 +1,6 @@
 package me.pm7.cornbreaddensened.annoyances;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +12,7 @@ public class EternalFlame implements Listener {
         if(e.getEntity() instanceof Player) {
             if(e.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK) {
                 Player p = (Player) e.getEntity();
+                if(p.getGameMode() != GameMode.SURVIVAL) { return; }
                 p.setFireTicks(200);
             }
         }

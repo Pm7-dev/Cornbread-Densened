@@ -2,6 +2,7 @@ package me.pm7.cornbreaddensened.annoyances;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +18,7 @@ public class NoEndBed implements Listener {
             Material.WHITE_BED, Material.ORANGE_BED, Material.YELLOW_BED, Material.MAGENTA_BED, Material.RESPAWN_ANCHOR);
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
+        if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(e.getBlock().getWorld().getName().equals("world_the_end")) {
             if(bedsList.contains(e.getBlockPlaced().getType())) {
                 e.setCancelled(true);

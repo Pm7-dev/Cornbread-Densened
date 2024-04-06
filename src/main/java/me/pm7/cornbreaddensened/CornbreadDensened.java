@@ -1,8 +1,10 @@
 package me.pm7.cornbreaddensened;
 
-import me.pm7.cornbreaddensened.Objects.SprintingPlayer;
 import me.pm7.cornbreaddensened.annoyances.*;
 import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
+import org.bukkit.GameRule;
+import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
@@ -14,6 +16,25 @@ public final class CornbreadDensened extends JavaPlugin {
     public void onEnable() {
         getLogger().log(Level.INFO, "Cornbread Densened has been enabled.");
         plugin = this;
+
+        World world = Bukkit.getWorld("world");
+        World nether = Bukkit.getWorld("world_nether");
+        World end = Bukkit.getWorld("world_the_end");
+
+        world.setDifficulty(Difficulty.HARD);
+        world.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
+        world.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
+        world.setGameRule(GameRule.SPAWN_RADIUS, 100);
+
+        nether.setDifficulty(Difficulty.HARD);
+        nether.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
+        nether.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
+        nether.setGameRule(GameRule.SPAWN_RADIUS, 100);
+
+        end.setDifficulty(Difficulty.HARD);
+        end.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
+        end.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
+        end.setGameRule(GameRule.SPAWN_RADIUS, 100);
 
         getServer().getPluginManager().registerEvents(new EndSpawns(), this);
         getServer().getPluginManager().registerEvents(new EternalFlame(), this);
@@ -34,6 +55,14 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoLavaBucket(), this);
         getServer().getPluginManager().registerEvents(new BigCreeperExplosion(), this);
         getServer().getPluginManager().registerEvents(new BuffMobs(), this);
+        getServer().getPluginManager().registerEvents(new StoneMobs(), this);
+        getServer().getPluginManager().registerEvents(new FurnaceFire(), this);
+        getServer().getPluginManager().registerEvents(new FurnaceBees(), this);
+        getServer().getPluginManager().registerEvents(new BedFire(), this);
+        getServer().getPluginManager().registerEvents(new ZombiePiglinAgro(), this);
+        getServer().getPluginManager().registerEvents(new NoStandingStill(), this);
+        getServer().getPluginManager().registerEvents(new Hoglins(), this);
+        getServer().getPluginManager().registerEvents(new NoChestBoat(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             Nethermites.Run();
@@ -43,6 +72,7 @@ public final class CornbreadDensened extends JavaPlugin {
             PufferDrop.Run();
             SpawnThingsAroundPlayers.Run();
             NoOffHand.Run();
+            NoStandingStill.Run();
         }, 20L, 1L);
     }
 

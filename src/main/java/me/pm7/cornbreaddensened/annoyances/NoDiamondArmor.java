@@ -3,6 +3,7 @@ package me.pm7.cornbreaddensened.annoyances;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
@@ -14,6 +15,7 @@ public class NoDiamondArmor {
     public static void Run() {
         if(tick<5) {tick+=1; return;}
         for(Player p : Bukkit.getOnlinePlayers()) {
+            if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
             PlayerInventory inv = p.getInventory();
             boolean diamondcheck = false;
 

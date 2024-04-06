@@ -1,5 +1,6 @@
 package me.pm7.cornbreaddensened.annoyances;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ public class RandomNetherSpeed implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
+        if(p.getGameMode() != GameMode.SURVIVAL) { return; }
         if(p.getWorld().getName().equals("world_nether")) {
             if((int) Math.floor(random.nextFloat() * (2000)) == 1) {
                 PotionEffect potionEffect = new PotionEffect(PotionEffectType.SPEED, 100, 40, false);

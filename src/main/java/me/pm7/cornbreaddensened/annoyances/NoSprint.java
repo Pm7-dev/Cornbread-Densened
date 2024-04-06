@@ -4,6 +4,7 @@ import me.pm7.cornbreaddensened.Objects.SprintingPlayer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -25,6 +26,7 @@ public class NoSprint implements Listener {
     public static void Run() {
         if(ticks < 2) {ticks++; return;}
         for(Player p : Bukkit.getOnlinePlayers()) {
+            if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
             if (p.isSprinting() && !isASprinter(p)) { sprinters.add(new SprintingPlayer(p, 0)); }
             if (!p.isSprinting() && isASprinter(p)) { sprinters.remove(getSprinter(p)); }
         }

@@ -1,6 +1,7 @@
 package me.pm7.cornbreaddensened.annoyances;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,8 +22,9 @@ public class MathPrompt implements Listener {
 
     @EventHandler
     public void onPlayerMovement(PlayerMoveEvent e) {
+        if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(!students.contains(e.getPlayer().getName())) {
-            if ((int) Math.floor(random.nextFloat() * (25000)) == 1) {
+            if ((int) Math.floor(random.nextFloat() * (22500)) == 1) {
                 students.add(e.getPlayer().getName());
                 int t1 = (int)Math.floor((Math.random() * (9)) + 1);
                 int t2 = (int)Math.floor((Math.random() * (9)) + 1);
@@ -40,6 +42,7 @@ public class MathPrompt implements Listener {
 
     @EventHandler
     public void onPLayerChat(AsyncPlayerChatEvent e) {
+        if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(students.contains(e.getPlayer().getName())) {
             String input = e.getMessage();
 
@@ -64,6 +67,7 @@ public class MathPrompt implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
+        if(p.getGameMode() != GameMode.SURVIVAL) { return; }
         if(students.contains(p.getName())) {
             problems.remove(students.indexOf(p.getName()));
             students.remove(p.getName());
