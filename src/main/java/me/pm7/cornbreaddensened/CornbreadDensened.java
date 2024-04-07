@@ -44,6 +44,8 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Hoglins(), this);
         getServer().getPluginManager().registerEvents(new NoChestBoat(), this);
         getServer().getPluginManager().registerEvents(new EndEndermanAgro(), this);
+        getServer().getPluginManager().registerEvents(new NoPhantomFire(), this);
+        getServer().getPluginManager().registerEvents(new LessKnockback(), this);
         getCommand("start").setExecutor(new start());
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {

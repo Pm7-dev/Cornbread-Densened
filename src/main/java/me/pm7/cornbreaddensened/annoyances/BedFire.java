@@ -25,7 +25,7 @@ public class BedFire implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         if(e.getRespawnLocation() == e.getRespawnLocation().getWorld().getSpawnLocation()) {return;}
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
-        if((int)Math.floor(random.nextFloat() * 10) != 1) { return; }
+        if((int)Math.floor(random.nextFloat() * 25) != 1) { return; }
         Location loc = e.getRespawnLocation();
         World world = loc.getWorld();
         boolean done = false;

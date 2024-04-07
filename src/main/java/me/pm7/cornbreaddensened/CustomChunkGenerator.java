@@ -90,7 +90,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                 // These structures only generate in the general middle of a chunk because
 
                                 // Add a cool house to white chunks every once in a while (special tool that will help us later)
-                                if (color == 0 && Math.floor(random.nextFloat() * (15)) == 1) {
+                                if (color == 0 && Math.floor(random.nextFloat() * (12)) == 1) {
                                     x += (chunkX * 16) - 3;
                                     y -= 2;
                                     z += (chunkZ * 16) + 3;
@@ -110,25 +110,15 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                     int finalX = x + (chunkX * 16) - 3;
                                     int finalY = y + 2;
                                     int finalZ = z + (chunkZ * 16) - 3;
-                                    switch ((int) Math.floor(random.nextFloat() * (3))) {
-                                        case 0: loadStructure("kelp_tower_1.nbt", finalX, finalY, finalZ, random); break;
-                                        case 1: loadStructure("kelp_tower_2.nbt", finalX, finalY, finalZ, random); break;
-                                        case 2: loadStructure("kelp_tower_3.nbt", finalX, finalY, finalZ, random); break;
-                                    }
+                                    int number = ((int) Math.floor(random.nextFloat() * 3)) + 1;
+                                    loadStructure("kelp_tower_" + number + ".nbt", finalX, finalY, finalZ, random); break;
                                 }
                                 // Might as well put in some couches too
                                 else if(Math.floor(random.nextFloat() * (23)) == 1) {
                                     int finalX = x + (chunkX * 16); // -3
                                     int finalZ = z + (chunkZ * 16) - 3;
-                                    switch ((int) Math.floor(random.nextFloat() * (7))) {
-                                        case 0: loadStructure("couch_1.nbt", finalX, y, finalZ, random); break;
-                                        case 1: loadStructure("couch_2.nbt", finalX, y, finalZ, random); break;
-                                        case 2: loadStructure("couch_3.nbt", finalX, y, finalZ, random); break;
-                                        case 3: loadStructure("couch_4.nbt", finalX, y, finalZ, random); break;
-                                        case 4: loadStructure("couch_5.nbt", finalX, y, finalZ, random); break;
-                                        case 5: loadStructure("couch_6.nbt", finalX, y, finalZ, random); break;
-                                        case 6: loadStructure("couch_7.nbt", finalX, y, finalZ, random); break;
-                                    }
+                                    int number = ((int) Math.floor(random.nextFloat() * 7)) + 1;
+                                    loadStructure("couch_" + number + ".nbt", finalX, y, finalZ, random); break;
                                 }
                             }
                             // Oh yeah we should probably have SOME wood

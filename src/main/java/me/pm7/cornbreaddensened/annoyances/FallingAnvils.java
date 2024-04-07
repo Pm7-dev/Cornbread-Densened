@@ -36,7 +36,7 @@ public class FallingAnvils {
             spawnAnvil(world, loc6);
             spawnAnvil(world, loc7);
             spawnAnvil(world, loc8);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Look out!")), 5L);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Look out!")), 2L);
         }
         tick = 0;
         needed = (int) Math.floor((Math.random() * (6500 - 5000)) + 5000);

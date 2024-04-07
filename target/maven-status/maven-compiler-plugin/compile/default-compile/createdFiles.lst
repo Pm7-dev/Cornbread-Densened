@@ -21,6 +21,7 @@ me\pm7\cornbreaddensened\annoyances\Leaves.class
 me\pm7\cornbreaddensened\annoyances\FurnaceFire.class
 me\pm7\cornbreaddensened\annoyances\NoStandingStill.class
 me\pm7\cornbreaddensened\annoyances\NoChestBoat.class
+me\pm7\cornbreaddensened\annoyances\LessKnockback.class
 me\pm7\cornbreaddensened\Commands\start.class
 me\pm7\cornbreaddensened\FastNoiseLite$CellularReturnType.class
 me\pm7\cornbreaddensened\annoyances\InventoryClear.class
@@ -51,3 +52,4 @@ me\pm7\cornbreaddensened\annoyances\FurnaceBees.class
 me\pm7\cornbreaddensened\annoyances\NoCrouch.class
 me\pm7\cornbreaddensened\annoyances\Hoglins.class
 me\pm7\cornbreaddensened\annoyances\FallingAnvils.class
+me\pm7\cornbreaddensened\annoyances\NoPhantomFire.class
