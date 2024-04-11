@@ -18,7 +18,6 @@ public class Nethermites {
                 Location loc = p.getLocation();
                 World world = p.getWorld();
                 world.spawnEntity(loc, EntityType.ENDERMITE);
-                world.spawnEntity(loc, EntityType.ENDERMITE);
             }
         }
         tick = 0;

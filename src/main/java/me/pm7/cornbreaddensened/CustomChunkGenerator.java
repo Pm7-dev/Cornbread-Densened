@@ -9,8 +9,9 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.WorldInfo;
 import org.bukkit.structure.Structure;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 
 public class CustomChunkGenerator extends ChunkGenerator {
@@ -71,17 +72,17 @@ public class CustomChunkGenerator extends ChunkGenerator {
             for (int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
                 for (int x = 0; x < 16; x++) {
                     for (int z = 0; z < 16; z++) {
+                        float stone = (((stoneLayer.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+                        float spikes = (((this.chromeSpikes.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 35) + 50);
+                        float chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
 
                         //Generate """stone""" layer (it will in fact not be stone)
-                        float stone = (((stoneLayer.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
-                        if (y <= stone) { chunkData.setBlock(x, y, z, getStoneMat(y, (int) stone, random)); }
+                        if (y <= stone && y <= chromeGround) { chunkData.setBlock(x, y, z, getStoneMat(y, (int) stone, random)); }
 
                         // Generate spikes of surface blocks to look cool
-                        float spikes = (((this.chromeSpikes.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 35) + 50);
                         if (y > stone && y <= spikes) { chunkData.setBlock(x, y, z, getSurfaceMat(color, random)); }
 
                         // Generate plateau-like surfaces from that wonky noisemap
-                        float chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
                         if (y > stone && y < chromeGround) {
                             chunkData.setBlock(x, y, z, getSurfaceMat(color, random));
 
@@ -90,7 +91,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                 // These structures only generate in the general middle of a chunk because
 
                                 // Add a cool house to white chunks every once in a while (special tool that will help us later)
-                                if (color == 0 && Math.floor(random.nextFloat() * (12)) == 1) {
+                                if (color == 0 && Math.floor(random.nextFloat() * (15)) == 1) {
                                     x += (chunkX * 16) - 3;
                                     y -= 2;
                                     z += (chunkZ * 16) + 3;
@@ -106,7 +107,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                     }
                                 }
                                 // Add some kelp towers so you don't starve
-                                else if(Math.floor(random.nextFloat() * (38)) == 1) {
+                                else if(Math.floor(random.nextFloat() * (34)) == 1) {
                                     int finalX = x + (chunkX * 16) - 3;
                                     int finalY = y + 2;
                                     int finalZ = z + (chunkZ * 16) - 3;
@@ -122,8 +123,8 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                 }
                             }
                             // Oh yeah we should probably have SOME wood
-                            else if (y > chromeGround-2 && y>spikes && Math.floor(random.nextFloat() * (3800)) == 1) {
-                                // Around every like 4000th surface block will have a tree on top of it
+                            else if (y > chromeGround-2 && y>spikes && Math.floor(random.nextFloat() * (3750)) == 1) {
+                                // Around every like 3750th surface block will have a tree on top of it
 
                                 // Randomize type of log we are using
                                 String type = "oak";
@@ -162,11 +163,18 @@ public class CustomChunkGenerator extends ChunkGenerator {
             return;
         }
         Bukkit.getScheduler().scheduleSyncDelayedTask(CornbreadDensened.getPlugin(), () -> {
-            // Gather the file from the chose one
+            // Gather the file from the chosen one
             Structure structure;
-            File path = new File(plugin.getDataFolder() + "/" + filename);
-            try { structure = Bukkit.getStructureManager().loadStructure(path); }
-            catch (IOException e) { throw new RuntimeException(e); }
+            try {
+                ClassLoader classLoader = plugin.getClass().getClassLoader();
+                InputStream inputStream = classLoader.getResourceAsStream("structures/" + filename);
+                if (inputStream == null) {
+                    throw new FileNotFoundException("Resource not found: " + filename);
+                }
+                structure = Bukkit.getStructureManager().loadStructure(inputStream);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to load structure: " + filename, e);
+            }
 
             // Choose a rotation to put the structure at
             switch ((int)Math.floor(random.nextFloat() * (4))) {

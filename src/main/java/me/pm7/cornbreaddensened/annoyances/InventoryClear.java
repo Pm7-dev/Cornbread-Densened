@@ -11,12 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryEvent;
-import org.bukkit.event.inventory.InventoryPickupItemEvent;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.Random;
-import java.util.logging.Level;
 
 public class InventoryClear implements Listener {
     Random random = new Random();

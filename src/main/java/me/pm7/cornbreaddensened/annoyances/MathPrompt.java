@@ -17,8 +17,10 @@ import static java.lang.Integer.parseInt;
 
 public class MathPrompt implements Listener {
     Random random = new Random();
-    List<String> students = new ArrayList<>();
+    static List<String> students = new ArrayList<>();
     List<String> problems = new ArrayList<>();
+
+    public static List<String> getStudents() {return students;}
 
     @EventHandler
     public void onPlayerMovement(PlayerMoveEvent e) {

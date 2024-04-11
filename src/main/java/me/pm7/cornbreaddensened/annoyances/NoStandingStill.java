@@ -22,6 +22,7 @@ public class NoStandingStill implements Listener {
 
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
+            if(MathPrompt.getStudents().contains(p.getName())) { return; }
             if(!isIdle(p)) { idlePlayers.add(new IdlePlayer(p, 0, false)); }
             IdlePlayer idle = getIdle(p);
             if(idle == null) { continue; }

@@ -13,7 +13,6 @@ public class NetherSpawns implements Listener {
         if(e.getEntity().getType() != EntityType.ENDERMITE && e.getEntity() instanceof LivingEntity) {
             e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.ENDERMITE);
             e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.ENDERMITE);
-            e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.ENDERMITE);
         }
     }
 }

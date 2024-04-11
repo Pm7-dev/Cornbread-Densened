@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 public class NoPhantomFire implements Listener {
     @EventHandler
     public void onEntitySpawn(EntitySpawnEvent e) {
+        if(!(e.getEntity() instanceof LivingEntity)) { return; }
         LivingEntity entity = (LivingEntity) e.getEntity();
         entity.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, PotionEffect.INFINITE_DURATION,0));
     }

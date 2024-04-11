@@ -66,7 +66,7 @@ public class EndSpawns implements Listener {
                 Phantom phantom1 = (Phantom) world.spawnEntity(newLoc, EntityType.PHANTOM);
                 Phantom phantom2 = (Phantom) world.spawnEntity(newLoc, EntityType.PHANTOM);
                 phantom1.setSize(5);
-                phantom1.setSize(6);
+                phantom2.setSize(6);
             }
             // Spawn Vindicator
             if((int) Math.floor(random.nextFloat() * (16)) == 1) {
