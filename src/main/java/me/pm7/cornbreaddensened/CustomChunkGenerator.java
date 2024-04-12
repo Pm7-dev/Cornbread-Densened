@@ -50,20 +50,28 @@ public class CustomChunkGenerator extends ChunkGenerator {
         if((int)Math.floor(random.nextFloat() * (10)) == 1) {
             for(int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
                 for (int x = 0; x < 16; x++) {
-                    //set z 0 and 15
-                    float chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 60); // 20 + 70
-                    float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 25); // 20 + 70
-                    if (y < chromeGround || y < stone) { chunkData.setBlock(x, y, 0, getSurfaceMat(color, random)); }
-                    chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 60);
-                    stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 25);
-                    if (y < chromeGround || y < stone) { chunkData.setBlock(x, y, 15, getSurfaceMat(color, random)); }
+
+                    //Set Z 1
+                    float ground = (((this.chromeGround.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 60);
+                    float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+                    if (y < ground || y < stone) { chunkData.setBlock(x, y, 0, getSurfaceMat(color, random)); }
+
+                    //Set Z 16
+                    ground = (((this.chromeGround.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 60);
+                    stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+                    if (y < ground || y < stone) { chunkData.setBlock(x, y, 15, getSurfaceMat(color, random)); }
                 }
                 for (int z = 0; z < 16; z++) {
-                    //set x 0 and 15
-                    float chromeGround = (((this.chromeGround.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
-                    if (y < chromeGround) { chunkData.setBlock(0, y, z, getSurfaceMat(color, random)); }
-                    chromeGround = (((this.chromeGround.GetNoise(15 + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 60);
-                    if (y < chromeGround) { chunkData.setBlock(15, y, z, getSurfaceMat(color, random)); }
+
+                    //Set X 1
+                    float ground = (((this.chromeGround.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
+                    float stone = (((this.stoneLayer.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+                    if (y < ground || y < stone) { chunkData.setBlock(0, y, z, getSurfaceMat(color, random)); }
+
+                    //Set X 16
+                    ground = (((this.chromeGround.GetNoise(15 + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
+                    stone = (((this.stoneLayer.GetNoise(15 + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+                    if (y < ground || y < stone) { chunkData.setBlock(15, y, z, getSurfaceMat(color, random)); }
                 }
             }
         }
@@ -72,22 +80,25 @@ public class CustomChunkGenerator extends ChunkGenerator {
             for (int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
                 for (int x = 0; x < 16; x++) {
                     for (int z = 0; z < 16; z++) {
-                        float stone = (((stoneLayer.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+                        float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
                         float spikes = (((this.chromeSpikes.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 35) + 50);
-                        float chromeGround = (((this.chromeGround.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
+                        float ground = (((this.chromeGround.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
 
                         //Generate """stone""" layer (it will in fact not be stone)
-                        if (y <= stone && y <= chromeGround) { chunkData.setBlock(x, y, z, getStoneMat(y, (int) stone, random)); }
+                        if (y < stone-1) { chunkData.setBlock(x, y, z, getStoneMat(y, (int) stone, random));}
+
+                        // Make a little two-block top layer of stone as the normal stuff
+                        else if (y >= stone-1 && y <= stone+2) { chunkData.setBlock(x, y, z, getSurfaceMat(color, random)); }
 
                         // Generate spikes of surface blocks to look cool
-                        if (y > stone && y <= spikes) { chunkData.setBlock(x, y, z, getSurfaceMat(color, random)); }
+                        else if (y >= stone && y <= spikes && y >= ground) { chunkData.setBlock(x, y, z, getSurfaceMat(color, random)); }
 
                         // Generate plateau-like surfaces from that wonky noisemap
-                        if (y > stone && y < chromeGround) {
+                        if (y > stone && y <= ground) {
                             chunkData.setBlock(x, y, z, getSurfaceMat(color, random));
 
                             // Generate "structures"
-                            if(x==8 && z==8 && y > chromeGround-2 && y>spikes) {
+                            if(x == 8 && z == 8 && y > ground-2 && y > 63) {
                                 // These structures only generate in the general middle of a chunk because
 
                                 // Add a cool house to white chunks every once in a while (special tool that will help us later)
@@ -109,7 +120,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                 // Add some kelp towers so you don't starve
                                 else if(Math.floor(random.nextFloat() * (34)) == 1) {
                                     int finalX = x + (chunkX * 16) - 3;
-                                    int finalY = y + 2;
+                                    int finalY = y+1;
                                     int finalZ = z + (chunkZ * 16) - 3;
                                     int number = ((int) Math.floor(random.nextFloat() * 3)) + 1;
                                     loadStructure("kelp_tower_" + number + ".nbt", finalX, finalY, finalZ, random); break;
@@ -119,11 +130,11 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                     int finalX = x + (chunkX * 16); // -3
                                     int finalZ = z + (chunkZ * 16) - 3;
                                     int number = ((int) Math.floor(random.nextFloat() * 7)) + 1;
-                                    loadStructure("couch_" + number + ".nbt", finalX, y, finalZ, random); break;
+                                    loadStructure("couch_" + number + ".nbt", finalX, y+1, finalZ, random); break;
                                 }
                             }
                             // Oh yeah we should probably have SOME wood
-                            else if (y > chromeGround-2 && y>spikes && Math.floor(random.nextFloat() * (3750)) == 1) {
+                            else if (y > ground-2 && y>spikes && Math.floor(random.nextFloat() * (3750)) == 1) {
                                 // Around every like 3750th surface block will have a tree on top of it
 
                                 // Randomize type of log we are using
