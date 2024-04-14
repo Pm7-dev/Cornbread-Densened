@@ -53,7 +53,6 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoCrouch(), this);
         getServer().getPluginManager().registerEvents(new NoEndBed(), this);
         getServer().getPluginManager().registerEvents(new BuffMobs(), this);
-        getServer().getPluginManager().registerEvents(new BedFire(), this);
         getServer().getPluginManager().registerEvents(new Hoglins(), this);
         getServer().getPluginManager().registerEvents(new NoSleep(), this);
         getServer().getPluginManager().registerEvents(new Leaves(), this);

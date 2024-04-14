@@ -4,24 +4,26 @@ Cornbread Densened is a spigot plugin designed to make Minecraft more challengin
 It is called Cornbread because I wanted it to be called Cornbread.
 # How to Set Up
 This tutorial assumes you already have a Spigot server set up. If you do not already know how to set up a Spigot server, many tutorials can be found on YouTube. This plugin will not work on vanilla, fo
-1. Head over to the [releases](https://github.com/Pm7-dev/Cornbread-Densened/releases/) page and download the latest (probably only) version of the plugin. 
+1. Head over to the [releases](https://github.com/Pm7-dev/Cornbread-Densened/releases/) page or the [spigot releases]() and download the latest (probably only) version of the plugin. 
 2. Shut down your server if it is running
 3. Add the plugin to your plugins folder
-4. Make sure the `level-name` is set to `world` in the `server.properties` file
-5. Delete the current world folder, along with the nether and end world folders
-6. add the following text to the end of your `bukkit.yml` file
+4. Make sure the `level-name` is set to `world` in the `server.properties` file. If you know you didn't change it, you can ignore this
+5. Either delete the current world folder, along with the nether and end world folders, or move them to a different location if you want to save them
+6. Add the following text to the end of your `bukkit.yml` file
 ```
 worlds:
   world:
     generator: CornbreadDensened
   ```
+7. Start up the server
+8. Once startup is complete, run the `/start` command to set up some game rules
+9. Have no fun!
 # Feature List
 For maximum annoyance value, I suggest playing through the game completely blind. However, if you want to know exactly what you're getting yourself into, click the "Show Feature List" button to see what exactly the plugin does
 <details>
   <summary>Show Feature List</summary>
 
 - There is a custom world generator built specifically for this plugin's overworld dimension. It's hard to describe exactly what it does, but it certainly is interesting.
-- Every time you respawn from a bed, there is a 1 in 25 chance that the bed goes up in flames
 - Creeper explosions are much larger and cause fire
 - All mobs spawn with Strength, Resistance, and Speed
 - Chests and Barrels cannot be crafted
@@ -62,5 +64,23 @@ For maximum annoyance value, I suggest playing through the game completely blind
 - Zombified Piglins are automatically angry at the nearest player
 </details>
 
+# Tips
+<details>
+  <summary>Tip 1 - Item Storage</summary>
+You can use droppers to store items. Redstone was intentionally put in the "stone" layer for this purpose
+</details>
+<details>
+  <summary>Tip 2 - Mining</summary>
+Iron and Diamonds both start spawning exactly 10 blocks below the surface of the "stone" layer at that block's position. Because the surface of the stone layer changes, it is best to go as deep as possible.
+</details>
+<details>
+  <summary>Tip 3 - End Portal</summary>
+To safely collect an end frame, go under the house, and with a hopper in hand, quickly right click the frame and then place the hopper
+</details>
+<details>
+  <summary>Tip 4 - Food</summary>
+Green towers will occasionally spawn around the Overworld with dried kelp blocks. This is the only way to get non-poisoning food until getting to the nether, where you can get food from hoglins
+</details>
+
 # Credits:
-[FastNoiseLite](https://github.com/Auburn/FastNoiseLite) - Easy to use library for generating noise maps - used in world generation changes
+[FastNoiseLite](https://github.com/Auburn/FastNoiseLite) - Easy to use library for generating noise maps - Used in world generation changes

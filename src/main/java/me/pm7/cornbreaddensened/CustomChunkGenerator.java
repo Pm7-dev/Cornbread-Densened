@@ -134,7 +134,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                 }
                             }
                             // Oh yeah we should probably have SOME wood
-                            else if (y > ground-2 && y>spikes && Math.floor(random.nextFloat() * (3750)) == 1) {
+                            else if (y > ground-2 && y>spikes && Math.floor(random.nextFloat() * (3000)) == 1) {
                                 // Around every like 3750th surface block will have a tree on top of it
 
                                 // Randomize type of log we are using
@@ -156,7 +156,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                 loadStructure("trees/"+type+"_"+variant+".nbt", x + (chunkX * 16)-2, y+1, z + (chunkZ * 16)-2, random);
                             }
 
-                            //Waterlevl
+                            //63 or 64 ikd isl water lev.l
                         } else if (y > stone && y <= 63 && x % 5 != 0 && z % 5 != 0 && x % 6 != 0 && z % 6 != 0) {
                             // Decided to make the water soul sand. Deal with it
                             chunkData.setBlock(x, y, z, Material.SOUL_SAND);
@@ -199,7 +199,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
 
     // For generating the stone layer; making inventory management a nightmare
     Material getStoneMat(int y, int height, Random random) {
-        int r = (int)Math.floor(random.nextFloat() * (59));
+        int r = (int)Math.floor(random.nextFloat() * (61));
         Material mat = Material.STONE;
         switch (r) {
             case 0: mat = Material.SMOOTH_STONE; break;
@@ -257,10 +257,12 @@ public class CustomChunkGenerator extends ChunkGenerator {
             case 52: mat = Material.OBSIDIAN; break;
             case 53: mat = Material.WAXED_WEATHERED_CUT_COPPER_STAIRS; break;
             case 54: mat = Material.SPONGE; break;
+            case 55: mat = Material.REDSTONE_ORE; break;
+            case 56: mat = Material.REDSTONE_BLOCK; break;
         }
         // gotta put some precious metals in. No coal though, that's what the fences were for
-        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (150)) == 1) { mat = Material.IRON_ORE; }
-        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (275)) == 1) { mat = Material.DIAMOND_ORE; }
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (125)) == 1) { mat = Material.IRON_ORE; }
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (250)) == 1) { mat = Material.DIAMOND_ORE; }
         return mat;
     }
 

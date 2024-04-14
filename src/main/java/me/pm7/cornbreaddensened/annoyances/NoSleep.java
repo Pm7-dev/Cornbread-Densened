@@ -29,13 +29,13 @@ public class NoSleep implements Listener {
         if(e.getClickedBlock() == null) { return; }
         if (bedsList.contains(e.getClickedBlock().getBlockData().getMaterial())) {
             Player p = e.getPlayer();
-            if(14 <= p.getHealth() && p.getHealth() <= 15) {
+            if(13.0 <= p.getHealth() && p.getHealth() <= 15.0) {
                 if(usedBeds.contains(p.getName())) {
                     usedBeds.remove(p.getName());
                     Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("...Still gonna set fire to you lol")), 5L);
                 }
             } else {
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You must be between 14.0 and 15.0 health to set spawn..."));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You must be between 13.0 and 15.0 health to set spawn..."));
                 if(p.getHealth() > 15.0) { p.setHealth(13.5); } // :)
                 usedBeds.add(p.getName());
                 e.setCancelled(true);
