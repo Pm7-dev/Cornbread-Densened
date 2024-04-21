@@ -8,10 +8,13 @@ import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import java.util.Random;
+
 public class FallingAnvils {
+    static Random random = new Random();
     static CornbreadDensened plugin = CornbreadDensened.getPlugin();
     static int tick = 0;
-    static int needed = 1200;
+    static int needed = (int) Math.floor((random.nextFloat() * (6500 - 5000)) + 5000);
     public static void Run() {
         if(tick < needed) { tick+=1; return; }
         for(Player p : Bukkit.getOnlinePlayers()) {
@@ -39,7 +42,8 @@ public class FallingAnvils {
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Look out!")), 2L);
         }
         tick = 0;
-        needed = (int) Math.floor((Math.random() * (6500 - 5000)) + 5000);
+        if(Math.floor(random.nextFloat() * (15)) == 1) {}
+        else {needed = (int) Math.floor((random.nextFloat() * (6500 - 5000)) + 5000);}
     }
 
     static void spawnAnvil(World world, Location loc) {

@@ -21,6 +21,7 @@ me\pm7\cornbreaddensened\FastNoiseLite$DomainWarpType.class
 me\pm7\cornbreaddensened\annoyances\StoneMobs.class
 me\pm7\cornbreaddensened\annoyances\BigCreeperExplosion.class
 me\pm7\cornbreaddensened\annoyances\PickUpEndFrame$1.class
+me\pm7\cornbreaddensened\annoyances\Pumpkin.class
 me\pm7\cornbreaddensened\annoyances\PickUpEndFrame.class
 me\pm7\cornbreaddensened\annoyances\FurnaceBees.class
 me\pm7\cornbreaddensened\annoyances\Hoglins.class
@@ -30,12 +31,14 @@ me\pm7\cornbreaddensened\annoyances\EndSpawns.class
 me\pm7\cornbreaddensened\annoyances\NetherPhantoms.class
 me\pm7\cornbreaddensened\annoyances\EndermiteSilverfishBuff.class
 me\pm7\cornbreaddensened\annoyances\ExplodeOnCraft.class
+me\pm7\cornbreaddensened\ItemManager.class
 me\pm7\cornbreaddensened\annoyances\NoEndBed.class
 me\pm7\cornbreaddensened\annoyances\NoBreakingNetherrack.class
 me\pm7\cornbreaddensened\FastNoiseLite$Vector3.class
 me\pm7\cornbreaddensened\annoyances\PufferDrop.class
 me\pm7\cornbreaddensened\annoyances\MathPrompt.class
 me\pm7\cornbreaddensened\annoyances\EternalFlame.class
+me\pm7\cornbreaddensened\annoyances\FireAspectZombies.class
 me\pm7\cornbreaddensened\annoyances\Leaves.class
 me\pm7\cornbreaddensened\annoyances\FurnaceFire.class
 me\pm7\cornbreaddensened\annoyances\NoStandingStill.class

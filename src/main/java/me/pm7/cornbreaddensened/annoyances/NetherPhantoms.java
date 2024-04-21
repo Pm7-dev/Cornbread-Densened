@@ -18,6 +18,7 @@ public class NetherPhantoms {
         if(tick<2400) {tick+=1; return;}
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
+            if(!p.getWorld().getName().equals("world_nether")) { continue; }
             if(random.nextDouble() > 0.65d) {
                 Phantom entity = (Phantom) p.getWorld().spawnEntity(p.getLocation().clone().add(0, 13, 0), EntityType.PHANTOM);
                 entity.setSize((int) Math.floor(random.nextFloat() * 4) + 2);

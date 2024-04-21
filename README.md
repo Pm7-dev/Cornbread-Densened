@@ -62,6 +62,7 @@ For maximum annoyance value, I suggest playing through the game completely blind
 - Entities that can randomly spawn around Overworld Players include: Blazes (will not drop rods), Ghasts, large Magma Cubes, large Phantoms, and Ravagers 
 - Breaking a stone block can spawn: Bees, Cave Spiders, Silverfish, normal Spiders, Endermites, and small Magma Cubes
 - Zombified Piglins are automatically angry at the nearest player
+- Some mobs will spawn with pumpkins on their heads, if they hit you, you are locked to 9:16 aspect ratio until you die
 </details>
 
 # Tips
@@ -74,12 +75,8 @@ You can use droppers to store items. Redstone was intentionally put in the "ston
 Iron and Diamonds both start spawning exactly 10 blocks below the surface of the "stone" layer at that block's position. Because the surface of the stone layer changes, it is best to go as deep as possible.
 </details>
 <details>
-  <summary>Tip 3 - End Portal</summary>
-To safely collect an end frame, go under the house, and with a hopper in hand, quickly right click the frame and then place the hopper
-</details>
-<details>
-  <summary>Tip 4 - Food</summary>
-Green towers will occasionally spawn around the Overworld with dried kelp blocks. This is the only way to get non-poisoning food until getting to the nether, where you can get food from hoglins
+  <summary>Tip 3 - Food</summary>
+You may notice a lack of food when playing. Don't worry, there's plenty of cornbread around. Simply find a yellow tower and collect the Cornbread blocks.
 </details>
 
 # Credits:

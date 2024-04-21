@@ -4,17 +4,15 @@ import me.pm7.cornbreaddensened.Commands.start;
 import me.pm7.cornbreaddensened.annoyances.*;
 import org.bukkit.Bukkit;
 
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.logging.Level;
 
 public final class CornbreadDensened extends JavaPlugin {
@@ -24,11 +22,14 @@ public final class CornbreadDensened extends JavaPlugin {
     public void onEnable() {
         getLogger().log(Level.INFO, "Cornbread Densened has been enabled.");
 
+        ItemManager.init();
+
         plugin = this;
 
         getServer().getPluginManager().registerEvents(new EndermiteSilverfishBuff(), this);
         getServer().getPluginManager().registerEvents(new NoBreakingNetherrack(), this);
         getServer().getPluginManager().registerEvents(new BigCreeperExplosion(), this);
+        getServer().getPluginManager().registerEvents(new FireAspectZombies(), this);
         getServer().getPluginManager().registerEvents(new RandomNetherSpeed(), this);
         getServer().getPluginManager().registerEvents(new NoOverworldDrops(), this);
         getServer().getPluginManager().registerEvents(new ZombiePiglinAgro(), this);
@@ -46,6 +47,7 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FurnaceFire(), this);
         getServer().getPluginManager().registerEvents(new FurnaceBees(), this);
         getServer().getPluginManager().registerEvents(new NoChestBoat(), this);
+        getServer().getPluginManager().registerEvents(new ItemManager(), this);
         getServer().getPluginManager().registerEvents(new CraftChest(), this);
         getServer().getPluginManager().registerEvents(new MathPrompt(), this);
         getServer().getPluginManager().registerEvents(new EndSpawns(), this);
@@ -54,6 +56,7 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoEndBed(), this);
         getServer().getPluginManager().registerEvents(new BuffMobs(), this);
         getServer().getPluginManager().registerEvents(new Hoglins(), this);
+        getServer().getPluginManager().registerEvents(new Pumpkin(), this);
         getServer().getPluginManager().registerEvents(new NoSleep(), this);
         getServer().getPluginManager().registerEvents(new Leaves(), this);
         getCommand("start").setExecutor(new start());

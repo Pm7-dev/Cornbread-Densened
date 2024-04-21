@@ -98,27 +98,25 @@ public class CustomChunkGenerator extends ChunkGenerator {
                             chunkData.setBlock(x, y, z, getSurfaceMat(color, random));
 
                             // Generate "structures"
-                            if(x == 8 && z == 8 && y > ground-2 && y > 63) {
+                            if(x == 8 && z == 8 && y > ground-1.5 && y > 63) {
                                 // These structures only generate in the general middle of a chunk because
 
                                 // Add a cool house to white chunks every once in a while (special tool that will help us later)
-                                if (color == 0 && Math.floor(random.nextFloat() * (15)) == 1) {
+                                if (color == 0 && Math.floor(random.nextFloat() * (10)) == 1) {
                                     x += (chunkX * 16) - 3;
                                     y -= 2;
                                     z += (chunkZ * 16) + 3;
                                     // 3/5ths of the time, generate a normal house, otherwise, generate one with a portal frame
-                                    switch ((int) Math.floor(random.nextFloat() * (5))) {
+                                    switch ((int) Math.floor(random.nextFloat() * (3))) {
                                         case 0:
+                                            loadStructure("house.nbt", x, y, z, random); break;
                                         case 1:
                                         case 2:
-                                            loadStructure("house.nbt", x, y, z, random); break;
-                                        case 3:
-                                        case 4:
                                             loadStructure("house_with_portal.nbt", x, y, z, random); break;
                                     }
                                 }
-                                // Add some kelp towers so you don't starve
-                                else if(Math.floor(random.nextFloat() * (34)) == 1) {
+                                // Add some kelp towers so you don't starve (they aren't kelp anymore but I don't wanna change the name)
+                                else if(Math.floor(random.nextFloat() * (18)) == 1) {
                                     int finalX = x + (chunkX * 16) - 3;
                                     int finalY = y+1;
                                     int finalZ = z + (chunkZ * 16) - 3;
@@ -126,7 +124,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                     loadStructure("kelp_tower_" + number + ".nbt", finalX, finalY, finalZ, random); break;
                                 }
                                 // Might as well put in some couches too
-                                else if(Math.floor(random.nextFloat() * (23)) == 1) {
+                                else if(Math.floor(random.nextFloat() * (16)) == 1) {
                                     int finalX = x + (chunkX * 16); // -3
                                     int finalZ = z + (chunkZ * 16) - 3;
                                     int number = ((int) Math.floor(random.nextFloat() * 7)) + 1;
@@ -134,7 +132,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                                 }
                             }
                             // Oh yeah we should probably have SOME wood
-                            else if (y > ground-2 && y>spikes && Math.floor(random.nextFloat() * (3000)) == 1) {
+                            else if (y > ground-1 && y > 63 && Math.floor(random.nextFloat() * (1300)) == 1) {
                                 // Around every like 3750th surface block will have a tree on top of it
 
                                 // Randomize type of log we are using

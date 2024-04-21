@@ -19,18 +19,16 @@ public class start implements CommandExecutor  {
         world.setDifficulty(Difficulty.HARD);
         world.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
         world.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
-        world.setGameRule(GameRule.SPAWN_RADIUS, 100);
+        world.setGameRule(GameRule.SPAWN_RADIUS, 150);
         world.setGameRule(GameRule.DO_TRADER_SPAWNING, false);
 
         nether.setDifficulty(Difficulty.HARD);
         nether.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
         nether.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
-        nether.setGameRule(GameRule.SPAWN_RADIUS, 100);
 
         end.setDifficulty(Difficulty.HARD);
         end.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
         end.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
-        end.setGameRule(GameRule.SPAWN_RADIUS, 100);
         return true;
     }
 }

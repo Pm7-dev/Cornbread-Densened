@@ -21,7 +21,7 @@ public class StoneMobs implements Listener {
     public void onBlockBreak(BlockBreakEvent e) {
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(e.getBlock().getType() != Material.STONE) { return; }
-        if((int)Math.floor(random.nextFloat() * 5) != 1) { return; }
+        if((int)Math.floor(random.nextFloat() * 12) != 1) { return; }
 
         Location loc = e.getBlock().getLocation().clone().add(0.5, 0.5, 0.5);
         World world = loc.getWorld();

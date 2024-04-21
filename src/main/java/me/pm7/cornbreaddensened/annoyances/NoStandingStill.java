@@ -71,5 +71,6 @@ public class NoStandingStill implements Listener {
         IdlePlayer p = getIdle(e.getPlayer());
         if(p == null) { return; }
         p.ticks = 0;
+        p.dead = false;
     }
 }
