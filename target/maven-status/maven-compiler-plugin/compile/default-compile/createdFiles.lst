@@ -4,7 +4,6 @@ me\pm7\cornbreaddensened\FastNoiseLite$CellularDistanceFunction.class
 me\pm7\cornbreaddensened\annoyances\RandomNetherSpeed.class
 me\pm7\cornbreaddensened\FastNoiseLite$1.class
 me\pm7\cornbreaddensened\annoyances\EndEndermanAgro.class
-me\pm7\cornbreaddensened\CustomChunkGenerator.class
 me\pm7\cornbreaddensened\annoyances\SpawnThingsAroundPlayers.class
 me\pm7\cornbreaddensened\Commands\start.class
 me\pm7\cornbreaddensened\annoyances\NoLavaBucket.class
@@ -14,6 +13,7 @@ me\pm7\cornbreaddensened\FastNoiseLite$Vector2.class
 me\pm7\cornbreaddensened\FastNoiseLite.class
 me\pm7\cornbreaddensened\CornbreadDensened.class
 me\pm7\cornbreaddensened\annoyances\NoSleep.class
+me\pm7\cornbreaddensened\Generators\OverworldChunkGenerator.class
 me\pm7\cornbreaddensened\FastNoiseLite$NoiseType.class
 me\pm7\cornbreaddensened\annoyances\NoOverworldDrops.class
 me\pm7\cornbreaddensened\FastNoiseLite$FractalType.class
@@ -41,6 +41,7 @@ me\pm7\cornbreaddensened\annoyances\MathPrompt.class
 me\pm7\cornbreaddensened\annoyances\EternalFlame.class
 me\pm7\cornbreaddensened\annoyances\FireAspectZombies.class
 me\pm7\cornbreaddensened\annoyances\Leaves.class
+me\pm7\cornbreaddensened\Generators\EndChunkGenerator.class
 me\pm7\cornbreaddensened\annoyances\FurnaceFire.class
 me\pm7\cornbreaddensened\annoyances\NoStandingStill.class
 me\pm7\cornbreaddensened\annoyances\NoChestBoat.class

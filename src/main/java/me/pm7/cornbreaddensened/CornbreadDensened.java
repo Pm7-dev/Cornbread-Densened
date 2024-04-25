@@ -1,18 +1,14 @@
 package me.pm7.cornbreaddensened;
 
 import me.pm7.cornbreaddensened.Commands.start;
+import me.pm7.cornbreaddensened.Generators.EndChunkGenerator;
+import me.pm7.cornbreaddensened.Generators.OverworldChunkGenerator;
 import me.pm7.cornbreaddensened.annoyances.*;
 import org.bukkit.Bukkit;
 
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.ChunkGenerator;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
 import java.util.logging.Level;
 
 public final class CornbreadDensened extends JavaPlugin {
@@ -82,7 +78,8 @@ public final class CornbreadDensened extends JavaPlugin {
     @Override
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
         getLogger().log(Level.WARNING, "CustomChunkGenerator is used for " + worldName + " " + id);
-        return new CustomChunkGenerator(); // Return an instance of the chunk generator we want to use.
+        if(worldName.equals("world")) { return new OverworldChunkGenerator(); }
+        return new EndChunkGenerator();
     }
 
     public static CornbreadDensened getPlugin() {

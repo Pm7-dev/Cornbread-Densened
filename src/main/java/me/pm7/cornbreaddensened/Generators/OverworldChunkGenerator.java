@@ -1,5 +1,7 @@
-package me.pm7.cornbreaddensened;
+package me.pm7.cornbreaddensened.Generators;
 
+import me.pm7.cornbreaddensened.CornbreadDensened;
+import me.pm7.cornbreaddensened.FastNoiseLite;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
-public class CustomChunkGenerator extends ChunkGenerator {
+public class OverworldChunkGenerator extends ChunkGenerator {
     CornbreadDensened plugin = CornbreadDensened.getPlugin();
     private final FastNoiseLite stoneLayer = new FastNoiseLite();
     private final FastNoiseLite chromeSpikes = new FastNoiseLite();
@@ -22,7 +24,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
 
     // TODO: Try loading all the NBT files up here and only placing them down there
 
-    public CustomChunkGenerator() {
+    public OverworldChunkGenerator() {
         Random random = new Random();
         // Setup all the noisemaps with random seeds
         stoneLayer.SetSeed((int)Math.floor(random.nextFloat() * (99999)));
