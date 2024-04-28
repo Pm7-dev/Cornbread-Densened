@@ -14,20 +14,23 @@ This tutorial assumes you already have a Spigot server set up. If you do not alr
 worlds:
   world:
     generator: CornbreadDensened
+  world_the_end:
+    generator: CornbreadDensened
   ```
 7. Start up the server
 8. Once startup is complete, run the `/start` command to set up some game rules
-9. Have no fun!
+9. Have a major lack of fun!
 # Feature List
 For maximum annoyance value, I suggest playing through the game completely blind. However, if you want to know exactly what you're getting yourself into, click the "Show Feature List" button to see what exactly the plugin does
 <details>
   <summary>Show Feature List</summary>
 
-- There is a custom world generator built specifically for this plugin's overworld dimension. It's hard to describe exactly what it does, but it certainly is interesting.
+- There is a custom world generator built specifically for this plugin's Overworld dimension. It's hard to describe exactly what it does, but it certainly is interesting.
+- There is also a custom world generator for the End dimension, but it's not as special.
 - Creeper explosions are much larger and cause fire
 - All mobs spawn with Strength, Resistance, and Speed
 - Chests and Barrels cannot be crafted
-- Endermen are automatically aggravated at the nearest player
+- Endermen are automatically aggravated at the nearest player (except in the end)
 - All Endermites and Silverfish spawn with Fire Resistance, Strength II, and Resistance III
 - Mobs that can spawn in the End include: Guardians, Vexes, Cave Spiders, Witches, Wither Skeletons, Strays, Silverfish, Phantoms, Vindicators, and Pillagers
 - If you get set on fire there is no way to put yourself out
@@ -78,6 +81,10 @@ Iron and Diamonds both start spawning exactly 10 blocks below the surface of the
   <summary>Tip 3 - Food</summary>
 You may notice a lack of food when playing. Don't worry, there's plenty of cornbread around. Simply find a yellow tower and collect the Cornbread blocks.
 </details>
+<details>
+  <summary>Tip 4 - End Portal</summary>
+You may have seen some white houses around. These have a chance to spawn with an end portal frame inside, that can be right-clicked to pick up. These houses will only appear in the white sections of the Overworld
+</details>
 
 # Credits:
-[FastNoiseLite](https://github.com/Auburn/FastNoiseLite) - Easy to use library for generating noise maps - Used in world generation changes
+[FastNoiseLite](https://github.com/Auburn/FastNoiseLite) - Easy to use library for generating noise maps

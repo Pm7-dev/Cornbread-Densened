@@ -13,8 +13,9 @@ import java.util.Random;
 public class PufferDrop {
     static Random random = new Random();
     static int tick = 0;
+    static int needed = (int) Math.floor((random.nextFloat() * (6500 - 5000)) + 5000);
     public static void Run() {
-        if(tick<2400) {tick+=1; return;}
+        if(tick < needed) { tick+=1; return; }
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
             if(random.nextDouble() > 0.65d) {
@@ -26,5 +27,6 @@ public class PufferDrop {
             }
         }
         tick = 0;
+        needed = (int) Math.floor((random.nextFloat() * (6500 - 5000)) + 5000);
     }
 }

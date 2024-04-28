@@ -3,6 +3,7 @@ package me.pm7.cornbreaddensened.annoyances;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Pumpkin implements Listener {
-    final List<EntityType> pumpkinable = Arrays.asList(EntityType.ZOMBIE, EntityType.HUSK, EntityType.STRAY, EntityType.WITHER_SKELETON, EntityType.SKELETON, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN, EntityType.ZOMBIE_VILLAGER, EntityType.DROWNED);
+    final List<EntityType> pumpkinable = Arrays.asList(EntityType.ZOMBIE, EntityType.HUSK, EntityType.WITHER_SKELETON, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN, EntityType.ZOMBIE_VILLAGER, EntityType.DROWNED);
     Random random = new Random();
 
     @EventHandler

@@ -29,7 +29,7 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RandomNetherSpeed(), this);
         getServer().getPluginManager().registerEvents(new NoOverworldDrops(), this);
         getServer().getPluginManager().registerEvents(new ZombiePiglinAgro(), this);
-        getServer().getPluginManager().registerEvents(new EndEndermanAgro(), this);
+        getServer().getPluginManager().registerEvents(new EndermanAgro(), this);
         getServer().getPluginManager().registerEvents(new NoStandingStill(), this);
         getServer().getPluginManager().registerEvents(new ExplodeOnCraft(), this);
         getServer().getPluginManager().registerEvents(new InventoryClear(), this);

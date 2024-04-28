@@ -29,7 +29,7 @@ public class NoSleep implements Listener {
         if(e.getClickedBlock() == null) { return; }
         if (bedsList.contains(e.getClickedBlock().getBlockData().getMaterial())) {
             Player p = e.getPlayer();
-            if(13.0 <= p.getHealth() && p.getHealth() <= 15.0) {
+            if(13.0 <= p.getHealth() && p.getHealth() <= 17.0) {
                 if(usedBeds.contains(p.getName())) {
                     usedBeds.remove(p.getName());
                     Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("...Still gonna set fire to you lol")), 5L);

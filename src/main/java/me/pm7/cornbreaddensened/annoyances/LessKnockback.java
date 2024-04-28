@@ -7,16 +7,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityKnockbackByEntityEvent;
 import org.bukkit.util.Vector;
 
 public class LessKnockback implements Listener {
     static CornbreadDensened plugin = CornbreadDensened.getPlugin();
 
     @EventHandler
-    public void onEntityDamage(EntityDamageByEntityEvent e) {
-        Entity entity = e.getEntity();
-        if(e.getDamager() instanceof Player && !(entity instanceof Player)) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> entity.setVelocity(e.getDamager().getLocation().getDirection().multiply(-0.25f).setY(0.3)), 1L);
+    public void EntityKnockbackEvent(EntityKnockbackByEntityEvent e) {
+        if(!(e.getEntity() instanceof Player) && e.getSourceEntity() instanceof Player) {
+            e.setFinalKnockback(e.getFinalKnockback().multiply(-1));
         }
     }
 }

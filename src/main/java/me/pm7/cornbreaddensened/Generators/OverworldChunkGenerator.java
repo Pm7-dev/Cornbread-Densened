@@ -14,15 +14,23 @@ import org.bukkit.structure.Structure;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class OverworldChunkGenerator extends ChunkGenerator {
+
+    // Hi. This file sucks. Good luck understanding this crap
+
     CornbreadDensened plugin = CornbreadDensened.getPlugin();
     private final FastNoiseLite stoneLayer = new FastNoiseLite();
     private final FastNoiseLite chromeSpikes = new FastNoiseLite();
     private final FastNoiseLite chromeGround = new FastNoiseLite();
+    private Map<String, Structure> structureCache = new HashMap<>();
 
     // TODO: Try loading all the NBT files up here and only placing them down there
+
+    // No >:3
 
     public OverworldChunkGenerator() {
         Random random = new Random();
@@ -45,121 +53,140 @@ public class OverworldChunkGenerator extends ChunkGenerator {
 
     @Override
     public void generateNoise(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, ChunkData chunkData) {
-        Random chunkColor = new Random((long) ((int) (chunkX / 3) + 18344) * ((int) (chunkZ / 3) + 28644) * 48743 + worldInfo.getSeed());
-        int color = (int) (chunkColor.nextFloat()*16);
+        // To make things consistent if you relaunch the server from a crash
+        random.setSeed(worldInfo.getSeed());
 
-        // First order of business, Delete around 1 in every ten chunks for funsies
+        // Delete around 1 in every ten chunks for funsies
         if((int)Math.floor(random.nextFloat() * (10)) == 1) {
-            for(int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
-                for (int x = 0; x < 16; x++) {
+            Random chunkColor = new Random((long) ((int) (chunkX / 3) + 18344) * ((int) (chunkZ / 3) + 28644) * 48743 + worldInfo.getSeed());
+            int color = (int) (chunkColor.nextFloat()*16);
 
-                    //Set Z 1
-                    float ground = (((this.chromeGround.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 60);
-                    float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+            for (int x = 0; x < 16; x++) {
+
+                //Set Z 1
+                float ground = (((this.chromeGround.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 20) + 60);
+                float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+
+                //Set Z 16
+                float ground2 = (((this.chromeGround.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 60);
+                float stone2 = (((this.stoneLayer.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+
+                for(int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
+                    if (y < ground2 || y < stone2) { chunkData.setBlock(x, y, 15, getSurfaceMat(color, random)); }
                     if (y < ground || y < stone) { chunkData.setBlock(x, y, 0, getSurfaceMat(color, random)); }
-
-                    //Set Z 16
-                    ground = (((this.chromeGround.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 20) + 60);
-                    stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), 15 + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
-                    if (y < ground || y < stone) { chunkData.setBlock(x, y, 15, getSurfaceMat(color, random)); }
                 }
-                for (int z = 0; z < 16; z++) {
+            }
+            for (int z = 0; z < 16; z++) {
 
-                    //Set X 1
-                    float ground = (((this.chromeGround.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
-                    float stone = (((this.stoneLayer.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+                //Set X 1
+                float ground = (((this.chromeGround.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
+                float stone = (((this.stoneLayer.GetNoise((chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+
+                //Set X 16
+                float ground2 = (((this.chromeGround.GetNoise(15 + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
+                float stone2 = (((this.stoneLayer.GetNoise(15 + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+
+                for(int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
                     if (y < ground || y < stone) { chunkData.setBlock(0, y, z, getSurfaceMat(color, random)); }
-
-                    //Set X 16
-                    ground = (((this.chromeGround.GetNoise(15 + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
-                    stone = (((this.stoneLayer.GetNoise(15 + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
-                    if (y < ground || y < stone) { chunkData.setBlock(15, y, z, getSurfaceMat(color, random)); }
+                    if (y < ground2 || y < stone2) { chunkData.setBlock(15, y, z, getSurfaceMat(color, random)); }
                 }
             }
         }
         // Ok time to actually generate the normal layers now
         else {
-            for (int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
-                for (int x = 0; x < 16; x++) {
-                    for (int z = 0; z < 16; z++) {
-                        float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
-                        float spikes = (((this.chromeSpikes.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 35) + 50);
-                        float ground = (((this.chromeGround.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
+            for (int x = 0; x < 16; x++) {
+                for (int z = 0; z < 16; z++) {
 
+                    // Not putting these in the Y for loop because that would be stupid and I would never do such a thing
+                    float stone = (((this.stoneLayer.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 25) + 25); // 30) + 60
+                    float spikes = (((this.chromeSpikes.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 35) + 50);
+                    float ground = (((this.chromeGround.GetNoise(x + (chunkX * 16), z + (chunkZ * 16)) * 2) * 20) + 60);
+
+                    for (int y = chunkData.getMinHeight() + 30; y < chunkData.getMaxHeight(); y++) {
                         //Generate """stone""" layer (it will in fact not be stone)
                         if (y < stone-1) { chunkData.setBlock(x, y, z, getStoneMat(y, (int) stone, random));}
 
-                        // Make a little two-block top layer of stone as the normal stuff
-                        else if (y >= stone-1 && y <= stone+2) { chunkData.setBlock(x, y, z, getSurfaceMat(color, random)); }
+                        else {
+                            Random chunkColor = new Random((long) ((int) (chunkX / 3) + 18344) * ((int) (chunkZ / 3) + 28644) * 48743 + worldInfo.getSeed());
+                            int color = (int) (chunkColor.nextFloat()*16);
 
-                        // Generate spikes of surface blocks to look cool
-                        else if (y >= stone && y <= spikes && y >= ground) { chunkData.setBlock(x, y, z, getSurfaceMat(color, random)); }
+                            // Make a little two-block top layer of stone as the normal stuff
+                            if (y <= stone + 2) { chunkData.setBlock(x, y, z, getSurfaceMat(color, random)); }
 
-                        // Generate plateau-like surfaces from that wonky noisemap
-                        if (y > stone && y <= ground) {
-                            chunkData.setBlock(x, y, z, getSurfaceMat(color, random));
+                            // Generate spikes of surface blocks to look cool
+                            else if (y <= spikes) { chunkData.setBlock(x, y, z, getSurfaceMat(color, random)); }
 
-                            // Generate "structures"
-                            if(x == 8 && z == 8 && y > ground-1.5 && y > 63) {
-                                // These structures only generate in the general middle of a chunk because
+                            // Generate plateau-like surfaces
+                            else if (y <= ground) {
+                                chunkData.setBlock(x, y, z, getSurfaceMat(color, random));
 
-                                // Add a cool house to white chunks every once in a while (special tool that will help us later)
-                                if (color == 0 && Math.floor(random.nextFloat() * (10)) == 1) {
-                                    x += (chunkX * 16) - 3;
-                                    y -= 2;
-                                    z += (chunkZ * 16) + 3;
-                                    // 3/5ths of the time, generate a normal house, otherwise, generate one with a portal frame
-                                    switch ((int) Math.floor(random.nextFloat() * (3))) {
-                                        case 0:
-                                            loadStructure("house.nbt", x, y, z, random); break;
-                                        case 1:
-                                        case 2:
-                                            loadStructure("house_with_portal.nbt", x, y, z, random); break;
+                                if(y > ground-1.5) {
+                                    // Generate "structures" in middle of chunk
+                                    if (x == 8 && z == 8 && y > 63) {
+
+                                        // Add a cool house to white chunks every once in a while (special tool that will help us later)
+                                        if (color == 0 && Math.floor(random.nextFloat() * (8)) == 1) {
+                                            x += (chunkX * 16);
+                                            y -= 2;
+                                            z += (chunkZ * 16);
+                                            // 3/5ths of the time, generate a normal house, otherwise, generate one with a portal frame
+                                            switch ((int) Math.floor(random.nextFloat() * (3))) {
+                                                case 0:
+                                                    loadStructure("house.nbt", x, y, z, -3, -3, random);
+                                                    break;
+                                                case 1:
+                                                case 2:
+                                                    loadStructure("house_with_portal.nbt", x, y, z, -3, -3, random);
+                                                    break;
+                                            }
+                                        }
+                                        // Add some kelp towers, so you don't starve (they aren't kelp anymore but I don't wanna change the name)
+                                        else if (Math.floor(random.nextFloat() * (13)) == 1) {
+                                            int finalX = x + (chunkX * 16);
+                                            int finalY = y + 1;
+                                            int finalZ = z + (chunkZ * 16);
+                                            int number = ((int) Math.floor(random.nextFloat() * 3)) + 1;
+                                            loadStructure("kelp_tower_" + number + ".nbt", finalX, finalY, finalZ, -3, -3, random);
+                                            break;
+                                        }
+                                        // Might as well put in some couches too
+                                        else if (Math.floor(random.nextFloat() * (11)) == 1) {
+                                            int finalX = x + (chunkX * 16);
+                                            int finalZ = z + (chunkZ * 16);
+                                            int number = ((int) Math.floor(random.nextFloat() * 7)) + 1;
+                                            loadStructure("couch_" + number + ".nbt", finalX, y + 1, finalZ, -3, -3, random);
+                                            break;
+                                        }
+                                    }
+                                    // Oh yeah we should probably have SOME wood
+                                    else if (y > 63 && Math.floor(random.nextFloat() * (1750)) == 1) { //1300
+                                        // Around every like 3750th surface block will have a tree on top of it
+
+                                        // Randomize type of log we are using
+                                        String type = "oak";
+                                        switch ((int) Math.floor(random.nextFloat() * (8))) {
+                                            case 0: type = "acacia"; break;
+                                            case 1: type = "birch"; break;
+                                            case 2: type = "cherry"; break;
+                                            case 3: type = "dark_oak"; break;
+                                            case 4: type = "jungle"; break;
+                                            case 5: type = "mangrove"; break;
+                                            case 6: type = "oak"; break;
+                                            case 7: type = "spruce"; break;
+                                        }
+                                        // Pick variant of tree
+                                        int variant = ((int) Math.floor(random.nextFloat() * (5))) + 1;
+
+                                        // Spawn in the tree
+                                        loadStructure("trees/" + type + "_" + variant + ".nbt", x + (chunkX * 16) - 2, y + 1, z + (chunkZ * 16) - 2, 0, 0, random);
                                     }
                                 }
-                                // Add some kelp towers so you don't starve (they aren't kelp anymore but I don't wanna change the name)
-                                else if(Math.floor(random.nextFloat() * (18)) == 1) {
-                                    int finalX = x + (chunkX * 16) - 3;
-                                    int finalY = y+1;
-                                    int finalZ = z + (chunkZ * 16) - 3;
-                                    int number = ((int) Math.floor(random.nextFloat() * 3)) + 1;
-                                    loadStructure("kelp_tower_" + number + ".nbt", finalX, finalY, finalZ, random); break;
-                                }
-                                // Might as well put in some couches too
-                                else if(Math.floor(random.nextFloat() * (16)) == 1) {
-                                    int finalX = x + (chunkX * 16); // -3
-                                    int finalZ = z + (chunkZ * 16) - 3;
-                                    int number = ((int) Math.floor(random.nextFloat() * 7)) + 1;
-                                    loadStructure("couch_" + number + ".nbt", finalX, y+1, finalZ, random); break;
-                                }
+
+                                //63 or 64 ikd isl water lev.l
+                            } else if (y<=63&&x%6!=0&&z%6!=0&&x%5!=0&&z%5!=0) {
+                                // Decided to make the water soul sand. Deal with it
+                                chunkData.setBlock(x, y, z, Material.SOUL_SAND);
                             }
-                            // Oh yeah we should probably have SOME wood
-                            else if (y > ground-1 && y > 63 && Math.floor(random.nextFloat() * (1300)) == 1) {
-                                // Around every like 3750th surface block will have a tree on top of it
-
-                                // Randomize type of log we are using
-                                String type = "oak";
-                                switch ((int) Math.floor(random.nextFloat() * (8))) {
-                                    case 0: type = "acacia"; break;
-                                    case 1: type = "birch"; break;
-                                    case 2: type = "cherry"; break;
-                                    case 3: type = "dark_oak"; break;
-                                    case 4: type = "jungle"; break;
-                                    case 5: type = "mangrove"; break;
-                                    case 6: type = "oak"; break;
-                                    case 7: type = "spruce"; break;
-                                }
-                                // Pick variant of tree
-                                int variant = ((int) Math.floor(random.nextFloat() * (5))) + 1;
-
-                                // Spawn in the tree
-                                loadStructure("trees/"+type+"_"+variant+".nbt", x + (chunkX * 16)-2, y+1, z + (chunkZ * 16)-2, random);
-                            }
-
-                            //63 or 64 ikd isl water lev.l
-                        } else if (y > stone && y <= 63 && x % 5 != 0 && z % 5 != 0 && x % 6 != 0 && z % 6 != 0) {
-                            // Decided to make the water soul sand. Deal with it
-                            chunkData.setBlock(x, y, z, Material.SOUL_SAND);
                         }
                     }
                 }
@@ -167,40 +194,64 @@ public class OverworldChunkGenerator extends ChunkGenerator {
         }
     }
 
-    void loadStructure(String filename, int x, int y, int z, Random random) {
-        // Wait 20 ticks to make sure the chunk loaded
+    void loadStructure(String filename, int x, int y, int z, int xShift, int zShift, Random random) {
+
+        // Error "handling"
         if(!plugin.isEnabled()) {
             System.out.println("AA, a crash!");
             return;
         }
+
+        // Wait 20 ticks to make sure the chunk loaded
         Bukkit.getScheduler().scheduleSyncDelayedTask(CornbreadDensened.getPlugin(), () -> {
-            // Gather the file from the chosen one
-            Structure structure;
-            try {
-                ClassLoader classLoader = plugin.getClass().getClassLoader();
-                InputStream inputStream = classLoader.getResourceAsStream("structures/" + filename);
-                if (inputStream == null) {
-                    throw new FileNotFoundException("Resource not found: " + filename);
+
+            // Check if the structure is already loaded in the cache
+            Structure structure = structureCache.get(filename);
+
+            // If not loaded, load it and cache it
+            if (structure == null) {
+                try {
+                    ClassLoader classLoader = plugin.getClass().getClassLoader();
+                    InputStream inputStream = classLoader.getResourceAsStream("structures/" + filename);
+                    if (inputStream == null) {
+                        throw new FileNotFoundException("Resource not found: " + filename);
+                    }
+                    structure = Bukkit.getStructureManager().loadStructure(inputStream);
+                    structureCache.put(filename, structure); // Cache the loaded structure
+                } catch (IOException e) {
+                    throw new RuntimeException("Failed to load structure: " + filename, e);
                 }
-                structure = Bukkit.getStructureManager().loadStructure(inputStream);
-            } catch (IOException e) {
-                throw new RuntimeException("Failed to load structure: " + filename, e);
             }
+
 
             // Choose a rotation to put the structure at
             switch ((int)Math.floor(random.nextFloat() * (4))) {
-                case 0: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.NONE, Mirror.NONE, 0, 1, new Random()); break;
-                case 1: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_90, Mirror.NONE, 0, 1, new Random()); break;
-                case 2: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.COUNTERCLOCKWISE_90, Mirror.NONE, 0, 1, new Random()); break;
-                case 3: structure.place(new Location(Bukkit.getWorld("world"), x, y, z), false, StructureRotation.CLOCKWISE_180, Mirror.NONE, 0, 1, new Random()); break;
+                case 0:
+                    structure.place(new Location(Bukkit.getWorld("world"), x + xShift, y, z + zShift), false, StructureRotation.NONE, Mirror.NONE, 0, 1, new Random());
+                    break;
+                case 1:
+                    structure.place(new Location(Bukkit.getWorld("world"), x + xShift, y, z + (zShift*-1)), false, StructureRotation.CLOCKWISE_90, Mirror.NONE, 0, 1, new Random());
+                    break;
+                case 2:
+                    structure.place(new Location(Bukkit.getWorld("world"), x+ (xShift*-1), y, z + zShift), false, StructureRotation.COUNTERCLOCKWISE_90, Mirror.NONE, 0, 1, new Random());
+                    break;
+                case 3:
+                    structure.place(new Location(Bukkit.getWorld("world"), x + (xShift*-1), y, z + (zShift*-1)), false, StructureRotation.CLOCKWISE_180, Mirror.NONE, 0, 1, new Random());
+                    break;
             }
+
         }, 20L);
     }
 
     // For generating the stone layer; making inventory management a nightmare
     Material getStoneMat(int y, int height, Random random) {
-        int r = (int)Math.floor(random.nextFloat() * (61));
         Material mat = Material.STONE;
+
+        // gotta put some precious metals in. No coal though, that's what the cherry slabs were for
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (50)) == 1) { mat = Material.IRON_ORE; return mat;}
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (175)) == 1) { mat = Material.DIAMOND_ORE; return mat; }
+
+        int r = (int)Math.floor(random.nextFloat() * (66));
         switch (r) {
             case 0: mat = Material.SMOOTH_STONE; break;
             case 1: mat = Material.STONE_BRICKS; break;
@@ -260,14 +311,12 @@ public class OverworldChunkGenerator extends ChunkGenerator {
             case 55: mat = Material.REDSTONE_ORE; break;
             case 56: mat = Material.REDSTONE_BLOCK; break;
         }
-        // gotta put some precious metals in. No coal though, that's what the fences were for
-        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (125)) == 1) { mat = Material.IRON_ORE; }
-        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (250)) == 1) { mat = Material.DIAMOND_ORE; }
+
         return mat;
     }
 
     Material getSurfaceMat(int color ,Random random) {
-        // Group chunks into chunk chunks of 3 chunks per chunk chunk. Color them according to the magical seed random
+        // Group chunks into chunk chunks of 3 chunks per chunk-chunk. Color them according to the magical seed random
         int block = (int)Math.floor(random.nextFloat() * (7));
         Material mat = Material.STONE;
 
