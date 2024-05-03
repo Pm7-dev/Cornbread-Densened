@@ -2,21 +2,15 @@ package me.pm7.cornbreaddensened.Generators;
 
 import me.pm7.cornbreaddensened.CornbreadDensened;
 import me.pm7.cornbreaddensened.FastNoiseLite;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.structure.Mirror;
-import org.bukkit.block.structure.StructureRotation;
+import me.pm7.cornbreaddensened.Objects.BlockStructure;
+import me.pm7.cornbreaddensened.Objects.LoadedStructure;
+import org.bukkit.*;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.WorldInfo;
-import org.bukkit.structure.Structure;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class OverworldChunkGenerator extends ChunkGenerator {
 
@@ -26,7 +20,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
     private final FastNoiseLite stoneLayer = new FastNoiseLite();
     private final FastNoiseLite chromeSpikes = new FastNoiseLite();
     private final FastNoiseLite chromeGround = new FastNoiseLite();
-    private Map<String, Structure> structureCache = new HashMap<>();
 
     // TODO: Try loading all the NBT files up here and only placing them down there
 
@@ -92,6 +85,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
             }
         }
+
         // Ok time to actually generate the normal layers now
         else {
             for (int x = 0; x < 16; x++) {
@@ -126,17 +120,19 @@ public class OverworldChunkGenerator extends ChunkGenerator {
 
                                         // Add a cool house to white chunks every once in a while (special tool that will help us later)
                                         if (color == 0 && Math.floor(random.nextFloat() * (8)) == 1) {
-                                            x += (chunkX * 16);
+                                            //x += (chunkX * 16);
                                             y -= 2;
-                                            z += (chunkZ * 16);
+                                            //z += (chunkZ * 16);
                                             // 3/5ths of the time, generate a normal house, otherwise, generate one with a portal frame
                                             switch ((int) Math.floor(random.nextFloat() * (3))) {
                                                 case 0:
-                                                    loadStructure("house.nbt", x, y, z, -3, -3, random);
+                                                    //loadStructure("house.nbt", x, y, z, -3, -3, random);
+                                                    loadStructure("house", x , y + 1, z, -3, -3, chunkData);
                                                     break;
                                                 case 1:
                                                 case 2:
-                                                    loadStructure("house_with_portal.nbt", x, y, z, -3, -3, random);
+                                                    //loadStructure("house_with_portal.nbt", x, y, z, -3, -3, random);
+                                                    loadStructure("house_with_portal", x , y + 1, z, -3, -3, chunkData);
                                                     break;
                                             }
                                         }
@@ -146,7 +142,9 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                             int finalY = y + 1;
                                             int finalZ = z + (chunkZ * 16);
                                             int number = ((int) Math.floor(random.nextFloat() * 3)) + 1;
-                                            loadStructure("kelp_tower_" + number + ".nbt", finalX, finalY, finalZ, -3, -3, random);
+                                            //loadStructure("kelp_tower_" + number + ".nbt", finalX, finalY, finalZ, -3, -3, random);
+                                            loadStructure("kelp_tower_" + number, x, y + 1, z , -3, -3, chunkData);
+
                                             break;
                                         }
                                         // Might as well put in some couches too
@@ -154,7 +152,9 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                             int finalX = x + (chunkX * 16);
                                             int finalZ = z + (chunkZ * 16);
                                             int number = ((int) Math.floor(random.nextFloat() * 7)) + 1;
-                                            loadStructure("couch_" + number + ".nbt", finalX, y + 1, finalZ, -3, -3, random);
+                                            //loadStructure("couch_" + number + ".nbt", finalX, y + 1, finalZ, -3, -3, random);
+                                            loadStructure("couch_" + number, x, y + 1, z , -3, -3, chunkData);
+
                                             break;
                                         }
                                     }
@@ -178,7 +178,8 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                         int variant = ((int) Math.floor(random.nextFloat() * (5))) + 1;
 
                                         // Spawn in the tree
-                                        loadStructure("trees/" + type + "_" + variant + ".nbt", x + (chunkX * 16) - 2, y + 1, z + (chunkZ * 16) - 2, 0, 0, random);
+                                        //loadStructure("trees/" + type + "_" + variant + ".nbt", x + (chunkX * 16) - 2, y + 1, z + (chunkZ * 16) - 2, 0, 0, random);
+                                        loadStructure("trees/" + type + "_" + variant, x, y + 1, z, -2, -2, chunkData);
                                     }
                                 }
 
@@ -194,53 +195,28 @@ public class OverworldChunkGenerator extends ChunkGenerator {
         }
     }
 
-    void loadStructure(String filename, int x, int y, int z, int xShift, int zShift, Random random) {
+    List<LoadedStructure> cachedStructures = new ArrayList<>();
+    void loadStructure(String structureName, int x, int y, int z, int xShift, int zShift, ChunkData chunkData) {
 
-        // Error "handling"
-        if(!plugin.isEnabled()) {
-            System.out.println("AA, a crash!");
-            return;
-        }
-
-        // Wait 20 ticks to make sure the chunk loaded
-        Bukkit.getScheduler().scheduleSyncDelayedTask(CornbreadDensened.getPlugin(), () -> {
-
-            // Check if the structure is already loaded in the cache
-            Structure structure = structureCache.get(filename);
-
-            // If not loaded, load it and cache it
-            if (structure == null) {
-                try {
-                    ClassLoader classLoader = plugin.getClass().getClassLoader();
-                    InputStream inputStream = classLoader.getResourceAsStream("structures/" + filename);
-                    if (inputStream == null) {
-                        throw new FileNotFoundException("Resource not found: " + filename);
-                    }
-                    structure = Bukkit.getStructureManager().loadStructure(inputStream);
-                    structureCache.put(filename, structure); // Cache the loaded structure
-                } catch (IOException e) {
-                    throw new RuntimeException("Failed to load structure: " + filename, e);
+        // If the structure already is cached, don't load it again
+        for(LoadedStructure structure : cachedStructures) {
+            if(structure.name == null) { System.out.println(":3"); return; }
+            if(structure.name.equals(structureName)) {
+                for(BlockStructure block : structure.blockList) {
+                    chunkData.setBlock(x + block.x + xShift, y + block.y, z + block.z + zShift, block.blockData);
                 }
+                return;
             }
-
-
-            // Choose a rotation to put the structure at
-            switch ((int)Math.floor(random.nextFloat() * (4))) {
-                case 0:
-                    structure.place(new Location(Bukkit.getWorld("world"), x + xShift, y, z + zShift), false, StructureRotation.NONE, Mirror.NONE, 0, 1, new Random());
-                    break;
-                case 1:
-                    structure.place(new Location(Bukkit.getWorld("world"), x + xShift, y, z + (zShift*-1)), false, StructureRotation.CLOCKWISE_90, Mirror.NONE, 0, 1, new Random());
-                    break;
-                case 2:
-                    structure.place(new Location(Bukkit.getWorld("world"), x+ (xShift*-1), y, z + zShift), false, StructureRotation.COUNTERCLOCKWISE_90, Mirror.NONE, 0, 1, new Random());
-                    break;
-                case 3:
-                    structure.place(new Location(Bukkit.getWorld("world"), x + (xShift*-1), y, z + (zShift*-1)), false, StructureRotation.CLOCKWISE_180, Mirror.NONE, 0, 1, new Random());
-                    break;
-            }
-
-        }, 20L);
+        }
+        FileConfiguration config = plugin.getConfig();
+        ConfigurationSection section = config.getConfigurationSection(structureName);
+        if(section == null) { System.out.println(";3"); return; }
+        LoadedStructure structure = LoadedStructure.deserialize(section.getValues(false));
+        structure.name = structureName;
+        cachedStructures.add(structure);
+        for (BlockStructure block : structure.blockList) {
+            chunkData.setBlock(x + block.x + xShift, y + block.y, z + block.z + zShift, block.blockData);
+        }
     }
 
     // For generating the stone layer; making inventory management a nightmare

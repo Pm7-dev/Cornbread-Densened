@@ -3,9 +3,12 @@ package me.pm7.cornbreaddensened;
 import me.pm7.cornbreaddensened.Commands.start;
 import me.pm7.cornbreaddensened.Generators.EndChunkGenerator;
 import me.pm7.cornbreaddensened.Generators.OverworldChunkGenerator;
+import me.pm7.cornbreaddensened.Objects.BlockStructure;
+import me.pm7.cornbreaddensened.Objects.LoadedStructure;
 import me.pm7.cornbreaddensened.annoyances.*;
 import org.bukkit.Bukkit;
 
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,6 +24,12 @@ public final class CornbreadDensened extends JavaPlugin {
         ItemManager.init();
 
         plugin = this;
+
+        ConfigurationSerialization.registerClass(LoadedStructure.class);
+        ConfigurationSerialization.registerClass(BlockStructure.class);
+
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
 
         getServer().getPluginManager().registerEvents(new EndermiteSilverfishBuff(), this);
         getServer().getPluginManager().registerEvents(new NoBreakingNetherrack(), this);

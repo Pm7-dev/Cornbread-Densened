@@ -1,6 +1,5 @@
 package me.pm7.cornbreaddensened.annoyances;
 
-import jdk.tools.jlink.internal.Platform;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
