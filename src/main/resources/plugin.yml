@@ -3,9 +3,6 @@ version: '0.0.1'
 main: me.pm7.cornbreaddensened.CornbreadDensened
 api-version: '1.20'
 load: STARTUP
-libraries:
-  - com.github.shynixn.structureblocklib:structureblocklib-bukkit-api:2.13.0
-  - com.github.shynixn.structureblocklib:structureblocklib-bukkit-core:2.13.0
 commands:
   start:
     usage: /<command>

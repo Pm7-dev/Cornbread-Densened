@@ -2,8 +2,11 @@
 Cornbread Densened is a spigot plugin designed to make Minecraft more challenging. It is not made to be fun, and you will probably rage-quit relatively quickly upon playing. It is the second version of the original Cornbread plugin, which was a mess of code that I made six months ago and never released.
 
 It is called Cornbread because I wanted it to be called Cornbread.
+
+If you're stuck and need a hint head over to the [tips](https://github.com/Pm7-dev/Cornbread-Densened?tab=readme-ov-file#tips) section\
+For a list of features head over to the [features](https://github.com/Pm7-dev/Cornbread-Densened?tab=readme-ov-file#feature-list) section
 # How to Set Up
-This tutorial assumes you already have a Spigot server set up. If you do not already know how to set up a Spigot server, many tutorials can be found on YouTube. This plugin will not work on vanilla, fo
+This tutorial assumes you already have a Spigot server set up. If you do not already know how to set up a Spigot server, many tutorials can be found on YouTube. This plugin will not work on vanilla.
 1. Head over to the [releases](https://github.com/Pm7-dev/Cornbread-Densened/releases/) page or the [spigot releases]() and download the latest (probably only) version of the plugin. 
 2. Shut down your server if it is running
 3. Add the plugin to your plugins folder
@@ -19,7 +22,8 @@ worlds:
   ```
 7. Start up the server
 8. Once startup is complete, run the `/start` command to set up some game rules
-9. Have a major lack of fun!
+9. Have a lack of fun!
+10. if the world is made up of a bunch of holes, just close the server, delete the world folder, and restart it. I have no idea why this happens, but it does
 # Feature List
 For maximum annoyance value, I suggest playing through the game completely blind. However, if you want to know exactly what you're getting yourself into, click the "Show Feature List" button to see what exactly the plugin does
 <details>
@@ -70,21 +74,22 @@ For maximum annoyance value, I suggest playing through the game completely blind
 
 # Tips
 <details>
-  <summary>Tip 1 - Item Storage</summary>
+  <summary>Tip 1 - End Portal</summary>
+You may have seen some white houses around. These have a chance to spawn with an end portal frame inside, that can be right-clicked to pick up. These houses will only appear in the white sections of the Overworld
+</details>
+<details>
+  <summary>Tip 2 - Item Storage</summary>
 You can use droppers to store items. Redstone was intentionally put in the "stone" layer for this purpose
 </details>
 <details>
-  <summary>Tip 2 - Mining</summary>
+  <summary>Tip 3 - Mining</summary>
 Iron and Diamonds both start spawning exactly 10 blocks below the surface of the "stone" layer at that block's position. Because the surface of the stone layer changes, it is best to go as deep as possible.
 </details>
 <details>
-  <summary>Tip 3 - Food</summary>
-You may notice a lack of food when playing. Don't worry, there's plenty of cornbread around. Simply find a yellow tower and collect the Cornbread blocks.
-</details>
-<details>
-  <summary>Tip 4 - End Portal</summary>
-You may have seen some white houses around. These have a chance to spawn with an end portal frame inside, that can be right-clicked to pick up. These houses will only appear in the white sections of the Overworld
+  <summary>Tip 4 - Food</summary>
+You may notice a lack of food when playing. Don't worry, there's plenty of cornbread around. Simply find a yellow tower and collect the Cornbread blocks, which you can craft into Cornbread
 </details>
 
 # Credits:
-[FastNoiseLite](https://github.com/Auburn/FastNoiseLite) - Easy to use library for generating noise maps
+[FastNoiseLite](https://github.com/Auburn/FastNoiseLite) - Easy to use library for generating noise maps\
+[StructureBlockLib](https://github.com/Shynixn/StructureBlockLib) - Used to load data from .yml file for structures to be loaded on world generation

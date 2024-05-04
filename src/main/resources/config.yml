@@ -5826,11 +5826,6 @@ house_with_portal:
       z: 4
       blockData: minecraft:smooth_quartz_stairs[facing=north,half=bottom,shape=outer_left,waterlogged=false]
     - ==: BlockStructure
-      x: 3
-      y: 4
-      z: 3
-      blockData: minecraft:warped_wall_sign[facing=north,waterlogged=false]
-    - ==: BlockStructure
       x: 4
       y: 4
       z: 2
