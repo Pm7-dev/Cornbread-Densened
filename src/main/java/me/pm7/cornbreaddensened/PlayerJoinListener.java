@@ -1,17 +1,17 @@
-package me.pm7.cornbreaddensened.Commands;
+package me.pm7.cornbreaddensened;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.World;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 
-public class start implements CommandExecutor  {
-    @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if(!commandSender.isOp()) { return true; }
+public class PlayerJoinListener implements Listener {
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e) {
         World world = Bukkit.getWorld("world");
         World nether = Bukkit.getWorld("world_nether");
         World end = Bukkit.getWorld("world_the_end");
@@ -29,6 +29,5 @@ public class start implements CommandExecutor  {
         end.setDifficulty(Difficulty.HARD);
         end.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
         end.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
-        return true;
     }
 }

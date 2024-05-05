@@ -2,10 +2,7 @@ package me.pm7.cornbreaddensened.annoyances;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -30,7 +27,7 @@ public class FurnaceBees implements Listener {
         Player p = e.getPlayer();
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         e.setCancelled(true);
-        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Oh no! There was a beehive in the furnace!"));
+        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "Oh no! There was a beehive in the furnace!"));
         Location loc = e.getClickedBlock().getLocation().clone().add(0.5, 0.5, 0.5);
 
         SpawnBee(loc, p);

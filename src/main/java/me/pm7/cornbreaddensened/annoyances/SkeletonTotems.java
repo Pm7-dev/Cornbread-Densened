@@ -2,6 +2,7 @@ package me.pm7.cornbreaddensened.annoyances;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -52,13 +53,13 @@ public class SkeletonTotems implements Listener {
         if (e.getDamager() instanceof Player) {
             if(damaged.getType() == EntityType.STRAY && !damaged.getPassengers().isEmpty()) {
                 Player p = (Player) e.getDamager();
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You can only damage the top of the totem."));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "You can only damage the top of the totem."));
                 e.setCancelled(true);
                 return;
             }
             if(damaged.getType() == EntityType.SILVERFISH && !damaged.getPassengers().isEmpty() && damaged.getPassengers().get(0).getType() == EntityType.STRAY) {
                 Player p = (Player) e.getDamager();
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You can only damage the top of the totem."));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "You can only damage the top of the totem."));
                 e.setCancelled(true);
             }
         }

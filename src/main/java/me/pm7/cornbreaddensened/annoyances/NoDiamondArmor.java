@@ -3,6 +3,7 @@ package me.pm7.cornbreaddensened.annoyances;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -27,7 +28,7 @@ public class NoDiamondArmor {
             PotionEffect effect = new PotionEffect(PotionEffectType.WITHER, 40, 0);
             if(diamondcheck) {
                 p.addPotionEffect(effect);
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("That diamond armor is too heavy!"));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "That diamond armor is too heavy!"));
             }
         }
         tick=0;

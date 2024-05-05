@@ -1,6 +1,5 @@
 package me.pm7.cornbreaddensened;
 
-import me.pm7.cornbreaddensened.Commands.start;
 import me.pm7.cornbreaddensened.Generators.EndChunkGenerator;
 import me.pm7.cornbreaddensened.Generators.OverworldChunkGenerator;
 import me.pm7.cornbreaddensened.Objects.BlockStructure;
@@ -35,10 +34,10 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoBreakingNetherrack(), this);
         getServer().getPluginManager().registerEvents(new BigCreeperExplosion(), this);
         getServer().getPluginManager().registerEvents(new FireAspectZombies(), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         getServer().getPluginManager().registerEvents(new RandomNetherSpeed(), this);
         getServer().getPluginManager().registerEvents(new NoOverworldDrops(), this);
         getServer().getPluginManager().registerEvents(new ZombiePiglinAgro(), this);
-        getServer().getPluginManager().registerEvents(new EndermanAgro(), this);
         getServer().getPluginManager().registerEvents(new NoStandingStill(), this);
         getServer().getPluginManager().registerEvents(new ExplodeOnCraft(), this);
         getServer().getPluginManager().registerEvents(new InventoryClear(), this);
@@ -46,6 +45,7 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SkeletonTotems(), this);
         getServer().getPluginManager().registerEvents(new NoPhantomFire(), this);
         getServer().getPluginManager().registerEvents(new LessKnockback(), this);
+        getServer().getPluginManager().registerEvents(new EndermanAgro(), this);
         getServer().getPluginManager().registerEvents(new NetherSpawns(), this);
         getServer().getPluginManager().registerEvents(new NoLavaBucket(), this);
         getServer().getPluginManager().registerEvents(new EternalFlame(), this);
@@ -64,7 +64,6 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Pumpkin(), this);
         getServer().getPluginManager().registerEvents(new NoSleep(), this);
         getServer().getPluginManager().registerEvents(new Leaves(), this);
-        getCommand("start").setExecutor(new start());
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             Nethermites.Run();

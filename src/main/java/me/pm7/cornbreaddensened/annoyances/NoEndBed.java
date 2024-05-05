@@ -2,6 +2,7 @@ package me.pm7.cornbreaddensened.annoyances;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,7 @@ public class NoEndBed implements Listener {
         if(e.getBlock().getWorld().getName().equals("world_the_end")) {
             if(bedsList.contains(e.getBlockPlaced().getType())) {
                 e.setCancelled(true);
-                e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You really thought you could use bed explosions in a world full of wool, huh?"));
+                e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "You really thought you could use bed explosions in a world full of wool, huh?"));
                 e.getPlayer().setHealth(0.0f);
             }
         }

@@ -4,6 +4,7 @@ import me.pm7.cornbreaddensened.CornbreadDensened;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -27,7 +28,7 @@ public class InventoryClear implements Listener {
             for(int i=0; i<36; i++) { if(p.getInventory().getItem(i) != null) { count++; } }
             if(count < 29) { return; }
             for(int in=0; in<12; in++) { p.getInventory().setItem((int) Math.floor(random.nextFloat() * (36)), null); }
-            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Your inventory was looking a little full, so I cleared some stuff"));
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "Your inventory was looking a little full, so I cleared some stuff"));
         }, 3L);
     }
 
@@ -40,7 +41,7 @@ public class InventoryClear implements Listener {
             for(int i=0; i<36; i++) { if(p.getInventory().getItem(i) != null) { count++; } }
             if(count < 29) { return; }
             for(int in=0; in<12; in++) { p.getInventory().setItem((int) Math.floor(random.nextFloat() * (36)), null); }
-            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Your inventory was looking a little full, so I cleared some stuff"));
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "Your inventory was looking a little full, so I cleared some stuff"));
         }, 3L);
     }
 }

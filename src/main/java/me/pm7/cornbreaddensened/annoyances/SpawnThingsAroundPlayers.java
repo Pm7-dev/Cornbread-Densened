@@ -37,22 +37,22 @@ public class SpawnThingsAroundPlayers {
                     Blaze entity = (Blaze) loc.getWorld().spawnEntity(loc, EntityType.BLAZE);
                     Blaze entity1 = (Blaze) loc.getWorld().spawnEntity(loc, EntityType.BLAZE);
                     Blaze entity2 = (Blaze) loc.getWorld().spawnEntity(loc, EntityType.BLAZE);
-                    Blaze entity3 = (Blaze) loc.getWorld().spawnEntity(loc, EntityType.BLAZE);
-                    Blaze entity4 = (Blaze) loc.getWorld().spawnEntity(loc, EntityType.BLAZE);
                     entity.setTarget(p);
                     entity1.setTarget(p);
                     entity2.setTarget(p);
-                    entity3.setTarget(p);
-                    entity4.setTarget(p);
                     break;
                 }
                 case 2: {
                     loc.add((random.nextFloat()*60)-30, 0, (random.nextFloat()*60)-30);
                     loc.setY(130);
                     MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(loc, EntityType.MAGMA_CUBE);
+                    MagmaCube entity1 = (MagmaCube) loc.getWorld().spawnEntity(loc, EntityType.MAGMA_CUBE);
                     entity.setTarget(p);
+                    entity1.setTarget(p);
                     entity.setSize(8);
+                    entity1.setSize(5);
                     entity.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 5));
+                    entity1.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 5));
                     break;
                 }
                 case 3: {
@@ -60,13 +60,10 @@ public class SpawnThingsAroundPlayers {
                     loc.setY(130);
                     Phantom entity = (Phantom) loc.getWorld().spawnEntity(loc, EntityType.PHANTOM);
                     Phantom entity1 = (Phantom) loc.getWorld().spawnEntity(loc, EntityType.PHANTOM);
-                    Phantom entity2 = (Phantom) loc.getWorld().spawnEntity(loc, EntityType.PHANTOM);
                     entity.setTarget(p);
                     entity1.setTarget(p);
-                    entity2.setTarget(p);
                     entity.setSize(8);
                     entity1.setSize(9);
-                    entity2.setSize(7);
                     break;
                 }
                 case 4: {

@@ -4,6 +4,7 @@ import me.pm7.cornbreaddensened.CornbreadDensened;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -32,10 +33,10 @@ public class NoSleep implements Listener {
             if(13.0 <= p.getHealth() && p.getHealth() <= 17.0) {
                 if(usedBeds.contains(p.getName())) {
                     usedBeds.remove(p.getName());
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("...Still gonna set fire to you lol")), 5L);
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "...Still gonna set fire to you lol")), 5L);
                 }
             } else {
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("You must be between 13.0 and 15.0 health to set spawn..."));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "You must be between 13.0 and 15.0 health to set spawn..."));
                 if(p.getHealth() > 15.0) { p.setHealth(13.5); } // :)
                 usedBeds.add(p.getName());
                 e.setCancelled(true);

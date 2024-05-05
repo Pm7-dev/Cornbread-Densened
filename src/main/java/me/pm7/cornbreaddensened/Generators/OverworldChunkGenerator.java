@@ -58,7 +58,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
 
             // Get the chunk's color
             Random chunkColor = new Random((long) ((int) (chunkX / 3) + 18344) * ((int) (chunkZ / 3) + 28644) * 48743 + worldInfo.getSeed());
-            int color = (int) (chunkColor.nextFloat()*18); // Set to 18 so we will have more white chunks than others to make house generation a little bit less sucky
+            int color = (int) (chunkColor.nextFloat()*19); // Set to 18 so we will have more white chunks than others to make house generation a little bit less sucky
 
             for (int x = 0; x < 16; x++) {
 
@@ -110,7 +110,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
 
                             // Get the chunk's color
                             Random chunkColor = new Random((long) ((int) (chunkX / 3) + 18344) * ((int) (chunkZ / 3) + 28644) * 48743 + worldInfo.getSeed());
-                            int color = (int) (chunkColor.nextFloat()*18); // Set to 18 so we will have more white chunks than others to make house generation a little bit less sucky
+                            int color = (int) (chunkColor.nextFloat()*19); // Set to 18 so we will have more white chunks than others to make house generation a little bit less sucky
 
                             // Make a little two-block top layer of stone as the normal stuff
                             if (y <= stone + 2) { setChunkBlock(chunkData, x, y, z, getSurfaceMat(color, random)); }
@@ -123,15 +123,15 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                 setChunkBlock(chunkData, x, y, z, getSurfaceMat(color, random));
 
                                 if(y > ground-1.5) {
+                                    if(y+1 > ground-1.5) { continue; }
+
                                     // Generate "structures" in middle of chunk
                                     if (x == 8 && z == 8 && y > 63) {
 
                                         // Add a cool house to white chunks every once in a while (special tool that will help us later)
-                                        if ((color == 0 || color == 16 || color == 17) && Math.floor(random.nextFloat() * (7)) == 1) {
-                                            //x += (chunkX * 16);
+                                        if ((color == 0 || color == 16 || color == 17 || color == 18) && Math.floor(random.nextFloat() * (7)) == 1) {
                                             y -= 2;
-                                            //z += (chunkZ * 16);
-                                            // 3/5ths of the time, generate a normal house, otherwise, generate one with a portal frame
+                                            // Two thirds of the houses will have a portal frame in them
                                             switch ((int) Math.floor(random.nextFloat() * (3))) {
                                                 case 0:
                                                     //loadStructure("house.nbt", x, y, z, -3, -3, random);
@@ -156,7 +156,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                             break;
                                         }
                                         // Might as well put in some couches too
-                                        else if (!(color == 0 || color == 16 || color == 17) && Math.floor(random.nextFloat() * (11)) == 1) { // DO NOT spawn these on white chunks (I have no idea why I wrote this part but I'm keeping it)
+                                        else if (!(color == 0 || color == 16 || color == 17 || color == 18) && Math.floor(random.nextFloat() * (11)) == 1) { // DO NOT spawn these on white chunks (I have no idea why I wrote this part but I'm keeping it)
                                             int finalX = x + (chunkX * 16);
                                             int finalZ = z + (chunkZ * 16);
                                             int number = ((int) Math.floor(random.nextFloat() * 7)) + 1;
@@ -167,7 +167,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                         }
                                     }
                                     // Oh yeah we should probably have SOME wood
-                                    else if (y > 63 && Math.floor(random.nextFloat() * (1750)) == 1) { //1300
+                                    else if (!(color == 0 || color == 16 || color == 17 || color == 18) && y > 63 && Math.floor(random.nextFloat() * (1750)) == 1) { //1300
                                         // Around every like 3750th surface block will have a tree on top of it
 
                                         // Randomize type of log we are using
@@ -360,7 +360,8 @@ public class OverworldChunkGenerator extends ChunkGenerator {
 
             case 0:
             case 16:
-            case 17:{
+            case 17:
+            case 18: {
                 switch (block) {
                     case 0: mat = Material.WHITE_CONCRETE; break;
                     case 1: mat = Material.WHITE_TERRACOTTA; break;
@@ -589,7 +590,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
         dataString = dataString.replaceAll("west", ":3_w");
 
         switch (degrees) {
-
             // 90 degrees
             case 2: {
                 dataString = dataString.replaceAll(":3_n", "west");
@@ -606,7 +606,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 dataString = dataString.replaceAll(":3_w", "east");
                 break;
             }
-            // 270 or somthg
+            // 270 radians
             case 4: {
                 dataString = dataString.replaceAll(":3_n", "east");
                 dataString = dataString.replaceAll(":3_e", "south");

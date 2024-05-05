@@ -4,6 +4,7 @@ import me.pm7.cornbreaddensened.Objects.SprintingPlayer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -46,7 +47,7 @@ public class NoSprint implements Listener {
                         }
                     }
                     inv.clear();
-                    sprinter.player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Oh no! You were sprinting for too long and tripped!"));
+                    sprinter.player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "Oh no! You were sprinting for too long and tripped!"));
                     sprinter.player.damage(1.0D);
                     sprinter.player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 400, 3));
                     sprinter.player.setSprinting(false);
