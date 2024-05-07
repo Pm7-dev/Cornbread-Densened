@@ -12,6 +12,8 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.WorldInfo;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OverworldChunkGenerator extends ChunkGenerator {
 
@@ -123,7 +125,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                 setChunkBlock(chunkData, x, y, z, getSurfaceMat(color, random));
 
                                 if(y > ground-1.5) {
-                                    if(y+1 > ground-1.5) { continue; }
+                                    //if(y+1 > ground-1.5) { continue; }
 
                                     // Generate "structures" in middle of chunk
                                     if (x == 8 && z == 8 && y > 63) {
@@ -146,22 +148,15 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                         }
                                         // Add some kelp towers, so you don't starve (they aren't kelp anymore but I don't wanna change the name)
                                         else if (Math.floor(random.nextFloat() * (13)) == 1) {
-                                            int finalX = x + (chunkX * 16);
-                                            int finalY = y + 1;
-                                            int finalZ = z + (chunkZ * 16);
                                             int number = ((int) Math.floor(random.nextFloat() * 3)) + 1;
-                                            //loadStructure("kelp_tower_" + number + ".nbt", finalX, finalY, finalZ, -3, -3, random);
                                             loadStructure("kelp_tower_" + number, x, y + 1, z , -3, -3, chunkData, random);
 
                                             break;
                                         }
                                         // Might as well put in some couches too
                                         else if (!(color == 0 || color == 16 || color == 17 || color == 18) && Math.floor(random.nextFloat() * (11)) == 1) { // DO NOT spawn these on white chunks (I have no idea why I wrote this part but I'm keeping it)
-                                            int finalX = x + (chunkX * 16);
-                                            int finalZ = z + (chunkZ * 16);
                                             int number = ((int) Math.floor(random.nextFloat() * 7)) + 1;
-                                            //loadStructure("couch_" + number + ".nbt", finalX, y + 1, finalZ, -3, -3, random);
-                                            loadStructure("couch_" + number, x, y + 1, z , -3, -3, chunkData, random);
+                                            loadStructure("couch_" + number, x, y, z , -3, -3, chunkData, random);
 
                                             break;
                                         }
@@ -186,7 +181,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                         int variant = ((int) Math.floor(random.nextFloat() * (5))) + 1;
 
                                         // Spawn in the tree
-                                        //loadStructure("trees/" + type + "_" + variant + ".nbt", x + (chunkX * 16) - 2, y + 1, z + (chunkZ * 16) - 2, 0, 0, random);
                                         loadStructure("trees/" + type + "_" + variant, x, y + 1, z, -2, -2, chunkData, random);
                                     }
                                 }
@@ -345,6 +339,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
             case 55: mat = Material.REDSTONE_ORE; break;
             case 56: mat = Material.REDSTONE_BLOCK; break;
         }
+
         return mat;
     }
 
@@ -357,7 +352,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
 
         // Pain.
         switch (color) {
-
             case 0:
             case 16:
             case 17:
@@ -373,7 +367,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 1: {
                 switch (block) {
                     case 0: mat = Material.LIGHT_GRAY_CONCRETE; break;
@@ -386,7 +379,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 2: {
                 switch (block) {
                     case 0: mat = Material.GRAY_CONCRETE; break;
@@ -399,7 +391,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 3: {
                 switch (block) {
                     case 0: mat = Material.BLACK_CONCRETE; break;
@@ -412,7 +403,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 4: {
                 switch (block) {
                     case 0: mat = Material.BROWN_CONCRETE; break;
@@ -425,7 +415,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 5: {
                 switch (block) {
                     case 0: mat = Material.RED_CONCRETE; break;
@@ -438,7 +427,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 6: {
                 switch (block) {
                     case 0: mat = Material.ORANGE_CONCRETE; break;
@@ -451,7 +439,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 7: {
                 switch (block) {
                     case 0: mat = Material.YELLOW_CONCRETE; break;
@@ -464,7 +451,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 8: {
                 switch (block) {
                     case 0: mat = Material.LIME_CONCRETE; break;
@@ -477,7 +463,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 9: {
                 switch (block) {
                     case 0: mat = Material.GREEN_CONCRETE; break;
@@ -490,7 +475,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 10: {
                 switch (block) {
                     case 0: mat = Material.CYAN_CONCRETE; break;
@@ -503,7 +487,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 11: {
                 switch (block) {
                     case 0: mat = Material.LIGHT_BLUE_CONCRETE; break;
@@ -514,9 +497,8 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                     case 5: mat = Material.LIGHT_BLUE_GLAZED_TERRACOTTA; break;
                     case 6: mat = Material.BLUE_ICE; break;
                 }
-                break;
+                break; // heh. (This isn't funny but I'm pretending like it is)
             }
-
             case 12: {
                 switch (block) {
                     case 0: mat = Material.BLUE_CONCRETE; break;
@@ -529,7 +511,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 13: {
                 switch (block) {
                     case 0: mat = Material.PURPLE_CONCRETE; break;
@@ -542,7 +523,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 14: {
                 switch (block) {
                     case 0: mat = Material.MAGENTA_CONCRETE; break;
@@ -555,7 +535,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 }
                 break;
             }
-
             case 15: {
                 switch (block) {
                     case 0: mat = Material.PINK_CONCRETE; break;
@@ -569,6 +548,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 break;
             }
         }
+
         return mat;
     }
 
@@ -583,13 +563,23 @@ public class OverworldChunkGenerator extends ChunkGenerator {
     BlockData rotateBlockData(BlockData data, int degrees) {
         String dataString = data.getAsString();
 
+        // Banner rotation
+        Pattern pattern = Pattern.compile("\\[rotation=(\\d+)\\]"); // Regex generated by chatgpt so I can avoid learning it once again
+        Matcher matcher = pattern.matcher(dataString);
+        if (matcher.find()) {
+            int num = Integer.parseInt(matcher.group(1)) - (degrees-1)*4;
+            if (num < 0) { num+=16; }
+            dataString = dataString.replaceAll("\\[rotation=\\d+\\]", "[rotation=" + num + "]");
+        }
+
         // Doing this weird little workaround to stop from overwriting a previous action
         dataString = dataString.replaceAll("north", ":3_n");
         dataString = dataString.replaceAll("east", ":3_e");
-        dataString = dataString.replaceAll("south", ":3_s");
+        dataString = dataString.replaceAll("south", ":3_s"); // meow :3
         dataString = dataString.replaceAll("west", ":3_w");
 
         switch (degrees) {
+
             // 90 degrees
             case 2: {
                 dataString = dataString.replaceAll(":3_n", "west");
@@ -598,6 +588,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 dataString = dataString.replaceAll(":3_w", "south");
                 break;
             }
+
             // 180 degrees
             case 3: {
                 dataString = dataString.replaceAll(":3_n", "south");
@@ -606,7 +597,8 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 dataString = dataString.replaceAll(":3_w", "east");
                 break;
             }
-            // 270 radians
+
+            // 270 radians :D
             case 4: {
                 dataString = dataString.replaceAll(":3_n", "east");
                 dataString = dataString.replaceAll(":3_e", "south");
@@ -615,7 +607,6 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                 break;
             }
         }
-
         return Bukkit.createBlockData(dataString);
     }
-}   // Hey look, it's a funny line number too
+}

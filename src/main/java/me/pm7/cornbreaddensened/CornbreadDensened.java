@@ -38,7 +38,7 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RandomNetherSpeed(), this);
         getServer().getPluginManager().registerEvents(new NoOverworldDrops(), this);
         getServer().getPluginManager().registerEvents(new ZombiePiglinAgro(), this);
-        getServer().getPluginManager().registerEvents(new NoStandingStill(), this);
+        getServer().getPluginManager().registerEvents(new FastInventory(), this);
         getServer().getPluginManager().registerEvents(new ExplodeOnCraft(), this);
         getServer().getPluginManager().registerEvents(new InventoryClear(), this);
         getServer().getPluginManager().registerEvents(new PickUpEndFrame(), this);
@@ -73,7 +73,7 @@ public final class CornbreadDensened extends JavaPlugin {
             PufferDrop.Run();
             SpawnThingsAroundPlayers.Run();
             NoOffHand.Run();
-            NoStandingStill.Run();
+            FastInventory.Run();
             NetherPhantoms.Run();
         }, 20L, 1L);
     }

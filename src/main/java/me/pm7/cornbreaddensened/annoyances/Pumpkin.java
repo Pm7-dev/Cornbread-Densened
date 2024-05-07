@@ -2,6 +2,7 @@ package me.pm7.cornbreaddensened.annoyances;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
@@ -32,7 +33,7 @@ public class Pumpkin implements Listener {
             if(!(e.getEntity() instanceof Player)) { return; }
             LivingEntity entity = (LivingEntity) e.getEntity();
             Player p = (Player) e.getEntity();
-            if(entity.getEquipment().getItem(EquipmentSlot.HEAD) == null || entity.getEquipment().getItem(EquipmentSlot.HEAD).getType() != Material.CARVED_PUMPKIN) { p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("There's no real explanation for this, just avoid pumpkin mobs (or don't)")); }
+            if(entity.getEquipment().getItem(EquipmentSlot.HEAD) == null || entity.getEquipment().getItem(EquipmentSlot.HEAD).getType() != Material.CARVED_PUMPKIN) { p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "There's no real explanation for this, just avoid pumpkin mobs (or don't)")); }
             entity.getEquipment().setHelmet(new ItemStack(Material.CARVED_PUMPKIN));
         }
     }

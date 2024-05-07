@@ -34,7 +34,7 @@ public class InventoryClear implements Listener {
 
     @EventHandler
     public void onInventory(InventoryClickEvent e) {
-        Player p = (Player) e.getInventory().getHolder();
+        Player p = (Player) e.getWhoClicked();
         if(p.getGameMode() != GameMode.SURVIVAL) { return; }
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             int count = 0;
