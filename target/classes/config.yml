@@ -2704,7 +2704,7 @@ kelp_tower_2:
       x: 3
       y: 1
       z: 3
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 3
       y: 1
@@ -2724,22 +2724,22 @@ kelp_tower_2:
       x: 4
       y: 1
       z: 2
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 4
       y: 1
       z: 3
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 4
       y: 1
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 4
       y: 1
       z: 5
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 4
       y: 1
@@ -2759,12 +2759,12 @@ kelp_tower_2:
       x: 5
       y: 1
       z: 3
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 5
       y: 1
       z: 4
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 5
       y: 1
@@ -2809,12 +2809,12 @@ kelp_tower_2:
       x: 4
       y: 2
       z: 3
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 4
       y: 2
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 4
       y: 2
@@ -2859,7 +2859,7 @@ kelp_tower_2:
       x: 4
       y: 3
       z: 4
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 4
       y: 3
@@ -2894,7 +2894,7 @@ kelp_tower_2:
       x: 4
       y: 4
       z: 4
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 4
       y: 4
@@ -2964,7 +2964,7 @@ kelp_tower_2:
       x: 4
       y: 8
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 4
       y: 8
@@ -2989,7 +2989,7 @@ kelp_tower_2:
       x: 4
       y: 9
       z: 4
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 4
       y: 9
@@ -3014,7 +3014,7 @@ kelp_tower_2:
       x: 4
       y: 10
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 4
       y: 10
@@ -6165,22 +6165,22 @@ kelp_tower_3:
       x: 3
       y: 1
       z: 3
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 3
       y: 1
       z: 4
-      blockData: minecraft:green_wool
+      blockData: minecraft:yellow_wool
     - ==: BlockStructure
       x: 3
       y: 1
       z: 5
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 3
       y: 1
       z: 6
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 3
       y: 1
@@ -6195,27 +6195,27 @@ kelp_tower_3:
       x: 4
       y: 1
       z: 2
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 4
       y: 1
       z: 3
-      blockData: minecraft:green_wool
+      blockData: minecraft:yellow_wool
     - ==: BlockStructure
       x: 4
       y: 1
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 4
       y: 1
       z: 5
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 4
       y: 1
       z: 6
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 4
       y: 1
@@ -6230,22 +6230,22 @@ kelp_tower_3:
       x: 5
       y: 1
       z: 2
-      blockData: minecraft:green_wool
+      blockData: minecraft:yellow_wool
     - ==: BlockStructure
       x: 5
       y: 1
       z: 3
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 5
       y: 1
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 5
       y: 1
       z: 5
-      blockData: minecraft:green_wool
+      blockData: minecraft:yellow_wool
     - ==: BlockStructure
       x: 5
       y: 1
@@ -6260,17 +6260,17 @@ kelp_tower_3:
       x: 6
       y: 1
       z: 3
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 6
       y: 1
       z: 4
-      blockData: minecraft:green_wool
+      blockData: minecraft:yellow_wool
     - ==: BlockStructure
       x: 6
       y: 1
       z: 5
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 6
       y: 1
@@ -6320,7 +6320,7 @@ kelp_tower_3:
       x: 3
       y: 2
       z: 5
-      blockData: minecraft:green_wool
+      blockData: minecraft:yellow_wool
     - ==: BlockStructure
       x: 3
       y: 2
@@ -6335,17 +6335,17 @@ kelp_tower_3:
       x: 4
       y: 2
       z: 3
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 4
       y: 2
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 4
       y: 2
       z: 5
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 4
       y: 2
@@ -6360,17 +6360,17 @@ kelp_tower_3:
       x: 5
       y: 2
       z: 3
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 5
       y: 2
       z: 4
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 5
       y: 2
       z: 5
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 5
       y: 2
@@ -6420,12 +6420,12 @@ kelp_tower_3:
       x: 4
       y: 3
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 4
       y: 3
       z: 5
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 4
       y: 3
@@ -6445,7 +6445,7 @@ kelp_tower_3:
       x: 5
       y: 3
       z: 4
-      blockData: minecraft:green_wool
+      blockData: minecraft:yellow_wool
     - ==: BlockStructure
       x: 5
       y: 3
@@ -6480,7 +6480,7 @@ kelp_tower_3:
       x: 4
       y: 4
       z: 4
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 4
       y: 4
@@ -6515,7 +6515,7 @@ kelp_tower_3:
       x: 4
       y: 5
       z: 4
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 4
       y: 5
@@ -10163,12 +10163,12 @@ kelp_tower_1:
       x: 2
       y: 1
       z: 3
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 2
       y: 1
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 2
       y: 1
@@ -10183,12 +10183,12 @@ kelp_tower_1:
       x: 3
       y: 1
       z: 3
-      blockData: minecraft:green_terracotta
+      blockData: minecraft:yellow_terracotta
     - ==: BlockStructure
       x: 3
       y: 1
       z: 4
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 3
       y: 1
@@ -10208,7 +10208,7 @@ kelp_tower_1:
       x: 4
       y: 1
       z: 4
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 4
       y: 1
@@ -10243,12 +10243,12 @@ kelp_tower_1:
       x: 3
       y: 2
       z: 3
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 3
       y: 2
       z: 4
-      blockData: minecraft:green_concrete
+      blockData: minecraft:yellow_concrete
     - ==: BlockStructure
       x: 3
       y: 2
@@ -10283,7 +10283,7 @@ kelp_tower_1:
       x: 3
       y: 3
       z: 3
-      blockData: minecraft:green_wool
+      blockData: minecraft:yellow_wool
     - ==: BlockStructure
       x: 3
       y: 3
@@ -10323,7 +10323,7 @@ kelp_tower_1:
       x: 3
       y: 4
       z: 3
-      blockData: minecraft:moss_block
+      blockData: minecraft:yellow_concrete_powder
     - ==: BlockStructure
       x: 3
       y: 4

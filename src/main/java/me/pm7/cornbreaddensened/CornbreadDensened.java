@@ -33,17 +33,17 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EndermiteSilverfishBuff(), this);
         getServer().getPluginManager().registerEvents(new NoBreakingNetherrack(), this);
         getServer().getPluginManager().registerEvents(new BigCreeperExplosion(), this);
-        getServer().getPluginManager().registerEvents(new FireAspectZombies(), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        getServer().getPluginManager().registerEvents(new FireAspectZombies(), this);
         getServer().getPluginManager().registerEvents(new RandomNetherSpeed(), this);
         getServer().getPluginManager().registerEvents(new NoOverworldDrops(), this);
         getServer().getPluginManager().registerEvents(new ZombiePiglinAgro(), this);
-        getServer().getPluginManager().registerEvents(new FastInventory(), this);
         getServer().getPluginManager().registerEvents(new ExplodeOnCraft(), this);
         getServer().getPluginManager().registerEvents(new InventoryClear(), this);
         getServer().getPluginManager().registerEvents(new PickUpEndFrame(), this);
         getServer().getPluginManager().registerEvents(new SkeletonTotems(), this);
         getServer().getPluginManager().registerEvents(new NoPhantomFire(), this);
+        getServer().getPluginManager().registerEvents(new FastInventory(), this);
         getServer().getPluginManager().registerEvents(new LessKnockback(), this);
         getServer().getPluginManager().registerEvents(new EndermanAgro(), this);
         getServer().getPluginManager().registerEvents(new NetherSpawns(), this);
@@ -66,7 +66,6 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Leaves(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            Nethermites.Run();
             FallingAnvils.Run();
             NoDiamondArmor.Run();
             NoSprint.Run();

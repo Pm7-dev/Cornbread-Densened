@@ -21,11 +21,11 @@ public class StoneMobs implements Listener {
     public void onBlockBreak(BlockBreakEvent e) {
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(e.getBlock().getType() != Material.STONE) { return; }
-        if((int)Math.floor(random.nextFloat() * 12) != 1) { return; }
+        if(((int)Math.floor(random.nextFloat() * 12)) != 1) { return; }
 
         Location loc = e.getBlock().getLocation().clone().add(0.5, 0.5, 0.5);
         World world = loc.getWorld();
-        switch ((int)Math.floor(random.nextFloat() * 8)) {
+        switch ((int)Math.floor(random.nextFloat() * 7)) {
             case 0:
                 Bee bee = (Bee) world.spawnEntity(loc, EntityType.BEE);
                 bee.setTarget(e.getPlayer());
@@ -35,23 +35,19 @@ public class StoneMobs implements Listener {
                 world.spawnEntity(loc, EntityType.CAVE_SPIDER);
                 break;
             case 2:
-                world.spawnEntity(loc, EntityType.SILVERFISH);
+                world.spawnEntity(loc, EntityType.SPIDER);
                 break;
             case 3:
-                world.spawnEntity(loc, EntityType.SPIDER);
-                world.spawnEntity(loc, EntityType.CAVE_SPIDER);
-                break;
-            case 4:
                 world.spawnEntity(loc, EntityType.VEX);
                 break;
-            case 5:
+            case 4:
                 world.spawnEntity(loc, EntityType.ENDERMITE);
                 break;
-            case 6:
+            case 5:
                 MagmaCube cube = (MagmaCube) world.spawnEntity(loc, EntityType.MAGMA_CUBE);
                 cube.setSize(2);
                 break;
-            case 7:
+            case 6:
                 Slime slime = (MagmaCube) world.spawnEntity(loc, EntityType.SLIME);
                 slime.setSize(2);
                 break;

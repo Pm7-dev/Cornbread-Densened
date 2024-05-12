@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Random;
 
@@ -17,9 +18,12 @@ public class NoBreakingNetherrack implements Listener {
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(e.getBlock().getBlockData().getMaterial() == Material.DEEPSLATE && e.getBlock().getWorld().getName().equals("world_nether")) {
             e.setCancelled(true);
-            e.getBlock().setType(Material.AIR);
-            if((int)Math.floor(random.nextFloat() * 6) == 1) {
-                e.getBlock().getWorld().spawnEntity(e.getBlock().getLocation().clone().add(0.5, 0.5, 0.5), EntityType.ENDERMITE);
+            if((int)Math.floor(random.nextFloat() * 12) == 1) {
+                e.getBlock().setType(Material.LAVA);
+            }
+            else {
+                e.getBlock().setType(Material.AIR);
+                e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), new ItemStack(Material.NETHERRACK));
             }
         }
         if(e.getBlock().getBlockData().getMaterial() == Material.NETHERRACK) {

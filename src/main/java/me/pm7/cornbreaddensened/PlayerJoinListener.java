@@ -18,16 +18,14 @@ public class PlayerJoinListener implements Listener {
 
         world.setDifficulty(Difficulty.HARD);
         world.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
-        world.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
         world.setGameRule(GameRule.SPAWN_RADIUS, 150);
+        world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         world.setGameRule(GameRule.DO_TRADER_SPAWNING, false);
 
         nether.setDifficulty(Difficulty.HARD);
         nether.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
-        nether.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
 
         end.setDifficulty(Difficulty.HARD);
         end.setGameRule(GameRule.RANDOM_TICK_SPEED, 60);
-        end.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false);
     }
 }

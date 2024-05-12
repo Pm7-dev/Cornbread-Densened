@@ -11,12 +11,16 @@ import org.bukkit.potion.PotionEffectType;
 public class EndermiteSilverfishBuff implements Listener {
     @EventHandler
     public void onEntitySpawn(EntitySpawnEvent e) {
-        if(e.getEntity().getType() == EntityType.SILVERFISH || e.getEntity().getType() == EntityType.ENDERMITE) {
+        if(e.getEntity().getType() == EntityType.SILVERFISH) {
             LivingEntity entity = (LivingEntity) e.getEntity();
             entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, PotionEffect.INFINITE_DURATION, 2, true));
             entity.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, PotionEffect.INFINITE_DURATION, 1, true));
             entity.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, PotionEffect.INFINITE_DURATION, 1, true));
-            entity.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, PotionEffect.INFINITE_DURATION, 2, true));
+        }
+        else if (e.getEntity().getType() == EntityType.ENDERMITE) {
+            LivingEntity entity = (LivingEntity) e.getEntity();
+            entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, PotionEffect.INFINITE_DURATION, 1, true));
+            entity.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, PotionEffect.INFINITE_DURATION, 1, true));
         }
     }
 }

@@ -125,7 +125,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                 setChunkBlock(chunkData, x, y, z, getSurfaceMat(color, random));
 
                                 if(y > ground-1.5) {
-                                    //if(y+1 > ground-1.5) { continue; }
+                                    if(y+1 > ground-1 && y+1 <= ground) { continue; }
 
                                     // Generate "structures" in middle of chunk
                                     if (x == 8 && z == 8 && y > 63) {
@@ -136,25 +136,23 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                             // Two thirds of the houses will have a portal frame in them
                                             switch ((int) Math.floor(random.nextFloat() * (3))) {
                                                 case 0:
-                                                    //loadStructure("house.nbt", x, y, z, -3, -3, random);
                                                     loadStructure("house", x , y + 1, z, -3, -3, chunkData, random);
                                                     break;
                                                 case 1:
                                                 case 2:
-                                                    //loadStructure("house_with_portal.nbt", x, y, z, -3, -3, random);
                                                     loadStructure("house_with_portal", x , y + 1, z, -3, -3, chunkData, random);
                                                     break;
                                             }
                                         }
                                         // Add some kelp towers, so you don't starve (they aren't kelp anymore but I don't wanna change the name)
-                                        else if (Math.floor(random.nextFloat() * (13)) == 1) {
+                                        else if (!(color == 0 || color == 16 || color == 17 || color == 18) && Math.floor(random.nextFloat() * (12)) == 1) {
                                             int number = ((int) Math.floor(random.nextFloat() * 3)) + 1;
                                             loadStructure("kelp_tower_" + number, x, y + 1, z , -3, -3, chunkData, random);
 
                                             break;
                                         }
                                         // Might as well put in some couches too
-                                        else if (!(color == 0 || color == 16 || color == 17 || color == 18) && Math.floor(random.nextFloat() * (11)) == 1) { // DO NOT spawn these on white chunks (I have no idea why I wrote this part but I'm keeping it)
+                                        else if (!(color == 0 || color == 16 || color == 17 || color == 18) && Math.floor(random.nextFloat() * (12)) == 1) { // DO NOT spawn these on white chunks (I have no idea why I wrote this part but I'm keeping it)
                                             int number = ((int) Math.floor(random.nextFloat() * 7)) + 1;
                                             loadStructure("couch_" + number, x, y, z , -3, -3, chunkData, random);
 
@@ -162,7 +160,7 @@ public class OverworldChunkGenerator extends ChunkGenerator {
                                         }
                                     }
                                     // Oh yeah we should probably have SOME wood
-                                    else if (!(color == 0 || color == 16 || color == 17 || color == 18) && y > 63 && Math.floor(random.nextFloat() * (1750)) == 1) { //1300
+                                    else if (y > 63 && Math.floor(random.nextFloat() * (1100)) == 1) { //1300
                                         // Around every like 3750th surface block will have a tree on top of it
 
                                         // Randomize type of log we are using

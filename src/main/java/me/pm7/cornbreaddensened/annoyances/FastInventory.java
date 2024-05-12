@@ -27,7 +27,7 @@ public class FastInventory implements Listener {
 
             if(boring.isBoring) { boring.ticks +=1; } else { boring.ticks = 0; }
 
-            if(boring.ticks >= 65) {
+            if(boring.ticks >= 100) {
                 if(Math.floor(random.nextFloat() * 20) == 0) {
                     boring.dead = true;
                     boring.player.setHealth(0.0d);

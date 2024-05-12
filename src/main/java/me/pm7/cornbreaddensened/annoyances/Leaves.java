@@ -23,7 +23,7 @@ public class Leaves implements Listener {
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(leaves.contains(e.getBlock().getType())) {
             e.setDropItems(false);
-            if((int) Math.floor(random.nextFloat() * (7)) == 1) {
+            if((int) Math.floor(random.nextFloat() * (5)) == 1) {
                 if(Math.floor(random.nextFloat() * (3)) == 1) {
                     World world = e.getBlock().getWorld();
                     Entity bat = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BAT);
@@ -45,7 +45,7 @@ public class Leaves implements Listener {
     public void onLeafDecay(LeavesDecayEvent e) {
         e.setCancelled(true);
         e.getBlock().setType(Material.AIR);
-        if((int) Math.floor(random.nextFloat() * (7)) == 1) {
+        if((int) Math.floor(random.nextFloat() * (5)) == 1) {
             World world = e.getBlock().getWorld();
             if(Math.floor(random.nextFloat() * (3)) == 1) {
                 Entity bat = world.spawnEntity(e.getBlock().getLocation().clone().add(new Vector(0, 3, 0)), EntityType.BAT);

@@ -19,8 +19,8 @@ public class PufferDrop {
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
             if(random.nextDouble() > 0.65d) {
-                LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(p.getLocation().clone().add(-0.65, 10, 0.3), EntityType.PUFFERFISH);
-                LivingEntity entity2 = (LivingEntity) p.getWorld().spawnEntity(p.getLocation().clone().add(+0.27, 10, -0.43), EntityType.PUFFERFISH);
+                LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(p.getLocation().clone().add(-0.65, 18, 0.3), EntityType.PUFFERFISH);
+                LivingEntity entity2 = (LivingEntity) p.getWorld().spawnEntity(p.getLocation().clone().add(+0.27, 18, -0.43), EntityType.PUFFERFISH);
                 PotionEffect effect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 5);
                 entity.addPotionEffect(effect);
                 entity2.addPotionEffect(effect);

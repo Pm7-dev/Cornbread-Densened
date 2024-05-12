@@ -8,10 +8,16 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class BuffMobs implements Listener {
+    final List<EntityType> noBuff = Arrays.asList(EntityType.PLAYER, EntityType.ENDERMAN, EntityType.MAGMA_CUBE);
+
     @EventHandler
     public void onMobSpawn(EntitySpawnEvent e) {
-        if(e.getEntityType() != EntityType.PLAYER && e.getEntity() instanceof LivingEntity) {
+        if(noBuff.contains(e.getEntityType()) && e.getEntity() instanceof LivingEntity) {
             LivingEntity entity = (LivingEntity) e.getEntity();
             entity.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, PotionEffect.INFINITE_DURATION, 0));
             entity.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, PotionEffect.INFINITE_DURATION, 0));
