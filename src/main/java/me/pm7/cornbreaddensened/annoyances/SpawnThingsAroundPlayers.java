@@ -19,6 +19,7 @@ public class SpawnThingsAroundPlayers {
         //spawn a random of one of the cool mobs with resistance 5 for 10 seconds so it can fall normally
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(p.getGameMode() != GameMode.SURVIVAL) { continue; }
+            if(!p.getWorld().getName().equals("world")) { return; }
             if(Math.floor(Math.random()*2)!=1) { continue; }
             Location loc = p.getLocation().clone();
             switch((int) (random.nextFloat()*5)) {

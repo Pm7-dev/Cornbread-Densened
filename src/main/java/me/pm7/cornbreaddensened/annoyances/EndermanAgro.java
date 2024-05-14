@@ -15,7 +15,7 @@ public class EndermanAgro implements Listener {
     public void onPlayerMove(PlayerMoveEvent e) {
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(e.getPlayer().getWorld().getName().equals("world_the_end")) { return; }
-        List<Entity> nearby = e.getPlayer().getNearbyEntities(45, 60, 45);
+        List<Entity> nearby = e.getPlayer().getNearbyEntities(12, 10, 12);
         for(Entity entity : nearby) {
             if (entity.getType() != EntityType.ENDERMAN) { continue; }
             if(((Enderman) entity).getTarget() != null) { continue; }

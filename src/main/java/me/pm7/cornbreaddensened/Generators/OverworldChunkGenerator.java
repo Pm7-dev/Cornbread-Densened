@@ -55,8 +55,8 @@ public class OverworldChunkGenerator extends ChunkGenerator {
         // To make things consistent if you relaunch the server from a crash
         random.setSeed(worldInfo.getSeed());
 
-        // Delete around 1 in every ten chunks for funsies
-        if((int)Math.floor(random.nextFloat() * (10)) == 1) {
+        // Delete around 1 in every fourteen chunks for funsies
+        if((int)(Math.random() * (14)) == 1) {
 
             // Get the chunk's color
             Random chunkColor = new Random((long) ((int) (chunkX / 3) + 18344) * ((int) (chunkZ / 3) + 28644) * 48743 + worldInfo.getSeed());
@@ -273,10 +273,16 @@ public class OverworldChunkGenerator extends ChunkGenerator {
 
         // gotta put some precious metals in. No coal though, that's what the cherry slabs were for
         // Oh I think moss can also be used for fuel, so maybe that too
-        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (50)) == 1) { mat = Material.IRON_ORE; return mat;}
+
+        // News update: moss can not be used as fuel
+
+        // Another news update: I am a dumb little idiot and forgot that wool is found all over the map. I shall search for my punishment
+
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (50)) == 1) { mat = Material.IRON_ORE; return mat; }
+        if(height-y > 13 && (int)Math.floor(random.nextFloat() * (70)) == 1) { mat = Material.GOLD_BLOCK; return mat; } // I hate vanilla piglin trading so much that I'm putting this in
         if(height-y > 13 && (int)Math.floor(random.nextFloat() * (175)) == 1) { mat = Material.DIAMOND_ORE; return mat; }
 
-        // look, it's the funny younglings number, get it?
+        // look, it's the funny younglings number, get it? (I am absolutely hilarious for sure!/)
         int r = (int)Math.floor(random.nextFloat() * (66));
         switch (r) {
             case 0: mat = Material.SMOOTH_STONE; break;

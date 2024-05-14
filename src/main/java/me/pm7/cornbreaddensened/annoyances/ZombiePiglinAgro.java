@@ -16,7 +16,7 @@ public class ZombiePiglinAgro implements Listener {
     public void onPlayerMove(PlayerMoveEvent e) {
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(e.getPlayer().getWorld() != Bukkit.getWorld("world_nether")) { return; }
-        List<Entity> nearby = e.getPlayer().getNearbyEntities(17, 200, 17);
+        List<Entity> nearby = e.getPlayer().getNearbyEntities(8, 10, 8);
         for(Entity entity : nearby) {
             if (entity.getType() != EntityType.ZOMBIFIED_PIGLIN) { continue; }
             if(((PigZombie) entity).getTarget() != null) { continue; }
