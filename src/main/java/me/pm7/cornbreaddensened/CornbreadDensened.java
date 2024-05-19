@@ -10,6 +10,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.logging.Level;
 
@@ -65,16 +67,35 @@ public final class CornbreadDensened extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NoSleep(), this);
         getServer().getPluginManager().registerEvents(new Leaves(), this);
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            FallingAnvils.Run();
-            NoDiamondArmor.Run();
-            NoSprint.Run();
-            PufferDrop.Run();
-            SpawnThingsAroundPlayers.Run();
-            NoOffHand.Run();
-            FastInventory.Run();
-            NetherPhantoms.Run();
-        }, 20L, 1L);
+        // I have removed so much efficiency because ONE OF THESE BREAKS THE ENTIRE THING AND I DON'T KNOW WHICH ONE
+        new BukkitRunnable() {
+            @Override
+            public void run() {FallingAnvils.Run();}
+        }.runTaskTimer(plugin, 20L, 1L);
+        new BukkitRunnable() {
+            @Override
+            public void run() {NoDiamondArmor.Run();}
+        }.runTaskTimer(plugin, 20L, 1L);
+        new BukkitRunnable() {
+            @Override
+            public void run() {NoSprint.Run();}
+        }.runTaskTimer(plugin, 20L, 1L);
+        new BukkitRunnable() {
+            @Override
+            public void run() {PufferDrop.Run();}
+        }.runTaskTimer(plugin, 20L, 1L);
+        new BukkitRunnable() {
+            @Override
+            public void run() {NoOffHand.Run();}
+        }.runTaskTimer(plugin, 20L, 1L);
+        new BukkitRunnable() {
+            @Override
+            public void run() {FastInventory.Run();}
+        }.runTaskTimer(plugin, 20L, 1L);
+        new BukkitRunnable() {
+            @Override
+            public void run() {NetherPhantoms.Run();}
+        }.runTaskTimer(plugin, 20L, 1L);
     }
 
     @Override

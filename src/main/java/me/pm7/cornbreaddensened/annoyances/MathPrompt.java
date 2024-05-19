@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Random;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.sum;
 
 public class MathPrompt implements Listener {
     Random random = new Random();
@@ -28,7 +29,7 @@ public class MathPrompt implements Listener {
     public void onPlayerMovement(PlayerMoveEvent e) {
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(isStudent(e.getPlayer())) { e.setCancelled(true); return; }
-        if ((int) Math.floor(random.nextFloat() * (22500)) != 1) { return; } // 22500
+        if ((int) Math.floor(random.nextFloat() * (225)) != 1) { return; } // 22500
         if(random.nextBoolean()) {
             // Multiplying Binomials
 
@@ -60,7 +61,7 @@ public class MathPrompt implements Listener {
             e.getPlayer().sendMessage(ChatColor.RED + "Solve the system of equations for y - Send answer in chat");
             e.getPlayer().sendMessage(ChatColor.RED + "y = " + t1 + "x + " + t3);
             e.getPlayer().sendMessage(ChatColor.RED + "y = " + t2 + "x + " + t4);
-            e.getPlayer().sendMessage(ChatColor.RED + "Only send the number in chat. it should not be preceded by 'y =' or anything");
+            e.getPlayer().sendMessage(ChatColor.RED + "Your answer should be one whole number. it should not be preceded by 'y =' or anything");
             e.getPlayer().sendMessage(ChatColor.RED + "Example problem: y = 8x + 18 && y = 5x + 12 Solution: 10");
             TextComponent component = new TextComponent(ChatColor.RED + "No clue how to do this? Either cry about it, or " + ChatColor.BOLD + "Click here");
             component.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.youtube.com/watch?v=F5oLU9qjYIo"));
@@ -83,10 +84,15 @@ public class MathPrompt implements Listener {
         if(student.questionType.equals("binomial")) {
             int dumbThing = (t1*t4)+(t2*t3);
             if(input.equals(t1*t3+"x^2 + "+dumbThing+"x + "+(t2*t4)) || input.equals(t1*t3+"x^2+"+dumbThing+"x+"+(t2*t4)) ) {
-                students.remove(getStudent(e.getPlayer()));
+                students.remove(student);
                 e.getPlayer().sendMessage(ChatColor.GREEN + "Correct");
             } else {
-                e.getPlayer().sendMessage(ChatColor.RED + "Incorrect");
+                student.attempts -= 1;
+                e.getPlayer().sendMessage(ChatColor.RED + "Incorrect. " + student.attempts + " attempts remaining.");
+                if(student.attempts <= 0) {
+                    student.player.setHealth(0);
+                }
+                students.remove(student);
             }
         }
         else if(student.questionType.equals("equationSystem")) {
@@ -99,7 +105,12 @@ public class MathPrompt implements Listener {
                 students.remove(getStudent(e.getPlayer()));
                 e.getPlayer().sendMessage(ChatColor.GREEN + "Correct");
             } else {
-                e.getPlayer().sendMessage(ChatColor.RED + "Incorrect");
+                student.attempts -= 1;
+                e.getPlayer().sendMessage(ChatColor.RED + "Incorrect. " + student.attempts + " attempts remaining.");
+                if(student.attempts <= 0) {
+                    student.player.setHealth(0);
+                }
+                students.remove(student);
             }
         }
     }

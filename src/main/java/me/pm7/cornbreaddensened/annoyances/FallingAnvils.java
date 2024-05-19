@@ -42,7 +42,7 @@ public class FallingAnvils {
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "Look out!")), 7L);
         }
         tick = 0;
-        if(Math.floor(random.nextFloat() * (15)) == 1) {}
+        if(Math.floor(random.nextFloat() * (15)) == 1) {needed = 60;}
         else {needed = (int) Math.floor((random.nextFloat() * (6500 - 5000)) + 5000);}
     }
 

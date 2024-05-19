@@ -48,7 +48,7 @@ public class StoneMobs implements Listener {
                 cube.setSize(2);
                 break;
             case 6:
-                Slime slime = (MagmaCube) world.spawnEntity(loc, EntityType.SLIME);
+                Slime slime = (Slime) world.spawnEntity(loc, EntityType.SLIME);
                 slime.setSize(2);
                 break;
         }

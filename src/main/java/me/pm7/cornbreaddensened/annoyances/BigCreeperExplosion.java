@@ -16,6 +16,7 @@ public class BigCreeperExplosion implements Listener {
             entity.removePotionEffect(PotionEffectType.SPEED);
             entity.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
             entity.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+            entity.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
             e.getLocation().getWorld().createExplosion(e.getLocation(), 13, true);
         }
     }
