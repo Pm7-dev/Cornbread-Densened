@@ -29,7 +29,7 @@ public class MathPrompt implements Listener {
     public void onPlayerMovement(PlayerMoveEvent e) {
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) { return; }
         if(isStudent(e.getPlayer())) { e.setCancelled(true); return; }
-        if ((int) Math.floor(random.nextFloat() * (225)) != 1) { return; } // 22500
+        if ((int) Math.floor(random.nextFloat() * (22500)) != 1) { return; } // 22500
         if(random.nextBoolean()) {
             // Multiplying Binomials
 
@@ -91,8 +91,8 @@ public class MathPrompt implements Listener {
                 e.getPlayer().sendMessage(ChatColor.RED + "Incorrect. " + student.attempts + " attempts remaining.");
                 if(student.attempts <= 0) {
                     student.player.setHealth(0);
+                    students.remove(student);
                 }
-                students.remove(student);
             }
         }
         else if(student.questionType.equals("equationSystem")) {
@@ -109,8 +109,8 @@ public class MathPrompt implements Listener {
                 e.getPlayer().sendMessage(ChatColor.RED + "Incorrect. " + student.attempts + " attempts remaining.");
                 if(student.attempts <= 0) {
                     student.player.setHealth(0);
+                    students.remove(student);
                 }
-                students.remove(student);
             }
         }
     }
