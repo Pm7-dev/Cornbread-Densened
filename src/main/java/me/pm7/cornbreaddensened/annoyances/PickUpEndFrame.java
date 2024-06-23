@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class PickUpEndFrame implements Listener {
     CornbreadDensened plugin = CornbreadDensened.getPlugin();
-    int i=0;
+    Random random = new Random();
 
     @EventHandler
     public void onPlayerRightClick(PlayerInteractEvent e) {
@@ -35,10 +35,9 @@ public class PickUpEndFrame implements Listener {
         Location loc = block.getLocation().add(new Vector(0.5, 0.5, 0.5));
         ItemStack frame = new ItemStack(Material.END_PORTAL_FRAME, 1);
         ItemMeta meta = frame.getItemMeta();
-        meta.setDisplayName(String.valueOf(i));
+        meta.setDisplayName(String.valueOf((int)(random.nextFloat() * 100)));
         frame.setItemMeta(meta);
         loc.getWorld().dropItemNaturally(loc, frame);
-        i++;
 
         Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
             int count = 0;

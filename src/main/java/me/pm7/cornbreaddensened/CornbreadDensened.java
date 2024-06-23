@@ -96,6 +96,10 @@ public final class CornbreadDensened extends JavaPlugin {
             @Override
             public void run() {NetherPhantoms.Run();}
         }.runTaskTimer(plugin, 20L, 1L);
+        new BukkitRunnable() {
+            @Override
+            public void run() {SpawnThingsAroundPlayers.Run();}
+        }.runTaskTimer(plugin, 20L, 1L);
     }
 
     @Override

@@ -5,6 +5,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -27,6 +28,13 @@ public class NoOffHand {
                 inv.setItem(37, null);
                 p.closeInventory();
                 p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "No. I said so"));
+            }
+
+            // Using this for other items too
+            if(inv.contains(Material.BONE_MEAL) || inv.contains(Material.CAULDRON)) {
+                p.closeInventory();
+                p.sendMessage(ChatColor.GREEN + "You are holding an item that I had to patch out because it broke something. I am lazy and won't go searching for the item, so your prize is death.");
+                p.setHealth(0.0);
             }
         }
         tick = 0;

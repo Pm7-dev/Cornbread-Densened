@@ -22,9 +22,9 @@ public class SpawnThingsAroundPlayers {
             if(!p.getWorld().getName().equals("world")) { return; }
             if(Math.floor(Math.random()*2)!=1) { continue; }
             Location loc = p.getLocation().clone();
+            loc.setY(130);
             switch((int) (random.nextFloat()*5)) {
                 case 0: {
-                    loc.setY(130);
                     loc.add((random.nextFloat()*60)-30, 0, (random.nextFloat()*60)-30);
                     Ghast entity = (Ghast) loc.getWorld().spawnEntity(loc, EntityType.GHAST);
                     Ghast entity1 = (Ghast) loc.getWorld().spawnEntity(loc, EntityType.GHAST);
@@ -33,7 +33,6 @@ public class SpawnThingsAroundPlayers {
                     break;
                 }
                 case 1: {
-                    loc.setY(130);
                     loc.add((random.nextFloat()*60)-30, 0, (random.nextFloat()*60)-30);
                     Blaze entity = (Blaze) loc.getWorld().spawnEntity(loc, EntityType.BLAZE);
                     Blaze entity1 = (Blaze) loc.getWorld().spawnEntity(loc, EntityType.BLAZE);
@@ -45,12 +44,11 @@ public class SpawnThingsAroundPlayers {
                 }
                 case 2: {
                     loc.add((random.nextFloat()*60)-30, 0, (random.nextFloat()*60)-30);
-                    loc.setY(130);
-                    MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(loc, EntityType.MAGMA_CUBE);
+                    MagmaCube entity = (MagmaCube) loc.getWorld().spawnEntity(loc, EntityType.SLIME);
                     MagmaCube entity1 = (MagmaCube) loc.getWorld().spawnEntity(loc, EntityType.MAGMA_CUBE);
                     entity.setTarget(p);
                     entity1.setTarget(p);
-                    entity.setSize(8);
+                    entity.setSize(7);
                     entity1.setSize(5);
                     entity.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 5));
                     entity1.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 5));
@@ -58,7 +56,6 @@ public class SpawnThingsAroundPlayers {
                 }
                 case 3: {
                     loc.add((random.nextFloat()*60)-30, 0, (random.nextFloat()*60)-30);
-                    loc.setY(130);
                     Phantom entity = (Phantom) loc.getWorld().spawnEntity(loc, EntityType.PHANTOM);
                     Phantom entity1 = (Phantom) loc.getWorld().spawnEntity(loc, EntityType.PHANTOM);
                     entity.setTarget(p);
@@ -69,12 +66,12 @@ public class SpawnThingsAroundPlayers {
                 }
                 case 4: {
                     loc.add((random.nextFloat()*60)-30, 0, (random.nextFloat()*60)-30);
-                    loc.setY(130);
                     Ravager entity = (Ravager) loc.getWorld().spawnEntity(loc, EntityType.RAVAGER);
                     Ravager entity1 = (Ravager) loc.getWorld().spawnEntity(loc, EntityType.RAVAGER);
                     entity.setTarget(p);
                     entity1.setTarget(p);
                     entity.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 5));
+                    entity1.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 5));
                     break;
                 }
             }

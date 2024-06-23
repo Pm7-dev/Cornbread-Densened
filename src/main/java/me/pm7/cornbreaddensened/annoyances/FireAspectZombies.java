@@ -17,7 +17,7 @@ public class FireAspectZombies implements Listener {
     @EventHandler
     public void onMobSpawn(EntitySpawnEvent e ) {
         if(e.getEntity().getType() != EntityType.ZOMBIE) { return; }
-        if(Math.floor(random.nextFloat() * (5)) != 1) { return; }
+        if(Math.floor(random.nextFloat() * (3)) != 1) { return; }
 
         ItemStack item = new ItemStack(Material.WOODEN_SWORD);
         item.addEnchantment(Enchantment.FIRE_ASPECT, 1);
